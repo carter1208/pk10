@@ -1,0 +1,57 @@
+.listNum{
+  position: absolute;
+  border: 1px solid #d5d5d5;
+  width: 160px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  z-index: 100;
+  .table-row{
+    margin: 4px;
+    #number{
+      font-size: 12pt;
+      font-weight:bold;
+      width: 27px;
+      color: white;
+      text-shadow: 1px 1.5px black;
+      border: 1px solid #F6E67B;
+      height: 27px;
+      text-align: center;
+      padding-left: 8px;
+      padding-top: 2px;
+    }
+    .name1{
+      background-color: #FFEA00;
+    }
+    .name2{
+      background-color: #389DF4;
+    }
+    .name3{
+      background-color: #616161;
+    }
+    .name4{
+      background-color: #FE790C;
+    }
+    .name5{
+      background-color: #54FBFB;
+    }
+    .name6{
+      background-color: #5E19EF;
+    }
+    .name7{
+      background-color: #DEE0E1;
+    }
+    .name8{
+      background-color: #FE4141;
+    }
+    .name9{
+      background-color: #8E0B0B;
+    }
+    .name10{
+      background-color: #54BD39;
+      padding-left: 2px !important;
+    }
+    .space-x {
+      width: 4px;
+    }
+  }
+}

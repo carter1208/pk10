@@ -1,0 +1,96 @@
+.game{
+  margin-left:100px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  .game-canvas-container{
+    z-index: 1;
+    position: absolute;
+  }
+  .dateTime{
+    position: absolute;
+    z-index: 2;
+    left: 690px;
+    margin-top: 5px;
+    font-size: 10pt;
+    color: white;
+    text-align: center;
+    background-color: yellow;
+    .drawNo{
+      position: absolute;
+      width: 130px;
+    }
+    .time{
+      position: absolute;
+      left: 150px;
+      font-size: 20pt;
+      font-weight: bold;
+    }
+
+  }
+  .result{
+    width: 150px;
+    margin-top: 5px;
+    font-size: 10pt;
+    text-align: center;
+    z-index: 3;
+    position: absolute;
+    left: 100px;
+    color: white;
+  }
+  .stat{
+    font-weight: bold;
+    z-index: 4;
+    position: absolute;
+    color: #545454;
+    top: 415px;
+    font-size: 18pt;
+    span, p{
+      position: absolute;
+    }
+    p{
+      color: white;
+      font-size: 20pt;
+    }
+    .total{
+      span{
+        left: 20px;
+        width: 100px;
+      }
+      .total{
+        left:105px;
+        width: 40px;
+        text-align: center;
+      }
+      .bs{
+        left:174px;
+      }
+      .ov{
+        left:230px;
+      }
+    }
+    .dt {
+      span{
+        left: 300px;
+      }
+      .d1 {
+        left: 482px;
+      }
+      .d2 {
+        left: 538px;
+      }
+      .d3 {
+        left: 595px;
+      }
+      .d4 {
+        left: 650px;
+      }
+      .d5 {
+        left: 705px;
+      }
+    }
+  }
+}

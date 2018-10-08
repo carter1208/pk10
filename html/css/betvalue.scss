@@ -1,0 +1,26 @@
+.bet-value{
+  width: 65px;
+  position: absolute;
+  border: 1px solid #db2222;
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 6px;
+  .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 27.5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #db2222 transparent;
+  }
+  .btn{
+    display: block;
+    height: 25px;
+    padding:0;
+  }
+  .btn:hover{
+    background-color: #eee;
+  }
+}

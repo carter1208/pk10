@@ -1,0 +1,20 @@
+.countdown{
+  display: flex;
+  position: absolute;
+  margin-top: -37px;
+  margin-left: 320px;
+  text-align: center;
+  .drawNo{
+    margin-top: -2px;
+    color: white;
+    font-weight: bold;
+    width: 150px;
+  }
+  .time{
+    padding-left: 60px;
+    font-size: 20pt;
+    color: #545454;
+    font-weight: bold;
+    text-shadow: 1px 1px #fff;
+  }
+}

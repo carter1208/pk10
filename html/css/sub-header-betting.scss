@@ -1,0 +1,93 @@
+.sub-position{
+  #myNavbar{
+    padding-left: 0px;
+  }
+  .nav{
+    width: 830px;
+    background-color: #eeeeee;
+    li{
+      border-color: white;
+      border: 1px solid white;
+      text-align: left;
+      width: 42px;
+    }
+    li>a{
+      border-color: white;
+      color: #545454;
+      height: 30px;
+      padding: 5px 5px 5px;
+    }
+    #sub10{
+      width: 47px;
+      border-right: 2px solid white;
+    }
+    .is-active{
+      color: #db2222;
+      opacity: 1;
+    }
+  }
+}
+.sub-dt{
+  #myNavbar{
+    padding-left: 0px;
+    width: 830px;
+    background-color: #eeeeee;
+  }
+  li{
+    border-color: white;
+    border: 1px solid white;
+    text-align: left;
+    width: 42px;
+  }
+  li>a{
+    border-color: white;
+    color: #545454;
+    height: 30px;
+    padding: 5px 5px 5px;
+  }
+  .is-active{
+    color: #db2222;
+    opacity: 1;
+  }
+  #d1{
+    width: 47px;
+  }
+  #d5{
+    border-right: 1px solid white;
+  }
+}
+.sub-combine{
+  #myNavbar{
+    padding-left: 0px;
+    width: 830px;
+    background-color: #eeeeee;
+  }
+  li{
+    border-color: white;
+    border: 1px solid white;
+    text-align: left;
+  }
+  li>a{
+    border-color: white;
+    color: #545454;
+    height: 30px;
+    padding: 5px 5px 5px;
+  }
+  .is-active{
+    color: #db2222;
+    opacity: 1;
+  }
+  #cb3{
+    border-right: 1px solid white;
+  }
+}
+.sub-sum {
+  #myNavbar {
+    padding-left: 0px;
+    width: 830px;
+    background-color: #eeeeee;
+  }
+  li{
+    height: 32px;
+  }
+}
