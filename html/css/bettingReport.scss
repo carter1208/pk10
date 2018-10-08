@@ -144,7 +144,7 @@
               background-color: #5E19EF;
             }
             .num7{
-              background-color: #DEE0E1;
+              background-color: #DBDBDB;
             }
             .num8{
               background-color: #FE4141;
@@ -158,6 +158,9 @@
           }
         }
       }
+    }
+    #line{
+      position: absolute;
     }
   }
   .betting-rpt{
@@ -318,6 +321,9 @@
     text-align: center;
     bottom: 0px;
     font-weight: bold;
+    li{
+     font-size: 12pt;
+    }
     a, a:hover{
       border: none;
       background-color: transparent;
