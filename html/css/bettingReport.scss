@@ -324,10 +324,15 @@
       color: #545454;
     }
 
-    a.active, a:focus, li.active{
+    a.active, a:focus{
       border: none;
       background-color: transparent;
       color: #db2222;
+    }
+    li.active{
+      a{
+        color: #db2222;
+      }
     }
   }
 }
