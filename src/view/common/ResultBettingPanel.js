@@ -30,6 +30,7 @@ export default class ResultBettingPanel extends Component {
             cutOffTime: this.cutOffDate['cutOff1']
         };
     }
+
     componentDidMount() {
         model.subscribe(Command.REPORT_BETTING, this);
         this.selectDateFrom();
@@ -90,7 +91,7 @@ export default class ResultBettingPanel extends Component {
         console.log("123: " + new Date((date.getMonth() +1) + "/" + (date.getDate() - 1) + "/" + date.getFullYear()));
         $('[data-date-time-from]').datetimepicker({
             format: 'DD/MM/YYYY',
-            defaultDate:new Date((date.getMonth()) + "/" + (date.getDate() - 1) + "/" + date.getFullYear())
+            defaultDate:new Date((date.getMonth() + 1) + "/" + (date.getDate() - 1) + "/" + date.getFullYear())
         });
     }
 

@@ -125,8 +125,8 @@ export default class WebsocketParser {
                     let objRes = objJs.result;
                     if(objRes.result){
                         obj = {};
-                        let item = {};
-                        let rec = {};
+                        var item = {};
+                        var rec = {};
 
                         for (let i = 0; i < objRes.result.length; i++ ){
                             item = objRes.result[i];
@@ -139,6 +139,30 @@ export default class WebsocketParser {
                             rec.result = item.WLStatus;
                             rec.game = item.TbName;
                             rec.drawNo = item.DrawNo;
+
+                            records.push(rec);
+                        }
+                        obj.page = parseInt(objRes.PageNo);
+                        obj.totalRow = parseInt(objRes.TotalRow);
+                        obj.records = records;
+                    }
+                }
+                break;
+            case Command.REPORT_RESULT:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                records = [];
+                if (objJs.error == DATA_SUCCESS) {
+                    let objRes = objJs.result;
+                    if(objRes.result){
+                        obj = {};
+                        for (let i = 0; i < objRes.result.length; i++ ){
+                            let item = objRes.result[i];
+                            let rec = {};
+                            rec.drawNoRef = item.DrawNoRef;
+                            rec.date = item.StartDate;
+                            rec.num = item.Nums;
+                            rec.tableName = item.TbName;
 
                             records.push(rec);
                         }

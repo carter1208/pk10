@@ -52,7 +52,7 @@
       height: 60px;
       margin-left: 20px;
       background-color: white;
-      .btn-select{
+      .btn-select-line{
         background-color: #db2222;
         color: white;
         border: none;
@@ -60,6 +60,9 @@
         height: 28px;
         border-radius: 20px;
         outline: none;
+        cursor: pointer;
+        position: absolute;
+        right: 470px;
       }
       .label-num{
         display: flex;
@@ -154,6 +157,10 @@
             }
             .num10{
               background-color: #54BD39;
+            }
+            .active{
+              background-color: transparent;
+              color: #8c8c8c;
             }
           }
         }

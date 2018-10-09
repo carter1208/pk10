@@ -20,7 +20,7 @@ export default class Lobby extends Component {
 
     onLogin(){
         lobbyServer.startWaiting(this.onConnectSuccessHandler.bind(this));
-        lobbyServer.connect('testpk10100', '123456');
+        lobbyServer.connect('rubby', '123456');
     }
     onConnectSuccessHandler(){
         lobbyServer.startWaiting(this.onLoadInfoCompleteHandler.bind(this))

@@ -4,7 +4,7 @@
 import React,{Component} from 'react'
 import BetPlaceCombine2Item from "../lottery/BetPlaceCombine2Item"
 import BetPlaceCombine3Item from "../lottery/BetPlaceCombine3Item"
-import ListNumber from "../lottery/ListNumber"
+import ListNumber from "./ListNumber"
 
 const CB2 = 'cb2';
 const CB3 = 'cb3';
