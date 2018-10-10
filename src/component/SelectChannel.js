@@ -37,7 +37,6 @@ export default class SelectChannel extends Component {
         return (
             <div>
                 <Select
-                    //arrowRenderer={this.renderArrow}
                     onChange={this.onChange.bind(this)}
                     optionComponent={OptionsComponent}
                     options={this.state.options}
