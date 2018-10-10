@@ -14,16 +14,18 @@ export default class OpenBetItem extends Component {
 
 
     render() {
-        let logo = "img/logo"+this.props.TbID+".png";
+        let logoID = 'img/logo'+ (this.props.TbID == 77 ? "_"+ this.props.TbID: this.props.TbID) +'.png';
         return (
             <div className="open-bet-item">
-                <img src="img/pk10Menu.png"/>
-                <img src={logo} width={75} height={30}/>
-                <span>{this.props.ticketNo}</span>
-                <span>{this.props.date}</span>
-                <span>{this.props.drawNo}</span>
-                <span>{this.props.betType}</span>
-                <span>{this.props.betValue}</span>
+                <div className="title">
+                    <img className="logo" src='img/pk10Menu.png' width='40%' height='40%'></img>&nbsp;&nbsp;
+                    <img className="logo1" src={logoID} width='40%' height='40%'></img>
+                </div>
+                <div className="trans">{this.props.ticketNo}</div>
+                <div className="date">{this.props.date}</div>
+                <div>{this.props.drawNo}</div>
+                <div className="betcode">{this.props.betType}</div>
+                <div>{this.props.betValue}</div>
             </div>
         )
     }

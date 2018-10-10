@@ -12,15 +12,19 @@ export default class ResultBettingItem extends Component {
 
 
     render() {
+        let logoID = 'img/logo'+ (this.props.TbID == 77 ? "_"+ this.props.TbID: this.props.TbID) +'.png';
         return (
             <div className="betting-item">
-                    <div className="title">{this.props.game}</div>
+                    <div className="title">
+                        <img className="logo" src='img/pk10Menu.png' width='40%' height='40%'></img>&nbsp;&nbsp;
+                        <img className="logo1" src={logoID} width='40%' height='40%'></img>
+                    </div>
                     <div className="trans">{this.props.trans}</div>
                     <div className="date">{this.props.date}</div>
                     <div>{this.props.drawno}</div>
                     <div className="betcode">{this.props.betcode}</div>
                     <div>{this.props.betamt}</div>
-                    <div>{this.props.winloss}</div>
+                    <div style={{color:parseFloat(this.props.winloss) > 0 ? "#545454":"#db2222"}}>{this.props.winloss}</div>
                     <div>{this.props.result}</div>
             </div>
         )

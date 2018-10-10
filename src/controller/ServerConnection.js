@@ -165,8 +165,8 @@ class ServerConnection {
     getTableHistory(tableId, isWaiting = false) {
         this.sendExtension(Command.TABLE_HISTORY, {tableId}, isWaiting);
     }
-    getRecentBetReport(tableId, page, ipp, isCountRow, isWaiting = false) {
-        this.sendExtension(Command.REPORT_RECENT_BET, {tableId, page, ipp, isCountRow}, isWaiting);
+    getRecentBetReport(tableId, pageNo, rowsPerPage, isCountRow, isWaiting = false) {
+        this.sendExtension(Command.REPORT_RECENT_BET, {tableId, pageNo, rowsPerPage, isCountRow, language:model.language}, isWaiting);
     }
     getBettingReport(tableId, fromDate, toDate, pageNo, rowsPerPage, isCountRow, isWaiting = false) {
         this.sendExtension(Command.REPORT_BETTING, {tableId, fromDate, toDate, pageNo, rowsPerPage, isCountRow, language:model.language}, isWaiting);

@@ -125,11 +125,11 @@ export default class WebsocketParser {
                     let objRes = objJs.result;
                     if(objRes.result){
                         obj = {};
-                        var item = {};
-                        var rec = {};
+
 
                         for (let i = 0; i < objRes.result.length; i++ ){
-                            item = objRes.result[i];
+                            let rec = {};
+                            let item = objRes.result[i];
                             rec.date = item.TrDate;
                             rec.ticketNo = item.TrID;
                             rec.TbID = item.TbID;

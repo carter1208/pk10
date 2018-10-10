@@ -6,6 +6,8 @@ import  Pagination from 'react-js-pagination';
 import  OpenBetItem from './OpenBetItem';
 import  {model} from '../../model/Model';
 import  {lobbyServer} from '../../controller/ServerLobby';
+import DisplayUtil from '../util/DisplayUtil';
+import  Command from '../../constant/Command';
 
 const ITEM_PER_PAGE = 10;
 
@@ -14,6 +16,7 @@ export default class OpenBetPanel extends Component {
         super(props);
         this.state = {
             activePage: 1,
+            totalRow: 0,
             arr: [],
             data:null
         };
@@ -27,12 +30,20 @@ export default class OpenBetPanel extends Component {
         lobbyServer.getRecentBetReport("0", pageNumber, ITEM_PER_PAGE, 0);
     }
 
+    hideMenu(e){
+        if(this.props.onClickClosePopup){
+            this.props.onClickClosePopup();
+        }
+    }
+
     update(command, data) {
         switch (command) {
             case Command.REPORT_RECENT_BET:
+                data = model._objOpen;
                 this.setState({
-                    arr: data.records,
-                    activePage: parseInt(data.page),
+                    arr: data ? data.records : [],
+                    activePage: data ? parseInt(data.page): 1,
+                    totalRow: data ? parseInt(data.totalRow): 0,
                     data:data
                 });
                 break;
@@ -48,18 +59,27 @@ export default class OpenBetPanel extends Component {
                 <OpenBetItem ref={'tb'+ obj.TbID} key={i+ 1} TbID={obj.TbID} ticketNo={obj.ticketNo} date={obj.date} drawNo={obj.drawNo} betType={obj.betType} betValue={obj.betValue} />
             );
         }
-        this.totalRow = this.state.data.totalRow;
         return (
             <div className="open-bet">
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('./img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
                 </div>
-                {jsxCol}
-                <div>
+                <div className="open-container">
+                    <div className="header" style={{fontWeight:'bold'}}>
+                        <div className="title">GAME</div>
+                        <div className="trans">TRANS ID</div>
+                        <div className="date">DATE TIME</div>
+                        <div>DRAW NO</div>
+                        <div className="betcode">BET CODE</div>
+                        <div>BET AMOUNT</div>
+                    </div>
+                    {jsxCol}
+                </div>
+                <div className="paging" style={{visibility:this.state.totalRow > 0 ? 'visible':'hidden'}}>
                     <Pagination
                         activePage={this.state.activePage}
                         itemsCountPerPage={ITEM_PER_PAGE}
-                        totalItemsCount={this.totalRow}
+                        totalItemsCount={this.state.totalRow}
                         pageRangeDisplayed={5}
                         onChange={::this.handlePageChange.bind(this)}
                     />

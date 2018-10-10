@@ -20,7 +20,6 @@ export default class TopPanel extends Component {
 
     onBlur(e){
         $('.sub-menu').removeClass('active')
-        this.setState({})
         this.setState({
             showMenu:false
         });

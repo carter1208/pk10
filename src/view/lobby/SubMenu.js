@@ -16,6 +16,7 @@ export default class SubMenu extends Component {
     showPopup(e){
         console.log('click report',e.currentTarget.id)
         model.update(EventType.SHOW_POPUP, e.currentTarget.id);
+        $('.sub-menu').removeClass('active');
     }
 
     render() {

@@ -38,7 +38,11 @@ export default class ResultBettingPanel extends Component {
         this.getHistoryRpt();
     }
 
-    getHistoryRpt(){
+    componentWillUnmount(){
+        this.mounted = false;
+    }
+
+    getHistoryRpt(pageNo = 1){
         console.log('getHistoryRpt', this.state.fromDate+" "+this.state.cutOff, this.state.toDate+" "+this.state.cutOffTime);
         let dateF = document.getElementById('from').value.split('/');
         let dateT = document.getElementById('to').value.split('/');
@@ -48,17 +52,14 @@ export default class ResultBettingPanel extends Component {
         let fromdate = dateF[0] + '-' + months[monthF - 1] + '-' + dateF[2];
         let todate = dateT[0] + '-' + months[monthT - 1] + '-' + dateT[2];
         if(new Date(fromdate) < new Date(todate) ) {
-            lobbyServer.getBettingReport('0', dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2]+" "+this.state.cutOff, dateT[0] + '/' + months[monthT - 1] + '/' + dateT[2] +" "+ this.state.cutOffTime,this.state.activePage ,ITEM_PER_PAGE, 1);
+            lobbyServer.getBettingReport('0', dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2]+" "+this.state.cutOff, dateT[0] + '/' + months[monthT - 1] + '/' + dateT[2] +" "+ this.state.cutOffTime, pageNo ,ITEM_PER_PAGE, 1);
         }else{
             alert('fromDate is lower todate')
         }
     }
 
     handlePageChange(pageNumber) {
-        this.setState({
-            activePage: pageNumber
-        });
-        this.getHistoryRpt.bind(this);
+        this.getHistoryRpt(pageNumber);
     }
 
     hdlChangeCutOff(val){
@@ -68,12 +69,10 @@ export default class ResultBettingPanel extends Component {
     }
 
     setData(data){
-        if(!data){
-            return;
-        }
         this.setState({
-            arr: data.records,
-            activePage: parseInt(data.page),
+            arr: data ? data.records : [],
+            activePage: data ? parseInt(data.page): 1,
+            totalRow: data ? parseInt(data.totalRow): 0,
             data:data
         });
     }
@@ -81,6 +80,7 @@ export default class ResultBettingPanel extends Component {
     update(command, data) {
         switch (command) {
             case Command.REPORT_BETTING:
+                model._objOpen = data;
                 this.setData(data);
                 break;
         }
@@ -102,6 +102,10 @@ export default class ResultBettingPanel extends Component {
         });
     }
 
+    onSearch(e){
+        this.getHistoryRpt();
+    }
+
     hideMenu(e){
         if(this.props.onClickClosePopup){
             this.props.onClickClosePopup();
@@ -114,10 +118,9 @@ export default class ResultBettingPanel extends Component {
         for (let i = 0; i < this.state.arr.length; i++){
             obj = this.state.arr[i];
             jsxCol.push(
-                <ResultBettingItem ref={'tb'+ obj.TbID} key={i+ 1} TbID={obj.TbID} date={obj.date} trans={obj.drawNoRef} drawno={obj.drawNoRef} betcode={obj.betDetail} betamt={obj.stake} winloss={obj.winloss} result={obj.result}/>
+                <ResultBettingItem ref={'tb'+ obj.TbID} key={i+ 1} TbID={obj.TbID} date={obj.date} trans={obj.ticketNo} drawno={obj.drawNo} betcode={obj.betDetail} betamt={obj.stake} winloss={obj.winloss} result={obj.result}/>
             );
         }
-        this.totalRow = this.state.data ? this.state.data.totalRow : 100;
         return (
             <div className="betting-rpt">
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
@@ -153,9 +156,10 @@ export default class ResultBettingPanel extends Component {
                         </div>
                         <span className="toCutOff" style={{paddingLeft:'10px', fontSize:'12pt'}}>{this.state.cutOffTime}</span>
                     </div>
+                    <button type="button" className="btn-select-line" onMouseDown={this.onSearch.bind(this)}>Search</button>
                 </div>
                 <div className="betting-container">
-                    <div className="header">
+                    <div className="header" style={{fontWeight:'bold'}}>
                         <div className="title">GAME</div>
                         <div className="trans">TRANS ID</div>
                         <div className="date">DATE TIME</div>
@@ -167,11 +171,11 @@ export default class ResultBettingPanel extends Component {
                     </div>
                     {jsxCol}
                 </div>
-                <div className="paging">
+                <div className="paging" style={{visibility:this.state.totalRow > 0 ? 'visible':'hidden'}}>
                     <Pagination
                         activePage={this.state.activePage}
                         itemsCountPerPage={ITEM_PER_PAGE}
-                        totalItemsCount={this.totalRow}
+                        totalItemsCount={this.state.totalRow}
                         pageRangeDisplayed={5}
                         onChange={this.handlePageChange.bind(this)}
                         firstPageText={<img src={'img/btnLast1.png'}/>}

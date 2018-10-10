@@ -8,6 +8,7 @@ import DisplayUtil from '../util/DisplayUtil';
 import  {lobbyServer} from '../../controller/ServerLobby';
 import  {model} from '../../model/Model';
 import  Command from '../../constant/Command';
+import  SelectLanguage from '../../component/SelectLanguage';
 
 const ITEM_PER_PAGE = 10;
 
@@ -83,7 +84,12 @@ export default class ResultHistoryPanel extends Component {
     }
 
     activeLine(e){
+        if(this.arrItem.length < 1) return;
         this.drawLine(this.idx);
+    }
+
+    hdlChangeTable(obj){
+
     }
 
     removeLine(){
@@ -153,18 +159,17 @@ export default class ResultHistoryPanel extends Component {
     update(command, data) {
         switch (command) {
             case Command.REPORT_RESULT:
-                if(!data) return;
                 this.setState({
-                    arr: data.records,
-                    activePage: parseInt(data.page),
+                    arr: data ? data.records : [],
+                    activePage: data ? parseInt(data.page): 1,
                     data:data,
-                    totalRow:parseInt(data.totalRow)
+                    totalRow:data ? parseInt(data.totalRow):0
                 });
+                if(data) this.drawLine(this.idx);
                 break;
         }
     }
     render() {
-
         let jsxCol = [];
         let obj;
         for (let i = 0; i < this.state.arr.length; i++){
@@ -178,6 +183,16 @@ export default class ResultHistoryPanel extends Component {
             <div className="result-rpt">
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
+                    <div className="sel">
+                        <SelectLanguage className="sel-market" options={[
+                            { value:'77',icon: 'img/logo_77.png', value: '77'},
+                            { value:'79',icon: 'img/logo79.png', value: '79'},
+                            { value:'80',icon: 'img/logo80.png', value: '80'},
+                            { value:'81',icon: 'img/logo81.png', value: '81'}
+                        ]}
+                        onChangeSelect={this.hdlChangeTable.bind(this)}
+                        />
+                    </div>
                 </div>
                 <canvas id="line" style={{ left: 0, top:0}} width={'1440px'} height={'720px'}>
 
@@ -214,13 +229,13 @@ export default class ResultHistoryPanel extends Component {
                     </div>
                 </div>
                 <div className="res-container">
-                    <div className="result-item">
+                    <div className="result-item" style={{fontWeight:'bold'}}>
                         <div className="info">DRAW NO</div>
                         <div className="list">RESULT</div>
                     </div>
                     {jsxCol}
                 </div>
-                <div className="paging">
+                <div className="paging" style={{visibility:this.state.totalRow > 0 ? 'visible':'hidden'}}>
                     <Pagination
                         activePage={this.state.activePage}
                         itemsCountPerPage={ITEM_PER_PAGE}

@@ -27,6 +27,8 @@ class Model extends Subject {
         this.casinoVisible = "";
         this._listCasino = [];
         this._listGameType = [];
+        //test
+        this._objOpen = {};
     }
 
     checkVisibleCasino(casinoId) {
