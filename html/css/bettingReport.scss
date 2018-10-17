@@ -8,7 +8,7 @@
   text-align: center;
   .open-bet{
     margin-top: -59px;
-    width: 1440px;
+    width: 1420px;
     height: 60px;
     .top{
       margin-left:0;
@@ -30,57 +30,57 @@
       margin-top: 20px;
       .header{
         display: flex;
-        height: 50px;
+        height: 58px;
         div {
           display: flex;
-          height: 50px;
+          height: 58px;
           min-width: 200px!important;
           border: 1px solid #eee;
           align-items: center;
           justify-content: center;
         }
         .title{
-          min-width: 250px!important;
+          width: 250px!important;
         }
         .trans{
-          min-width: 250px!important;
+          width: 250px!important;
         }
         .date{
-          min-width: 250px!important;
+          width: 270px!important;
         }
         .betcode{
-          min-width: 230px!important;
+          width: 230px!important;
         }
       }
       .open-bet-item{
         display: flex;
-        height: 50px;
+        height: 58px;
         div {
           display: flex;
-          height: 50px;
+          height: 58px;
           min-width: 200px!important;
           border: 1px solid #eee;
           align-items: center;
           justify-content: center;
         }
         .title{
-          min-width: 250px!important;
+          width: 250px!important;
         }
         .trans{
-          min-width: 250px!important;
+          width: 250px!important;
         }
         .date{
-          min-width: 250px!important;
+          width: 270px!important;
         }
         .betcode{
-          min-width: 230px!important;
+          width: 230px!important;
         }
       }
     }
   }
   .result-rpt{
     margin-top: -59px;
-    width: 1440px;
+    width: 1400px;
     height: 60px;
     .top{
       margin-left:0;
@@ -246,7 +246,7 @@
   }
   .betting-rpt{
     margin-top: -59px;
-    width: 1440px;
+    width: 1420px;
     height: 60px;
     .top{
       margin-left:0;
@@ -383,7 +383,7 @@
           min-width: 220px!important;
         }
         .betcode{
-          min-width: 180px!important;
+          min-width: 200px!important;
         }
       }
       .betting-item {
@@ -398,16 +398,16 @@
           justify-content: center;
         }
         .title{
-          min-width: 180px!important;
+          width: 180px!important;
         }
         .trans{
-          min-width: 200px!important;
+          width: 200px!important;
         }
         .date{
-          min-width: 220px!important;
+          width: 220px!important;
         }
         .betcode{
-          min-width: 180px!important;
+          width: 200px!important;
         }
       }
     }
@@ -421,11 +421,14 @@
     font-weight: bold;
     li{
      font-size: 12pt;
+      width: 100%;
     }
     a, a:hover{
+      justify-content: center;
       border: none;
       background-color: transparent;
       color: #545454;
+      height: 36px!important;
     }
 
     a.active, a:focus{
@@ -433,7 +436,8 @@
       background-color: transparent;
       color: #db2222;
     }
-    li.active{
+    li.active, li.disabled{
+      height: 36px!important;
       a{
         color: #db2222;
       }

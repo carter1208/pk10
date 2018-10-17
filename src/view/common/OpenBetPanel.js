@@ -82,6 +82,10 @@ export default class OpenBetPanel extends Component {
                         totalItemsCount={this.state.totalRow}
                         pageRangeDisplayed={5}
                         onChange={::this.handlePageChange.bind(this)}
+                        firstPageText={<img src={'img/btnLast1.png'}/>}
+                        lastPageText={<img src={'img/btnLast.png'}/>}
+                        prevPageText={<img src={'img/btnNext1.png'}/>}
+                        nextPageText={<img src={'img/btnNext.png'}/>}
                     />
                 </div>
             </div>

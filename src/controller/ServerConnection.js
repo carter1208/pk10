@@ -70,7 +70,7 @@ class ServerConnection {
         if (!message) {
             message = {};
         }
-        message.sessionId = this.sessionId;
+        message.sessionId = model.sessionId;
         this.server.sendExtension(command, message);
     }
 
@@ -78,7 +78,7 @@ class ServerConnection {
         console.log('onExtensionResponse: ', "command", command, "data", result);
         let data = this.parser.parseResponse(command, result);
         if (command == Command.SESSION) {
-            this.sessionId = data.result.sessionId;
+            model.sessionId = data.result.sessionId;
         }
         model.updateData(command, data.result, this.isLobby);
 
@@ -174,8 +174,20 @@ class ServerConnection {
     getResultReport(tableId, date, pageNo, rowsPerPage, isCountRow, isWaiting = false) {
         this.sendExtension(Command.REPORT_RESULT, {tableId, date, pageNo, rowsPerPage, isCountRow, language:model.language}, isWaiting);
     }
-    getTableInfo(tableId) {
-        this.sendExtension(Command.TABLE_INFO, {tableId}, false);
+    getTableInfo(tableId, isWaiting = false) {
+        this.sendExtension(Command.TABLE_INFO, {tableId}, isWaiting);
+    }
+    getOddDefault(tableId, isWaiting = false) {
+        this.sendExtension(Command.GET_ODD_DEFAULT, {tableId}, isWaiting);
+    }
+    getOddLive(tableId, isWaiting = false) {
+        this.sendExtension(Command.GET_ODD_LIVE, {tableId}, isWaiting);
+    }
+    getServerDate(isWaiting = false) {
+        this.sendExtension(Command.SERVER_DATE, {}, isWaiting);
+    }
+    getStart(tableId, isWaiting = false) {
+        this.sendExtension(Command.TABLE_START, {tableId}, isWaiting);
     }
 }
 export default ServerConnection;

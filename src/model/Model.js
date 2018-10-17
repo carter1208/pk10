@@ -6,6 +6,10 @@ import Command from '../constant/Command';
 import UserInfo from './UserInfo';
 import TableInfo from './TableInfo';
 import ResultInfo from './ResultInfo';
+import BetPlaceInfo from '../model/LoBetPlaceInfo'
+import RangeItemInfo from './RangeItemInfo'
+import LotteryBetType from '../enum/LotteryBetType'
+
 class Model extends Subject {
     get listCasino() {
         return this._listCasino;
@@ -16,8 +20,15 @@ class Model extends Subject {
     get listTable(){
         return this._listTable;
     }
+    get listBetPlaceInfo(){
+        return this._listBetPlaceInfo;
+    }
+    get range(){
+        return this._range;
+    }
     constructor() {
         super();
+        this.isBetting = false;
         this.gameMode = 's';
         this.gameType = "Pk10";
         this.language = "E";
@@ -26,7 +37,9 @@ class Model extends Subject {
         this.loginPass = "";
         this.casinoVisible = "";
         this._listCasino = [];
+        this._listBetPlaceInfo = [];
         this._listGameType = [];
+        this._range = null;
         //test
         this._objOpen = {};
     }
@@ -69,6 +82,127 @@ class Model extends Subject {
         return false;
     }
 
+    setBetStatus(data){
+        this.isBetting = false;
+        this.update(Command.UPDATE_STOP_BETTING);
+    }
+
+    initBetCode(){
+        this._listBetPlaceInfo = [];
+        this.createPositionBetCode();
+        this.createDTBetCode();
+        this.createSum2BetCode();
+        this.createSum3BetCode();
+        this.createCombine2BetCode();
+        this.createCombine3BetCode();
+    }
+    createPositionBetCode(){
+        let betcode = '';
+        let betInfo;
+        let arr = ['B', 'S', 'EV', 'OD'];
+        for (let i = 1; i < 11; i++)
+        {
+            for (let j = 1; j < 11; j++)
+            {
+                if (i == 10 && j == 10)
+                    betcode = 'Lo' + i + "" + j;
+                else
+                    betcode = 'Lo' + i + "-" + j;
+                betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.POSITION);
+                this._listBetPlaceInfo.push(betInfo);
+            }
+            betcode = '';
+            for (let k = 0; k < arr.length; k++)
+            {
+                betcode = 'Lo' + i + arr[k];
+                betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.POSITION);
+                this._listBetPlaceInfo.push(betInfo);
+            }
+        }
+    }
+    createDTBetCode(){
+        let betcode = '';
+        let betInfo;
+        for (let i = 1; i < 11; i++)
+        {
+            if (i < 6)
+                betcode = 'LoD' + i;
+            else
+                betcode = 'LoG' + i;
+            betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.DRAGON_TIGER);
+            this._listBetPlaceInfo.push(betInfo);
+        }
+    }
+    createSum2BetCode(){
+        let betInfo;
+        let betcode = '';
+        let arr = ['B', 'S', 'EV', 'OD'];
+        let arr1 = [3, 4, 7, 8, 11, 12, 15, 16, 19];
+        for (let i = 0; i < arr1.length; i++)
+        {
+            betcode = 'Lo2S' + arr1[i];
+            betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 19.5, LotteryBetType.SUM_OF_2);
+            this._listBetPlaceInfo.push(betInfo);
+        }
+        for (let i = 0; i < arr.length; i++)
+        {
+            betcode = 'Lo2S' + arr[i];
+            betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.SUM_OF_2);
+            this._listBetPlaceInfo.push(betInfo);
+        }
+    }
+    createSum3BetCode(){
+        let betInfo;
+        let betcode = '';
+        let arr = ['B', 'S', 'EV', 'OD'];
+        let arr1 = [6, 7, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27];
+        for (let i = 0; i < arr1.length; i++)
+        {
+            betcode = 'Lo3S' + arr1[i];
+            betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.SUM_OF_3);
+            this._listBetPlaceInfo.push(betInfo);
+        }
+        for (let i = 0; i < arr.length; i++)
+        {
+            betcode = 'Lo3S' + arr[i];
+            betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.SUM_OF_3);
+            this._listBetPlaceInfo.push(betInfo);
+        }
+    }
+    createCombine2BetCode(){
+        let betcode = '';
+        for (let i = 1; i < 11; i++)
+        {
+            for (let j = 1; j < 11; j++)
+            {
+                if (i == j)
+                    continue;
+                betcode = 'Lo' + i + j;
+                let betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 44, LotteryBetType.COMBINE_2);
+                this._listBetPlaceInfo.push(betInfo);
+            }
+        }
+    }
+    createCombine3BetCode(){
+        let betcode = '';
+        for (let i = 1; i < 11; i++)
+        {
+            for (let j = 1; j < 11; j++)
+            {
+                if (j == i)
+                    continue;
+                for (let k = 1; k < 11; k++)
+                {
+                    if (j == k || k == i)
+                        continue;
+                    betcode = 'Lo' + i + j + k;
+                    let betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 110, LotteryBetType.COMBINE_3);
+                    this._listBetPlaceInfo.push(betInfo);
+                }
+            }
+        }
+    }
+
     updateData(command, data, isLobby) {
         switch (command) {
             case Command.SESSION:
@@ -100,6 +234,11 @@ class Model extends Subject {
                 break;
             case Command.PERSON_INFO:
                 this.userInfo = new UserInfo(this.loginName, data.Credit, data.CommRate, data.BonusCredit);
+                break;
+            case Command.GAME_LIMIT:
+                let minBet = parseFloat(data.minBet);
+                let maxBet = parseFloat(data.maxBet);
+                this._range = new RangeItemInfo("0", minBet, maxBet);
                 break;
             case Command.BET_RESULT:
                 let res = new ResultInfo(data);

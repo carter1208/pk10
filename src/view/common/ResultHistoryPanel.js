@@ -38,6 +38,7 @@ export default class ResultHistoryPanel extends Component {
 
     componentWillUnmount(){
         this.mounted = false;
+        model.unsubscribe(Command.REPORT_RESULT, this);
     }
 
     getResultRpt(page = 1){

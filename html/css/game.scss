@@ -1,5 +1,7 @@
 .game{
-  margin-left:100px;
+  display: inherit;
+  height: 100%;
+  padding-top: 20px;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -13,19 +15,18 @@
   .dateTime{
     position: absolute;
     z-index: 2;
-    left: 690px;
     margin-top: 5px;
     font-size: 10pt;
     color: white;
     text-align: center;
-    background-color: yellow;
     .drawNo{
       position: absolute;
       width: 130px;
+      left:585px;
     }
     .time{
       position: absolute;
-      left: 150px;
+      left: 740px;
       font-size: 20pt;
       font-weight: bold;
     }
@@ -38,15 +39,20 @@
     text-align: center;
     z-index: 3;
     position: absolute;
-    left: 100px;
     color: white;
+    .drawNo{
+      left:20px;
+    }
+    .time{
+
+    }
   }
   .stat{
     font-weight: bold;
     z-index: 4;
     position: absolute;
     color: #545454;
-    top: 415px;
+    top: 473px;
     font-size: 18pt;
     span, p{
       position: absolute;
@@ -83,7 +89,7 @@
         left: 538px;
       }
       .d3 {
-        left: 595px;
+        left: 593px;
       }
       .d4 {
         left: 650px;

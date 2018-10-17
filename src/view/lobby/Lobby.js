@@ -3,6 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import {lobbyServer} from '../../controller/ServerLobby'
+import {model} from '../../model/Model'
 import MainPage from "./MainPage";
 
 export default class Lobby extends Component {
@@ -13,14 +14,17 @@ export default class Lobby extends Component {
         }
     }
     componentDidMount() {
+
         this.onLogin();
     }
     componentWillUnmount() {
     }
 
     onLogin(){
+        model.loginName = 'rubby';
+        model.loginPass = '123456';
         lobbyServer.startWaiting(this.onConnectSuccessHandler.bind(this));
-        lobbyServer.connect('rubby', '123456');
+        lobbyServer.connect(model.loginName, model.loginPass);
     }
     onConnectSuccessHandler(){
         lobbyServer.startWaiting(this.onLoadInfoCompleteHandler.bind(this))

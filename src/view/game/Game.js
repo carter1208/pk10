@@ -22,11 +22,11 @@ export default class Game extends Component {
             total:'0',
             bigSmall:'B',
             oddEven:'O',
-            d1:'T',
-            d2:'T',
-            d3:'T',
-            d4:'T',
-            d5:'T'
+            d1:'D',
+            d2:'D',
+            d3:'D',
+            d4:'D',
+            d5:'D'
         }
     }
 
@@ -43,7 +43,7 @@ export default class Game extends Component {
     }
 
     init() {
-        this.app = new PIXI.Application(1290, 1000, {backgroundColor: 'transparent', transparent:true});
+        this.app = new PIXI.Application(830, 450, {backgroundColor: 'transparent', transparent:true});
         this.refs.canvasContainer.appendChild(this.app.view);
         this.stage = new PIXI.Container();
 
@@ -106,7 +106,7 @@ export default class Game extends Component {
         this.mcMute.buttonMode = true;
         this.mcMute.on('mousedown', this.hdlSound.bind(this));
 
-        this.mcMute.x = 790;
+        this.mcMute.x = 780;
         this.mcMute.y = 393;
 
         this.stage.addChild(this.mcRacing);

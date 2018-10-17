@@ -68,7 +68,16 @@ export default class WebsocketParser {
                     obj.BonusCredit = objRes.BonusCredit;
                 }
                 break;
-
+            case Command.GAME_LIMIT:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    obj = {};
+                    let objRes = objJs.result;
+                    obj.minBet = objRes.MinBet;
+                    obj.maxBet = objRes.MaxBet;
+                }
+                break;
             case Command.TABLE_LIST_BY_USER:
                 obj = [];
                 objJs = JSON.parse(strData);
@@ -172,69 +181,106 @@ export default class WebsocketParser {
                     }
                 }
                 break;
+            case  Command.TABLE_INFO:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    let item = objJs.result;
+                    obj = {};
+                    obj.tableName = item.TbName;
+                    obj.drawNoRef = item.DrawNoRef;
+                    obj.status = item.TbStatus;
+                    obj.gameSet = item.GameSet;
+                    obj.gameNo = item.GameNo;
+                }
+                break;
+            case  Command.TABLE_HISTORY:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    if (!objJs.result){
+                        return;
+                    }
+                    obj = [];
+                    let arr = objJs.result;
+                    for (let i = 0; i < arr.length; i++)
+                    {
+                        let his = {};
+                        let item = arr[i];
+                        his.tableId = this.tableId;
+                        his.drawNoRef = item.DrawNoRef;
+                        his.num = item.Nums;
+                        obj.push(his);
+                    }
+                }
+                break;
+            case  Command.GET_ODD_LIVE:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    if (!objJs.result){
+                        return;
+                    }
+                    let item = objJs.result;
+                    let arr = item.ListOdds;
+                    model.setBetStatus(item.IsStartBet);
+                    obj = [];
+                    for (let i = 0; i < arr.length; i++)
+                    {
+                        let objBet = new Object();
+                        let obj1 = arr[i];
+                        objBet.key = obj1.BetCode;
+                        objBet.odd = obj1.Odds;
+                        objBet.isOnline = obj1.IsOnline;
+                        obj.push(objBet);
+                    }
+                }
+                break;
+            case  Command.GET_ODD_DEFAULT:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    if (!objJs.result){
+                        return;
+                    }
+                    let item = objJs.result;
+                    let arr = item.ListOdds;
+                    obj = [];
+                    for (let i = 0; i < arr.length; i++)
+                    {
+                        let objBet = new Object();
+                        let obj1 = arr[i];
+                        objBet.key = obj1.BetCode;
+                        objBet.odd = obj1.Odds;
+                        objBet.isOnline = obj1.IsOnline;
+                        obj.push(objBet);
+                    }
+                }
+                break;
+            case Command.TABLE_START:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    obj = {};
+                    let objRes = objJs.result;
+                    obj.countDown = result.countdown;
+                    obj.tbId = objRes.TbID;
+                    obj.drawNo = objRes.DrawNoRef;
+                    obj.gameSet = objRes.GameSet;
+                    obj.gameNo = objRes.GameNo;
+                }
+                break;
+            case Command.SERVER_DATE:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                obj = '';
+                if (data.error == DATA_SUCCESS) {
+                    let objRes = objJs.result;
+                    obj = objRes.DateTime;
+                }
+                break;
         }
         data.result = obj;
         return data;
     }
-
-    parseBetting(result) {
-        let arrCode;
-        let arrValue;
-        let pos = 0;
-        let len = 9;
-        let arrRes = [];
-        let i;
-        switch (model.gameType) {
-            case GameType.BACCARAT:
-                arrCode = ["BaBank", "BaDeal", "BaTie", "BaBPa", "BaPPa", "BaBig", "BaSm"];
-                arrValue = [0, 0, 0, 0, 0, 0, 0];
-                break;
-            case GameType.BACCARAT_INSURANCE:
-                arrCode = ["BiBank", "BiDeal", "BiTie", "BiBPa", "BiPPa", "BiBig", "BiSm", "BI", "PI"];
-                arrValue = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-                break;
-            case GameType.DRAGON_TIGER:
-                arrCode = ["DtDWin", "DtTWin", "DtTie"];
-                arrValue = [0, 0, 0];
-                break;
-            case GameType.SICBO:
-                arrCode = [];
-                arrValue = [];
-                for (i = 1; i < 51; i++ ) {
-                    arrCode.push("Dc" + i.toString());
-                    arrValue.push(0);
-                }
-                break;
-        }
-
-        if (arrCode) {
-            for (i = 0; i < arrCode.length; i++) {
-                arrValue[i] = parseInt(result.substr(pos, len));
-                pos += len;
-                if (arrValue[i] > 0) {
-                    arrRes.push({BetCode:arrCode[i], BetAmt:arrValue[i]});
-                }
-            }
-        } else if (model.gameType == GameType.ROULETTE) {
-            let posCode = 0;
-            let lenCode = 4;
-            let posValue = 4;
-            let lenValue = 9;
-            let bcode;
-            let bvalue;
-            while (posValue < result.length) {
-                bcode = result.substr(posCode, lenCode);
-                bvalue = parseFloat(result.substr(posValue, lenValue))
-                if (bvalue > 0) {
-                    arrRes.push({BetCode:bcode, BetAmt:bvalue});
-                }
-
-                posCode += lenCode + lenValue;
-                posValue += lenCode + lenValue;
-            }
-        }
-
-        return arrRes;
-    }
-
 }
