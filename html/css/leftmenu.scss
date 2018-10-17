@@ -1,6 +1,6 @@
 .left-menu{
   margin-top: 20px;
-  padding-left: 20px;
+  margin-left: 20px;
   width: 234px;
   height: 220px;
   .sroll-content {
@@ -8,6 +8,7 @@
     overflow-y: auto;
     .item {
       display: flex;
+      cursor: pointer;
       height: 50px;
       align-items: center;
       padding-left: 10px;
