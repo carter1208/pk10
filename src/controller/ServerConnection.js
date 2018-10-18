@@ -175,7 +175,7 @@ class ServerConnection {
         this.sendExtension(Command.REPORT_RESULT, {tableId, date, pageNo, rowsPerPage, isCountRow, language:model.language}, isWaiting);
     }
     getTableInfo(tableId, isWaiting = false) {
-        this.sendExtension(Command.TABLE_INFO, {tableId}, isWaiting);
+        this.sendExtension(Command.TABLE_INFO, {tableId, language:model.language}, isWaiting);
     }
     getOddDefault(tableId, isWaiting = false) {
         this.sendExtension(Command.GET_ODD_DEFAULT, {tableId}, isWaiting);

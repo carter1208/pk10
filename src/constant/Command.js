@@ -22,6 +22,7 @@ export default class Command {
     static TABLE_START   			 = "@betStarting";
 
     static OPEN_TABLE   			 = "open_table";
+    static BACK_LOBBY   			 = "back_lobby";
     static STOP_BET_LOBBY			 = "stop_bet_lobby";
     static START_BET_LOBBY			 = "start_bet_lobby";
     static UPDATE_STOP_BETTING		 = "stop_betting";

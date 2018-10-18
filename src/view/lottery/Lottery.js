@@ -8,20 +8,27 @@ import BettingPanel from './BettingPanel'
 import {model} from '../../model/Model'
 import {gameServer} from '../../controller/GameServer'
 import LeftMenu from "../common/LeftMenu";
+import Command from "../../constant/Command";
+import ResultStat from "./ResultStat";
 
 export default class Lottery extends Component {
     constructor(props) {
         super(props);
         model.tableId = this.props.tbID;
+        this.isFirst = true;
         this.state = {
             tbID: this.props.tbID,
-            isShow:false
+            isShow:false,
+            arrRes:[]
         }
     }
     componentDidMount() {
+        model.subscribe(Command.TABLE_HISTORY, this);
         this.onConnectGame();
     }
     componentWillUnmount() {
+        this.mounted = false;
+        model.unsubscribe(Command.TABLE_HISTORY, this);
     }
 
     onConnectGame(){
@@ -31,7 +38,7 @@ export default class Lottery extends Component {
 
     onConnectSuccessHandler(){
         gameServer.startWaiting(this.onLoadInfoCompleteHandler.bind(this))
-        gameServer.getTableInfo(true);
+        gameServer.getTableInfo(this.state.tbID, true);
         model.initBetCode();
         gameServer.getOddDefault(this.state.tbID, true);
         gameServer.getOddLive(this.state.tbID, true);
@@ -46,19 +53,38 @@ export default class Lottery extends Component {
         this.setState({isShow:true});
     }
 
+    removeState(){
+        this.refs.gameContainer.removeState();
+        this.setState({isShow:false});
+    }
+
+    update(command, data) {
+        switch (command) {
+            case Command.TABLE_HISTORY:
+                if (!this.isFirst)
+                    return;
+                this.setState({
+                    arrRes:model.table.history.getHistory
+                });
+                this.isFirst = false;
+                break;
+        }
+    }
+
     render() {
         if(!this.state.isShow){
             return <div></div>
         }
         return (
             <div className="game-container">
-                <TopPanel/>
+                <TopPanel tbID={this.state.tbID}/>
                 <div style={{display:'flex'}}>
                     <div className="left" style={{float:'left'}}>
                         <LeftMenu/>
+                        <ResultStat arrRes={this.state.arrRes}/>
                     </div>
-                    <div className="center" style={{float:'center', width:'830px', paddingLeft:'20px'}}>
-                        <Game/>
+                    <div className="center" style={{float:'center', width:'830px', marginLeft:'20px'}}>
+                        <Game ref="gameContainer"/>
                         <BettingPanel/>
                     </div>
                     <div className="right" style={{float:'right'}}>

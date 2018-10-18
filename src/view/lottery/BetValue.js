@@ -6,11 +6,17 @@ export default class BetValue extends Component{
     constructor(props){
         super();
         this.state = {
+            isShow:false,
+            top:0,
             arrNum:[1,2,5,10,20,50]
         };
     }
 
     componentDidMount(){
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
     }
 
     onClick(e){

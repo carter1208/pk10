@@ -21,7 +21,7 @@ export default class Lobby extends Component {
     render() {
         return (
             <div className="main-container">
-                <TopPanel/>
+                <TopPanel tbID={0}/>
                 <ListTable/>
                 <PopupContainer/>
             </div>

@@ -32,6 +32,7 @@ class Model extends Subject {
         this.gameMode = 's';
         this.gameType = "Pk10";
         this.language = "E";
+        this.tableId = "0";
         this.apiToken = "";
         this.loginName = "";
         this.loginPass = "";
@@ -234,6 +235,15 @@ class Model extends Subject {
                 break;
             case Command.PERSON_INFO:
                 this.userInfo = new UserInfo(this.loginName, data.Credit, data.CommRate, data.BonusCredit);
+                break;
+            case Command.TABLE_HISTORY:
+                this.table.history.setHistory = data;
+                break;
+            case Command.TABLE_INFO:
+                this.table = new TableInfo("", "Lo", this.tableId, data.tableName, data.status);
+                this.table.drawNo = data.drawNoRef;
+                this.table.gameSet = data.gameSet;
+                this.table.gameNo = data.gameNo;
                 break;
             case Command.GAME_LIMIT:
                 let minBet = parseFloat(data.minBet);

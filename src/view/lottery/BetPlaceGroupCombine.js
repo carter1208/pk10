@@ -49,7 +49,6 @@ export default class BetPlaceGroupCombine extends Component {
     }
 
     hdlClickNum(id){
-        console.log('click num', this.refs[this.currItem.id], id, this.currItem.id);
         this.refs[this.currItem.id].getColor(id, this.currItem.childNodes);
     }
 

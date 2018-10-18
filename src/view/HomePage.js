@@ -13,14 +13,17 @@ export default class Main extends Component {
         super(props);
         this.state = {
             tbID:'0',
+            isLogin:true,
             sence: LOBBY
         }
     }
     componentDidMount() {
         model.subscribe(Command.OPEN_TABLE, this);
+        model.subscribe(Command.BACK_LOBBY, this);
     }
     componentWillUnmount(){
         model.unsubscribe(Command.OPEN_TABLE, this);
+        model.unsubscribe(Command.BACK_LOBBY, this);
     }
     update(command, data) {
         switch (command) {
@@ -30,10 +33,17 @@ export default class Main extends Component {
                     sence: GAME
                 });
                 break;
+            case Command.BACK_LOBBY:
+                this.refs.game.removeState();
+                this.setState({
+                    isLogin:false,
+                    sence: LOBBY
+                });
+                break;
         }
     }
     render() {
-        let jsx = this.state.sence == LOBBY ? <Lobby/> : <Game key={Math.random()} tbID={this.state.tbID}/>;
+        let jsx = this.state.sence == LOBBY ? <Lobby ref="lobby" isLogin={this.state.isLogin}/> : <Game ref="game" key={Math.random()} tbID={this.state.tbID}/>;
         return (
             <div className="main-page">
                 {jsx}

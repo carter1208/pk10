@@ -180,17 +180,20 @@ export default class ResultHistoryPanel extends Component {
             );
         }
         this.arrItem = jsxCol.concat();
+        let jsxTb = [];
+        for(let i = 0; i< model.listTable.length; i++){
+            let item = {
+                value:model.listTable[i].id,
+                icon: 'img/logo'+ (model.listTable[i].id == 77 ? "_"+ model.listTable[i].id: model.listTable[i].id) +'.png'
+            };
+            jsxTb.push(item)
+        }
         return (
             <div className="result-rpt">
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
                     <div className="sel">
-                        <SelectLanguage className="sel-market" options={[
-                            { value:'77',icon: 'img/logo_77.png', value: '77'},
-                            { value:'79',icon: 'img/logo79.png', value: '79'},
-                            { value:'80',icon: 'img/logo80.png', value: '80'},
-                            { value:'81',icon: 'img/logo81.png', value: '81'}
-                        ]}
+                        <SelectLanguage className="sel-market" options={jsxTb}
                         onChangeSelect={this.hdlChangeTable.bind(this)}
                         />
                     </div>

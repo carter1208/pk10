@@ -87,6 +87,24 @@ export default class Racing extends PIXI.Container{
         this.mcResult.visible  = false;
     }
 
+    removeChild(){
+        this.soundUrls = null;
+        this.soundPlayer.volume = 0;
+        this.soundPlayer = null;
+        this.soundPlayer1.volume = 0;
+        this.soundPlayer1 = null;
+        this.arrCar = [];
+        this.grades = [];
+        this.mcBg = null;
+        this.gate1 = null;
+        this.gate2 = null;
+        this.mcLandscape = null;
+        this.mcStadium = null;
+        this.mcResult = null;
+        TweenLite.killTweensOf(this.stopRace.bind(this))
+        clearInterval(this.interval);
+    }
+
     setMute(val) {
         this.soundVolume = val ? 0 : 1;
         this.soundPlayer.volume = this.soundVolume;
@@ -121,8 +139,10 @@ export default class Racing extends PIXI.Container{
         this.interval = setInterval(this.onCountDown.bind(this), 1000);
         this.mcCountDown.visible = true;
         this.isFinish = false;
-        this.soundPlayer.src = this.soundUrls['start'];
-        this.soundPlayer.play();
+        if(this.soundPlayer) {
+            this.soundPlayer.src = this.soundUrls['start'];
+            this.soundPlayer.play();
+        }
     }
 
     onCountDown(){
@@ -136,7 +156,6 @@ export default class Racing extends PIXI.Container{
             clearInterval(this.interval);
             return;
         }
-        console.log("onCountDown", this.countDown);
         this.mcCountDown.text = this.countDown;
         this.countDown--;
     }
@@ -148,9 +167,10 @@ export default class Racing extends PIXI.Container{
     startRace() {
         if (this.isClose)
             return;
-        this.soundPlayer.src = this.soundUrls['run'];
-
-        this.soundPlayer.play();
+        if(this.soundPlayer) {
+            this.soundPlayer.src = this.soundUrls['run'];
+            this.soundPlayer.play();
+        }
         let px;
         this.mcBg.startRace(this.dir);
         this.mcStadium.startRace(this.dir);
@@ -195,8 +215,10 @@ export default class Racing extends PIXI.Container{
     showResult() {
         if (this.isClose)
             return;
-        this.soundPlayer1.src = this.soundUrls['win'];
-        this.soundPlayer1.play();
+        if(this.soundPlayer1) {
+            this.soundPlayer1.src = this.soundUrls['win'];
+            this.soundPlayer1.play();
+        }
         this.mcResult.visible = true;
         this.mcResult.init(this.grades);
 
@@ -214,8 +236,10 @@ export default class Racing extends PIXI.Container{
         console.log('onTheFirst...')
         if(this.isClose)
             return;
-        this.soundPlayer1.src = this.soundUrls['cheer'];
-        this.soundPlayer1.play();
+        if(this.soundPlayer1) {
+            this.soundPlayer1.src = this.soundUrls['cheer'];
+            this.soundPlayer1.play();
+        }
     }
 
     onTheLast(e) {
@@ -226,6 +250,7 @@ export default class Racing extends PIXI.Container{
     }
 
     stopRace(){
+        if(this.grades.length < 1) return;
         this.grades.map ((item, idx) => {
             this.arrCar[item-1].stopRace(idx);
         });

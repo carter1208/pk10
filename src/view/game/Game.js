@@ -2,6 +2,7 @@
  * Created by carter on 8/23/2018.
  */
 import React,{Component} from 'react';
+import ReactDOM from 'react-dom';
 import * as PIXI from 'pixi.js';
 import Racing from './Racing'
 import ATimer from '../../component/ATimer'
@@ -14,6 +15,7 @@ export default class Game extends Component {
         this.timer = new ATimer();
         let strTime = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate() + " " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
         this.state = {
+            isShow:true,
             drawNo:'123456',
             countDownTime:'00:00',
             idResult:'12345678910',
@@ -40,6 +42,22 @@ export default class Game extends Component {
             .add('loading6', '../img/CarRes.json')
             .add('loading7', '../img/iconSound.json')
             .load(this.init.bind(this));
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+        this.setState({
+            isShow:false
+        });
+        this.timer.stopTimer();
+        clearInterval(this.intervalTime);
+        clearInterval(this.intervalId);
+        this.mcRacing.removeChild();
+        this.app = null;
+        this.stage.destroy();
+        PIXI.loader.reset();
+
+        PIXI.utils.clearTextureCache();
     }
 
     init() {
@@ -207,14 +225,19 @@ export default class Game extends Component {
         $('#resultInfo').css('z-index',3);
         $('#statInfo p').css('visibility','visible');
         this.isStarted = true;
-        this.mcRacing.startGame(10, arr);
-        this.mcRacing.on("END_RACE", this.onEndRace.bind(this));
-        this.mcRacing.on("FINISH", this.onFinishRace.bind(this));
+        if(this.app) {
+            this.mcRacing.startGame(10, arr);
+            this.mcRacing.on("END_RACE", this.onEndRace.bind(this));
+            this.mcRacing.on("FINISH", this.onFinishRace.bind(this));
+        }
         this.intervalId = setInterval(this.updateOrder.bind(this), 100);
     }
 
     onFinishRace(e)
     {
+        if(!this.app) {
+            return;
+        }
         this.mcRacing.off("FINISH", this.onEndRace.bind(this));
         this.isStarted = false;
         if (this.isCounting) {
@@ -256,6 +279,7 @@ export default class Game extends Component {
 
     updateOrder() {
         let arr = this.mcRacing.getRate();
+        if(arr.length < 1) return;
         this.total = 0;
         let rate = 0;
         this.grades = [];
@@ -284,9 +308,16 @@ export default class Game extends Component {
         this.app.renderer.render(this.stage);
     }
 
+    removeState(){
+        this.setState({isShow:false});
+    }
+
     render() {
+        if(!this.state.isShow){
+            return <div></div>
+        }
         return (
-            <div className="game">
+            <div className="game" ref="Container" id="Container">
                 <div className="game-canvas-container" ref="canvasContainer"/>
                 <div className="dateTime">
                     <div className="drawNo">

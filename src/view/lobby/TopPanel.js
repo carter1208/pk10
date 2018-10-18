@@ -6,12 +6,13 @@ import DisplayUtil from '../util/DisplayUtil'
 import {model} from '../../model/Model';
 import UserPanel from "./UserPanel";
 import SubMenu from "./SubMenu";
+import Command from "../../constant/Command";
 
 export default class TopPanel extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isLobby:true,
+            isLobby:this.props.tbID == 0,
             showMenu:false
         };
     }
@@ -27,15 +28,18 @@ export default class TopPanel extends Component {
 
     showMenu(e){
         e.preventDefault();
-        if(!this.state.showMenu){
-            $('.sub-menu').addClass('active')
-            this.setState({txtBalance:this.state.balance})
+        if(this.state.isLobby) {
+            if (!this.state.showMenu) {
+                $('.sub-menu').addClass('active')
+                this.setState({txtBalance: this.state.balance})
+            } else {
+                $('.sub-menu').removeClass('active')
+                this.setState({txtBalance: this.state.total})
+            }
+            this.state.showMenu = !this.state.showMenu;
         }else {
-            $('.sub-menu').removeClass('active')
-            this.setState({txtBalance:this.state.total})
+            model.update(Command.BACK_LOBBY)
         }
-
-        this.state.showMenu = !this.state.showMenu;
     }
 
     render() {

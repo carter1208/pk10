@@ -2,10 +2,11 @@ export default class TableHistoryInfo {
     constructor() {
     }
 
-    get history() {
+    get getHistory() {
         return this._history;
     }
-    set history(value) {
+    set setHistory(value) {
+        value.reverse();
         this._history = value;
     }
     get historyNum() {

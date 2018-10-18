@@ -10,12 +10,13 @@ export default class Lobby extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sence: 'Lobby'
+            isLogin:this.props.isLogin,
+            sence: this.props.isLogin? 'Lobby':'Main'
         }
     }
     componentDidMount() {
-
-        this.onLogin();
+        if(this.state.isLogin)
+            this.onLogin();
     }
     componentWillUnmount() {
     }

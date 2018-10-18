@@ -4,6 +4,7 @@
 import React,{Component} from 'react';
 import {model} from '../../model/Model'
 import ItemMenu from "./ItemMenu";
+import Command from "../../constant/Command";
 export default class LeftMenu extends Component{
     constructor(props){
         super(props);
@@ -15,6 +16,7 @@ export default class LeftMenu extends Component{
 
     openGame(e){
         console.log('click', e.currentTarget.id);
+        model.update(Command.OPEN_TABLE, e.currentTarget.id);
     }
 
     render() {

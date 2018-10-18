@@ -14,7 +14,6 @@ export default class BetPlaceGroupPos extends Component{
 
     onClickBet(e, index) {
         e.preventDefault();
-        console.log(e.currentTarget.key);
     }
 
     getNamebyKey(key){
