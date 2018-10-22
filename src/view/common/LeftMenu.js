@@ -24,7 +24,7 @@ export default class LeftMenu extends Component{
         let obj;
         for (let i = 0; i < model.listTable.length; i++){
             obj = model.listTable[i];
-            let style = (i == model.listTable.length - 1)? 'none':'1px solid #ccc';
+            let style = '1px solid #ccc';
             jsxCol.push(
                 <ItemMenu key={i+ 1} line={style} id={obj.id} onOpenGame={this.openGame.bind(this)}/>
             );
@@ -35,7 +35,6 @@ export default class LeftMenu extends Component{
                     {jsxCol}
                 </div>
             </div>
-
         )
     }
 }

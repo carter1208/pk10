@@ -38,8 +38,9 @@ export default class ResultBettingPanel extends Component {
         this.getHistoryRpt();
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.mounted = false;
+        model.unsubscribe(Command.REPORT_BETTING, this);
     }
 
     getHistoryRpt(pageNo = 1){

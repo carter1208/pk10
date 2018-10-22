@@ -12,6 +12,7 @@ import BetPlaceGroupSum2 from '../lottery/BetPlaceGroupSum2'
 import BetPlaceGroupSum3 from '../lottery/BetPlaceGroupSum3'
 import BetPlaceGroupCombine from '../lottery/BetPlaceGroupCombine'
 import BetValue from '../lottery/BetValue'
+import ChipSettingPanel from "./ChipSettingPanel";
 
 export default class BettingPanel extends Component{
     constructor(props){
@@ -52,6 +53,14 @@ export default class BettingPanel extends Component{
     onBlur(e){
         console.log('move bet');
         this.refs.betvalue.updateList(false, 0, 0);
+    }
+
+    confirmBet(){}
+
+    clearBet(){}
+
+    quickChange(e){
+        this.refs.chipSetting.show();
     }
 
     render() {
@@ -106,7 +115,15 @@ export default class BettingPanel extends Component{
                 </div>
                 {jsxSub}
                 {jsxBetPlace}
+                <div className="btn-confirm">
+                    <div className="control">
+                        <button type="button" id ='confirm' onClick={this.confirmBet.bind(this)}>CONFIRM</button>&nbsp;
+                        <button type="button" id ='clear' onClick={this.clearBet.bind(this)}>CLEAR</button>
+                    </div>
+                    <button type="button" id ='quick' onClick={this.quickChange.bind(this)}>QUICK CHANGE</button>
+                </div>
                 <BetValue ref="betvalue" onClickItem={this.chooseBetValue.bind(this)}/>
+                <ChipSettingPanel ref="chipSetting"/>
             </div>
 
         )

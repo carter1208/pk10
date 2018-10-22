@@ -1,0 +1,26 @@
+.rpt-panel{
+  width: 250px;
+  height: 204px;
+  margin-top: 20px;
+  margin-left: 20px;
+  div{
+    padding-left: 20px;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border-bottom: 1px solid #d4d4d4;
+    cursor: pointer;
+    line-height: 50px;
+    span{
+      position: relative;
+      left: 10px;
+    }
+  }
+
+  .open{}
+  .res{}
+  .bet{}
+  .rule{
+    border-bottom: none;
+  }
+}

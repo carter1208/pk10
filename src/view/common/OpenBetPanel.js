@@ -26,6 +26,11 @@ export default class OpenBetPanel extends Component {
         lobbyServer.getRecentBetReport("0", 1, ITEM_PER_PAGE, 1);
     }
 
+    componentWillUnmount() {
+        this.mounted = false;
+        model.unsubscribe(Command.REPORT_RECENT_BET, this);
+    }
+
     handlePageChange(pageNumber) {
         lobbyServer.getRecentBetReport("0", pageNumber, ITEM_PER_PAGE, 0);
     }
@@ -39,7 +44,6 @@ export default class OpenBetPanel extends Component {
     update(command, data) {
         switch (command) {
             case Command.REPORT_RECENT_BET:
-                data = model._objOpen;
                 this.setState({
                     arr: data ? data.records : [],
                     activePage: data ? parseInt(data.page): 1,

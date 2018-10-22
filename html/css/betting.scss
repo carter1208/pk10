@@ -2,9 +2,10 @@
   width: 830px;
   background-color: white;
   z-index: 2;
-  position: absolute;
+  //position: absolute;
   top: 530px;
   margin-right: 2px;
+  height: 240px;
   button{
     color:#545454;
     background-color: #eeeeee;
@@ -31,5 +32,27 @@
     color:white;
     background-color: #db2222;
     border-color: #db2222;
+  }
+  .btn-confirm{
+    display: flex;
+    margin-top: 5px;
+    width: 830px;
+    position: absolute;
+    justify-content: center;
+    bottom: 10px;
+    button{
+      background-color: #db2222;
+      color: white;
+      border: 1px solid #da2222;
+      border-radius: 6px;
+      font-size: 10pt;
+      min-width: 100px;
+    }
+    #quick{
+      right: 10px;
+      background-color: #5e5e5e;
+      border: 1px solid #545454;
+      position: absolute;
+    }
   }
 }

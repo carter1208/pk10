@@ -1,0 +1,63 @@
+.chip-setting-panel{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 960px;
+  background:rgba(0,0,0,0.5);
+  z-index: 7;
+  .container{
+    width: 250px;
+    height: 360px;
+    background-color: white;
+    border-radius: 6px;
+    line-height: 100%;
+    padding: 0;
+    button{
+      min-width: 80px;
+      border-radius: 6px;
+    }
+    .header{
+      background-color: #db2222;
+      height: 30px;
+      line-height: 30px;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      span{
+        margin-left:10px;
+        color: white;
+        font-weight: bold;
+      }
+      img{
+        cursor: pointer;
+        float: right;
+        margin: 4px;
+      }
+    }
+    .content{
+      padding-top: 5px;
+      .chip-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+        span{
+          border: 1px solid #d4d4d4;
+          width: 60px;
+          height: 28px;
+          text-align: center;
+          line-height: 28px;
+        }
+      }
+    }
+    .footer{
+      display: flex;
+      margin-top: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

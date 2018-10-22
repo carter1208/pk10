@@ -213,7 +213,7 @@ export default class Racing extends PIXI.Container{
     }
 
     showResult() {
-        if (this.isClose)
+        if (this.isClose || !this.mcResult)
             return;
         if(this.soundPlayer1) {
             this.soundPlayer1.src = this.soundUrls['win'];

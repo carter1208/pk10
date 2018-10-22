@@ -21,10 +21,12 @@ export default class PopupContainer extends Component {
         model.subscribe(EventType.SHOW_POPUP, this);
     }
     componentWillUnmount() {
+        this.mounted = false;
+        model.unsubscribe(EventType.SHOW_POPUP, this);
     }
 
     hidePopup() {
-        this.setState({isShow:false});
+        this.setState({isShow:false, name:''});
     }
 
     showPopup(name) {
@@ -35,7 +37,7 @@ export default class PopupContainer extends Component {
     }
 
     onClickClose() {
-        this.setState({isShow:false})
+        this.setState({isShow:false, name:''})
     }
 
     update(command, data) {
@@ -69,8 +71,7 @@ export default class PopupContainer extends Component {
                 break;
         }
         return (
-            <div className="overlay">
-                {/*<div className="popup-container" style={DisplayUtil.backgroundStyle("assets/lobby/betstt.png")}>*/}
+            <div className="overlay" style={{zIndex:10, width:1440, height:740}}>
                 {jsx}
             </div>
         )

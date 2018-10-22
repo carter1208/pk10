@@ -53,7 +53,8 @@ export default class UserPanel extends Component{
     onBlur(e){
         $('.bonus').removeClass('active')
         this.setState({
-            showBonus:false
+            showBonus:false,
+            txtBalance:this.state.total
         });
     }
 

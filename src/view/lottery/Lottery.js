@@ -10,6 +10,9 @@ import {gameServer} from '../../controller/GameServer'
 import LeftMenu from "../common/LeftMenu";
 import Command from "../../constant/Command";
 import ResultStat from "./ResultStat";
+import PopupContainer from '../../component/PopupContainer'
+import TableHistory from "../common/TableHistory";
+import ReportPanel from "../common/ReportPanel";
 
 export default class Lottery extends Component {
     constructor(props) {
@@ -63,6 +66,7 @@ export default class Lottery extends Component {
             case Command.TABLE_HISTORY:
                 if (!this.isFirst)
                     return;
+                this.refs.tbHistory.updateHistory();
                 this.setState({
                     arrRes:model.table.history.getHistory
                 });
@@ -83,14 +87,16 @@ export default class Lottery extends Component {
                         <LeftMenu/>
                         <ResultStat arrRes={this.state.arrRes}/>
                     </div>
-                    <div className="center" style={{float:'center', width:'830px', marginLeft:'20px'}}>
+                    <div className="center" style={{float:'center', width:'830px', height:'840px', marginLeft:'20px'}}>
                         <Game ref="gameContainer"/>
                         <BettingPanel/>
+                        <TableHistory ref='tbHistory'/>
                     </div>
                     <div className="right" style={{float:'right'}}>
-                        right
+                        <ReportPanel/>
                     </div>
                 </div>
+                <PopupContainer/>
             </div>
         )
     }

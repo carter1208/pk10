@@ -204,6 +204,21 @@ class Model extends Subject {
         }
     }
 
+    getHistoryByDrawNo(drawNo)
+    {
+        let arr = this.table.history.getHistory;
+        let item = arr.filter((item)=>{
+            if(item.drawNoRef == drawNo){
+                return item.num;
+            }
+        });
+        if (item) {
+            return item[0].num;
+        } else {
+            return null;
+        }
+    }
+
     updateData(command, data, isLobby) {
         switch (command) {
             case Command.SESSION:
