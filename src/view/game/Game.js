@@ -61,12 +61,13 @@ export default class Game extends Component {
     }
 
     init() {
-        this.app = new PIXI.Application(830, 450, {backgroundColor: 'transparent', transparent:true});
+        this.app = new PIXI.Application(830, 440, {backgroundColor: 'transparent', transparent:true});
         this.refs.canvasContainer.appendChild(this.app.view);
         this.stage = new PIXI.Container();
 
         this.mcRacing = new Racing();
         this.mcRacing.init();
+        this.mcRacing.height = 400;
         this.mcOderHolder = new PIXI.Container();
         this.mcOderHolder.x = 180;
         this.mcOderHolder.y = 8;

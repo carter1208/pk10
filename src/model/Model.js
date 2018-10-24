@@ -11,6 +11,13 @@ import RangeItemInfo from './RangeItemInfo'
 import LotteryBetType from '../enum/LotteryBetType'
 
 class Model extends Subject {
+    get arrChipValue() {
+        return this._arrChipValue;
+    }
+
+    set arrChipValue(value) {
+        this._arrChipValue = value;
+    }
     get listCasino() {
         return this._listCasino;
     }
@@ -43,6 +50,7 @@ class Model extends Subject {
         this._range = null;
         //test
         this._objOpen = {};
+        this._arrChipValue = [];
     }
 
     checkVisibleCasino(casinoId) {

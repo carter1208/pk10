@@ -71,7 +71,7 @@ export default class PopupContainer extends Component {
                 break;
         }
         return (
-            <div className="overlay" style={{zIndex:10, width:1440, height:740}}>
+            <div className="overlay" style={{zIndex:10, width:1440, height:880}}>
                 {jsx}
             </div>
         )

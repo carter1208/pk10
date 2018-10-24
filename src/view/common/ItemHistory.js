@@ -8,15 +8,21 @@ export default class ItemHistory extends Component{
         super(props);
         this.indexX = this.props.id > 5 ? this.props.id - 6 : this.props.id - 1;
         this.indexY = this.props.id > 5 ? 1 : 0;
+        this.state={
+            pos:this.props.pos
+        }
     }
 
     componentDidMount() {
     }
 
-    updateResult(x, y){
+    updateResult(x, y, idx){
         let px = x - this.indexX * 168;
         let py = y - this.indexY * 74;
         this.tween = TweenLite.to(this.item, 0.5, {x: px, y:py});
+        this.setState({
+            pos:idx
+        })
     }
     setPosition(x, y){
         this.x = x;
@@ -25,8 +31,8 @@ export default class ItemHistory extends Component{
 
     render() {
         let ext = '';
-        switch (this.props.pos){
-            case 1:
+        switch (this.state.pos){
+    case 1:
                 ext='ST';
                 break;
             case 2:
@@ -43,7 +49,7 @@ export default class ItemHistory extends Component{
             <div className={'item-his'+this.props.id} id={'item'} ref={div => this.item = div}>
                 <div className="info">
                     <div className={'num' + this.props.id} id="num">{this.props.id}</div>
-                    <div className="idx">{this.props.pos + ext}</div>
+                    <div className="idx">{this.state.pos + ext}</div>
                 </div>
                 <img src={'img/car-' + this.props.id + '.png'} width='120' height='39'/>
             </div>

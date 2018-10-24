@@ -52,7 +52,16 @@ export default class Lottery extends Component {
         gameServer.getStart(this.state.tbID, false);
         gameServer.getTableHistory(this.state.tbID, false);
         gameServer.getServerDate(false);
-
+        model.arrChipValue = new Array (
+            1, 2, 5,
+            10, 20, 50,
+            100, 200, 500,
+            1000, 2000, 5000,
+            10000, 20000, 50000,
+            100000, 200000, 500000,
+            1000000, 2000000, 5000000,
+            10000000, 20000000, 50000000
+        );
         this.setState({isShow:true});
     }
 
@@ -66,6 +75,7 @@ export default class Lottery extends Component {
             case Command.TABLE_HISTORY:
                 if (!this.isFirst)
                     return;
+                this.refs.bettingPanel.init();
                 this.refs.tbHistory.updateHistory();
                 this.setState({
                     arrRes:model.table.history.getHistory
@@ -87,9 +97,9 @@ export default class Lottery extends Component {
                         <LeftMenu/>
                         <ResultStat arrRes={this.state.arrRes}/>
                     </div>
-                    <div className="center" style={{float:'center', width:'830px', height:'840px', marginLeft:'20px'}}>
+                    <div className="center" style={{float:'center', width:'830px', height:'880px', marginLeft:'20px'}}>
                         <Game ref="gameContainer"/>
-                        <BettingPanel/>
+                        <BettingPanel ref="bettingPanel"/>
                         <TableHistory ref='tbHistory'/>
                     </div>
                     <div className="right" style={{float:'right'}}>

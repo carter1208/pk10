@@ -17,8 +17,12 @@
     line-height: 100%;
     padding: 0;
     button{
-      min-width: 80px;
+      min-width: 60px;
       border-radius: 6px;
+      background-color: #545454;
+      color: white;
+      font-size: 10pt;
+      border: none;
     }
     .header{
       background-color: #db2222;
@@ -38,13 +42,14 @@
       }
     }
     .content{
+      height: 215px;
       padding-top: 5px;
       .chip-item {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-top: 5px;
-        span{
+        input{
           border: 1px solid #d4d4d4;
           width: 60px;
           height: 28px;

@@ -35,7 +35,7 @@ export default class BetPlacePosItem extends Component{
 
     render(){
         return(
-            <div className={'pos'}>
+            <div className={'pos'} id={this.props.name}>
                 <div className={'name' + this.props.id} id="title">{this.props.id}</div>
                 <div className="odd">{this.props.oddBetCode}</div>
                 <input type="text" className='value' onClick={this.onClick.bind(this)} onKeyPress={this.onChange.bind(this)} onBlur={this.onMoveLeave.bind(this)} tabIndex={this.props.id} defaultValue={0}></input>

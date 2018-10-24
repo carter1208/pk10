@@ -19,11 +19,14 @@ export default class BettingPanel extends Component{
         super();
         this.currItem = null;
         this.state ={
-            subMenu:PositionSub
+            subMenu:'position'
         }
     }
     componentDidMount() {
+    }
 
+    init(){
+        this.refs.chipSetting.init();
     }
 
     show(e){
@@ -48,6 +51,7 @@ export default class BettingPanel extends Component{
     chooseBetValue(value){
         console.log('chooseBetValue',value);
         this.currItem.value = value;
+        document.getElementById(this.state.subMenu+'_tick').style.visibility = 'visible';
     }
 
     onBlur(e){
@@ -77,7 +81,7 @@ export default class BettingPanel extends Component{
                 break;
             case  'dt':
                 jsxSub = (
-                    <DTSub/>
+                    <SumSub/>
                 );
                 jsxBetPlace = (
                     <BetPlaceGroupDt onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
@@ -107,11 +111,31 @@ export default class BettingPanel extends Component{
         return (
             <div className="betting">
                 <div className="btn-group">
-                    <button type="button" id ='position' className="active" onClick={this.show.bind(this)}>POSITION</button>
-                    <button type="button" id='dt' onClick={this.show.bind(this)}>DRAGON/TIGER</button>
-                    <button type="button" id='sum2' onClick={this.show.bind(this)}>SUM OF 1ST + 2ND</button>
-                    <button type="button" id='sum3' onClick={this.show.bind(this)}>SUM OF 1ST + 2ST + 3RD</button>
-                    <button type="button" id ='combine' onClick={this.show.bind(this)}>COMBINE</button>
+                    <button type="button" id ='position' className="active" onClick={this.show.bind(this)}>POSITION
+                        <div className="img" id="position_tick" style={{visibility:'hidden'}}>
+                            <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
+                        </div>
+                    </button>
+                    <button type="button" id='dt' onClick={this.show.bind(this)}>DRAGON/TIGER
+                        <div className="img" id="dt_tick" style={{visibility:'hidden'}}>
+                            <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
+                        </div>
+                    </button>
+                    <button type="button" id='sum2' onClick={this.show.bind(this)}>SUM OF 1ST + 2ND
+                        <div className="img" id="sum2_tick" style={{visibility:'hidden'}}>
+                            <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
+                        </div>
+                    </button>
+                    <button type="button" id='sum3' onClick={this.show.bind(this)}>SUM OF 1ST + 2ST + 3RD
+                        <div className="img" id="sum3_tick" style={{visibility:'hidden'}}>
+                            <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
+                        </div>
+                    </button>
+                    <button type="button" id ='combine' onClick={this.show.bind(this)}>COMBINE
+                        <div className="img" id="combine_tick" style={{visibility:'hidden'}}>
+                            <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
+                        </div>
+                    </button>
                 </div>
                 {jsxSub}
                 {jsxBetPlace}

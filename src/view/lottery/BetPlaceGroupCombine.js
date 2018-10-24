@@ -39,7 +39,7 @@ export default class BetPlaceGroupCombine extends Component {
             this.props.onBlurBet();
     }
     onBlur(){
-        this.refs.listNum.updateList(this.state.arr, false);
+        this.refs.listNum.updateList(this.state.arr, false, 0, 0);
     }
 
     showCombineBet(id){

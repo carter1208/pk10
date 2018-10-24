@@ -46,7 +46,7 @@ export default class TableHistory extends Component{
     updateResult(arr){
         for (let i = 0; i < arr.length; i++ ) {
             let id = arr[i];
-            this.refs['item'+id].updateResult(this.state.arrPos[i].x, this.state.arrPos[i].y);
+            this.refs['item'+id].updateResult(this.state.arrPos[i].x, this.state.arrPos[i].y, i+1);
         }
     }
 

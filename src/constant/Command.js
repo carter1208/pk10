@@ -21,6 +21,7 @@ export default class Command {
     static SERVER_DATE   			 = "@serverDate";
     static TABLE_START   			 = "@betStarting";
 
+    static UPDATE_CHIP_SETTING		 = "update_chip_setting";
     static OPEN_TABLE   			 = "open_table";
     static BACK_LOBBY   			 = "back_lobby";
     static STOP_BET_LOBBY			 = "stop_bet_lobby";

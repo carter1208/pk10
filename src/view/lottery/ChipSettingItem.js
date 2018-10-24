@@ -5,6 +5,7 @@ import React,{Component} from 'react';
 export default class ChipSettingItem extends Component{
     constructor(props){
         super(props);
+        this.id = this.props.id;
     }
 
     componentDidMount() {
@@ -12,10 +13,31 @@ export default class ChipSettingItem extends Component{
     }
 
     clear(e){
-
+        let item = document.getElementById('text'+this.id);
+        if(this.props.hdlDel)
+            this.props.hdlDel(parseFloat(item.value));
     }
     insert(e){
-        console.log('click', e.currentTarget.id);
+        if(this.props.hdlInsert)
+            this.props.hdlInsert();
+    }
+
+    onChange(event){
+        let currentString = event.currentTarget.value;
+        if(currentString == 0) currentString = '';
+        currentString = currentString.replace(/[^0-9\.]/g,'');
+        event.currentTarget.value = currentString;
+        if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    }
+    onMoveLeave(event){
+        let currentString = event.currentTarget.value;
+        if(currentString == '') currentString = 0;
+        event.currentTarget.value = currentString;
+        if(this.props.hdlChange)
+            this.props.hdlChange(parseFloat(currentString));
     }
 
     render() {
@@ -34,7 +56,7 @@ export default class ChipSettingItem extends Component{
         }
         return (
             <div className="chip-item">
-                <span>{this.props.value}</span>
+                <input id={'text'+this.props.id} disabled={this.props.value > 0} defaultValue={this.props.value} onKeyPress={this.onChange.bind(this)} onBlur={this.onMoveLeave.bind(this)}></input>&nbsp;&nbsp;
                 {objBtn}
             </div>
         )
