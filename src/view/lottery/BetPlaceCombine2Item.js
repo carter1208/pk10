@@ -3,6 +3,8 @@
  */
 import React,{Component} from 'react'
 import GlobalState from './GlobalState'
+import {model} from '../../model/Model'
+
 export default class BetPlaceCombine2Item extends Component{
     constructor(props){
         super(props);
@@ -11,7 +13,10 @@ export default class BetPlaceCombine2Item extends Component{
             color1:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].color1:'#999',
             value1:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value1: 0,
             color2:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].color2:'#999',
-            value2:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value2 : 0
+            value2:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value2 : 0,
+            name:this.props.name,
+            id:this.props.id,
+            oddBetCode:this.props.oddBetCode
         };
     }
 
@@ -56,6 +61,19 @@ export default class BetPlaceCombine2Item extends Component{
             this.state.value2=id;
             this.state.color2=color;
         }
+
+        for(let key in GlobalState){
+            if(GlobalState[key].value1 == this.state.value1 && GlobalState[key].value2 == this.state.value2){
+                alert('betcode is exist.');
+                this.setState({
+                    value1:'0',
+                    value2:'0',
+                    color1:'#999',
+                    color2:'#999'
+                });
+                return;
+            }
+        }
         this.setState({});
         GlobalState[this.props.idItem].value1 = this.state.value1;
         GlobalState[this.props.idItem].value2 = this.state.value2;
@@ -71,6 +89,8 @@ export default class BetPlaceCombine2Item extends Component{
             GlobalState[this.props.idItem].value2 = 0;
             GlobalState[this.props.idItem].color2 = '#999';
         }
+        this.getOdd();
+        this.getValue();
     }
 
     onChange(event){
@@ -82,14 +102,18 @@ export default class BetPlaceCombine2Item extends Component{
             event.preventDefault();
         }
     }
+
     onMoveLeave(event){
         let currentString = event.currentTarget.value;
         if(currentString == '') currentString = 0;
         event.currentTarget.value = currentString;
+
+        this.setBgColor(currentString);
         if(this.props.onBlurBet){
             this.props.onBlurBet(event);
         }
     }
+
     onClick(event){
         event.preventDefault();
         this.currItem = event.currentTarget;
@@ -101,15 +125,53 @@ export default class BetPlaceCombine2Item extends Component{
 
     onBlur(event){
         event.stopPropagation();
-        if(this.props.obBlurItem){
-            this.props.obBlurItem(event);
+        if(this.props.onBlurItem){
+            this.props.onBlurItem(event);
         }
-
     }
     onClickBet(e){
         e.preventDefault();
+        this.state.name = this.state.value1 + '' + this.state.value2;
+        this.betCode = "Lo" + this.state.name;
+        this.betInfo = model.getBetPlaceInfo(this.betCode);
         if(this.props.onClickBet)
             this.props.onClickBet(e);
+    }
+
+    getValue(){
+        if(this.state.value1 != 0 && this.state.value2 !=0){
+            this.state.name = this.state.value1 + '' + this.state.value2;
+            this.betCode = "Lo" + this.state.name;
+            this.betInfo = model.getBetPlaceInfo(this.betCode);
+
+            let input = document.getElementById('value'+this.props.idItem);
+            input.value = this.betInfo.tempValue;
+            this.setBgColor(this.betInfo.tempValue);
+        }
+    }
+
+    setBgColor(currentString){
+        let item = document.getElementById(this.props.idItem)
+        if(parseFloat(currentString) > 0){
+            $(item).addClass('hasValue');
+            this.betInfo.tempValue = parseFloat(currentString);
+        }else{
+            $(item).removeClass('hasValue');
+            this.betInfo.tempValue = 0;
+        }
+    }
+
+    getOdd(){
+        if(!model.objCombine2){
+            return;
+        }
+        if(!(model.objCombine2.isOnline == 1)) {
+            let item = document.getElementById(this.props.idItem)
+            $(item).addClass('disable')
+        }
+        this.setState({
+            oddBetCode:parseFloat(model.objCombine2.oddValue)
+        });
     }
 
     render(){
@@ -128,8 +190,8 @@ export default class BetPlaceCombine2Item extends Component{
                 {jsx}
                 <div className={'name1'} id="title">2ND</div>
                 {jsx1}
-                <div className="odd">{this.props.oddBetCode}</div>
-                <input type="text" className='value' onClick={this.onClickBet.bind(this)} onKeyPress={this.onChange.bind(this)} onBlur={this.onMoveLeave.bind(this)} tabIndex={this.props.id} defaultValue={0} disabled={(this.state.value1 == 0 || this.state.value2 ==0)}></input>
+                <div className="odd">{this.state.oddBetCode}</div>
+                <input type="text" className='value' id={'value'+this.props.idItem} onClick={this.onClickBet.bind(this)} onKeyPress={this.onChange.bind(this)} onBlur={this.onMoveLeave.bind(this)} tabIndex={this.state.idx} defaultValue={0} disabled={(this.state.value1 == 0 || this.state.value2 ==0)}></input>
             </div>
         )
     }

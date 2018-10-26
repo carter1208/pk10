@@ -1,10 +1,18 @@
 .betplace-pos{
+  text-align: center;
   .table-row {
     display: flex;
     font-size: 12pt;
     .emptyRow{
       width: 166px;
       border: 1px solid #eeeeee;
+    }
+    .disable{
+      opacity: 0.4;
+      pointer-events:none;
+    }
+    .hasValue{
+      background:rgba(0,0,0,0.5);
     }
     .pos {
       display: flex;
@@ -124,6 +132,13 @@
       width: 277px;
       border: 1px solid #eeeeee;
     }
+    .disable{
+      opacity: 0.4;
+      pointer-events:none;
+    }
+    .hasValue{
+      background:rgba(0,0,0,0.5);
+    }
     .dt {
       display: flex;
       height: 35px;
@@ -171,6 +186,13 @@
     .emptyRow{
       width: 166px;
       border: 1px solid #eeeeee;
+    }
+    .disable{
+      opacity: 0.4;
+      pointer-events:none;
+    }
+    .hasValue{
+      background:rgba(0,0,0,0.5);
     }
     .pos {
       display: flex;
@@ -258,6 +280,13 @@
       width: 166px;
       border: 1px solid #eeeeee;
     }
+    .disable{
+      opacity: 0.4;
+      pointer-events:none;
+    }
+    .hasValue{
+      background:rgba(0,0,0,0.5);
+    }
     .pos {
       display: flex;
       height: 35px;
@@ -344,6 +373,13 @@
       width: 166px;
       border: 1px solid #eeeeee;
     }
+    .disable{
+      opacity: 0.4;
+      pointer-events:none;
+    }
+    .hasValue{
+      background:rgba(0,0,0,0.5);
+    }
     .combine2 {
       display: flex;
       height: 35px;
@@ -386,7 +422,7 @@
         border: 2px solid #d4d4d4;
         border-radius: 5px;
         width: 40px;
-        height: 27px;
+        height: 30px;
         margin-top: 2px;
         .btn {
           display: flex;

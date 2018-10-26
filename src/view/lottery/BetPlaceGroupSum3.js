@@ -6,6 +6,8 @@ import BetPlacePosItem from "../lottery/BetPlacePosItem"
 export default class BetPlaceGroupSum3 extends Component{
     constructor(props){
         super();
+        this.arrName = [6,7,10,11,14,15,18,19,22,23,26,27, '', '', ''];
+        this.arrName1 = ['B','S', 'EV', 'OD'];
     }
 
     componentDidMount(){
@@ -46,25 +48,35 @@ export default class BetPlaceGroupSum3 extends Component{
             this.props.onBlurBet();
     }
 
+    updateOdd(){
+        for (let i = 0; i < this.arrName.length; i++){
+            this.refs['sum3' + this.arrName[i]].getOdd();
+        }
+        for (let i = 0; i < this.arrName1.length; i++){
+            this.refs['sum3' + this.arrName1[i]].getOdd();
+        }
+    }
+
     render(){
-        let arrName = [6,7,10,11,14,15,18,19,22,23,26,27, '', '', ''];
         let jsxRow = [];
         let jsxCol = [];
-        for (var i = 0; i < arrName.length; i++){
+        let idx = 0;
+        for (var i = 0; i < this.arrName.length; i++){
+            idx++;
             if (jsxCol.length > 0) {
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
             }
-            if(arrName[i] == ''){
+            if(this.arrName[i] == ''){
                 jsxCol.push(
                     <div key={'empty' + i} className="emptyRow"/>
                 );
             }else {
                 jsxCol.push(
-                    <BetPlacePosItem key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i + 1))} id={arrName[i]}
-                                     name={'3S' + arrName[i]} oddBetCode={114.15} value={0}/>
+                    <BetPlacePosItem idx={idx} ref={'sum3' + this.arrName[i]} key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i + 1))} id={this.arrName[i]}
+                                     name={'3S' + this.arrName[i]} oddBetCode={114.15} value={0}/>
                 );
             }
-            if (jsxCol.length > 7 || i == arrName.length ) {
+            if (jsxCol.length > 7 || i == this.arrName.length ) {
                 if (jsxRow.length > 0) {
                     jsxRow.push(<div key={'spacey' + i} className="space-y"/>);
                 }
@@ -76,10 +88,10 @@ export default class BetPlaceGroupSum3 extends Component{
                 jsxCol = [];
             }
         }
-        let arrName1 = ['B','S', 'EV', 'OD'];
-        for (var i = 0; i < arrName1.length; i++){
+        for (var i = 0; i < this.arrName1.length; i++){
+            idx++;
             jsxCol.push(
-                <BetPlacePosItem key={arrName1[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i+ 1))} id={this.getNamebyKey(arrName1[i])} name={'3S'+arrName1[i]} oddBetCode={114.15} value={0}/>
+                <BetPlacePosItem idx={idx} ref={'sum3' + this.arrName1[i]} key={this.arrName1[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i+ 1))} id={this.getNamebyKey(this.arrName1[i])} name={'3S'+this.arrName1[i]} oddBetCode={114.15} value={0}/>
             );
         }
         jsxCol.push(

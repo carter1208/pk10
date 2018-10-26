@@ -13,6 +13,7 @@ import BetPlaceGroupSum3 from '../lottery/BetPlaceGroupSum3'
 import BetPlaceGroupCombine from '../lottery/BetPlaceGroupCombine'
 import BetValue from '../lottery/BetValue'
 import ChipSettingPanel from "./ChipSettingPanel";
+import {model} from '../../model/Model'
 
 export default class BettingPanel extends Component{
     constructor(props){
@@ -37,26 +38,49 @@ export default class BettingPanel extends Component{
     }
 
     hdlActiveCombine(id){
-        console.log('click combine', id);
-        this.refs.bpGroupCombine.showCombineBet(id);
+        this.refs.combine.showCombineBet(id);
+        this.updateOdd();
+    }
+
+    activeSubMenu(){
+        this.refs[this.state.subMenu].getValue();
     }
 
     hdlClick(e){
         var p = $(e.currentTarget).position();
-        console.log('click bet', p);
         this.currItem = e.currentTarget;
         this.refs.betvalue.updateList(true, p.left, p.top);
     }
 
     chooseBetValue(value){
-        console.log('chooseBetValue',value);
         this.currItem.value = value;
-        document.getElementById(this.state.subMenu+'_tick').style.visibility = 'visible';
+    }
+
+    getValueByGroup(group){
+        let val = 0;
+        let betPlaceInfo;
+        for (let i = 0; i < model.listBetPlaceInfo.length; i++)
+        {
+            betPlaceInfo = model.listBetPlaceInfo[i];
+            if (betPlaceInfo.groupName != group)
+            {
+                continue;
+            }
+            if (isNaN(betPlaceInfo.tempValue))
+                betPlaceInfo.tempValue = 0;
+            val += betPlaceInfo.tempValue;
+        }
+        return val;
     }
 
     onBlur(e){
-        console.log('move bet');
         this.refs.betvalue.updateList(false, 0, 0);
+        let total = this.getValueByGroup(this.state.subMenu);
+        if(total > 0) {
+            document.getElementById(this.state.subMenu + '_tick').style.visibility = 'visible';
+        }else {
+            document.getElementById(this.state.subMenu + '_tick').style.visibility = 'hidden';
+        }
     }
 
     confirmBet(){}
@@ -67,16 +91,29 @@ export default class BettingPanel extends Component{
         this.refs.chipSetting.show();
     }
 
+    updateOdd(){
+        this.refs[this.state.subMenu].updateOdd();
+    }
+
+    update(command, data) {
+        switch (command) {
+            case Command.GET_ODD_LIVE:
+                this.updateOdd();
+                break;
+        }
+    }
+
     render() {
         let jsxSub = <PositionSub/>;
         let jsxBetPlace = <BetPlaceGroupPos onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>;
+        model.subMenu = '';
         switch (this.state.subMenu) {
             case  'position':
                 jsxSub = (
-                    <PositionSub/>
+                    <PositionSub changeSub={this.activeSubMenu.bind(this)}/>
                 );
                 jsxBetPlace = (
-                    <BetPlaceGroupPos onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
+                    <BetPlaceGroupPos ref="position" onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
                 );
                 break;
             case  'dt':
@@ -84,7 +121,7 @@ export default class BettingPanel extends Component{
                     <SumSub/>
                 );
                 jsxBetPlace = (
-                    <BetPlaceGroupDt onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
+                    <BetPlaceGroupDt ref="dt" onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
                 );
                 break;
             case  'combine':
@@ -92,19 +129,19 @@ export default class BettingPanel extends Component{
                     <CombineSub hdlChangeSub={this.hdlActiveCombine.bind(this)}/>
                 );
                 jsxBetPlace = (
-                    <BetPlaceGroupCombine ref="bpGroupCombine" onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
+                    <BetPlaceGroupCombine ref="combine" onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
                 );
                 break;
             case  'sum2':
                 jsxSub = <SumSub/>
                 jsxBetPlace = (
-                    <BetPlaceGroupSum2 onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
+                    <BetPlaceGroupSum2 ref="sum2" onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
                 );
                 break;
             case  'sum3':
                 jsxSub = <SumSub/>
                 jsxBetPlace = (
-                    <BetPlaceGroupSum3 onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
+                    <BetPlaceGroupSum3 ref="sum3" onClickBet={this.hdlClick.bind(this)} onBlurBet={this.onBlur.bind(this)}/>
                 );
                 break;
         }

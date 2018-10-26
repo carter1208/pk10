@@ -34,7 +34,6 @@ export default class Lobby extends Component {
         lobbyServer.getGameLimit(true);
     }
     onLoadInfoCompleteHandler(){
-        console.log("init...");
         this.setState({sence:'Main'});
     }
 

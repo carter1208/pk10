@@ -9,8 +9,16 @@ import ResultInfo from './ResultInfo';
 import BetPlaceInfo from '../model/LoBetPlaceInfo'
 import RangeItemInfo from './RangeItemInfo'
 import LotteryBetType from '../enum/LotteryBetType'
+import LotteryResult from '../enum/LotteryResult'
 
 class Model extends Subject {
+    get subMenu() {
+        return this._subMenu;
+    }
+
+    set subMenu(value) {
+        this._subMenu = value;
+    }
     get arrChipValue() {
         return this._arrChipValue;
     }
@@ -48,9 +56,12 @@ class Model extends Subject {
         this._listBetPlaceInfo = [];
         this._listGameType = [];
         this._range = null;
+        this._subMenu = '';
         //test
         this._objOpen = {};
         this._arrChipValue = [];
+        this.objCombine2 ={};
+        this.objCombine3 ={};
     }
 
     checkVisibleCasino(casinoId) {
@@ -118,6 +129,7 @@ class Model extends Subject {
                 else
                     betcode = 'Lo' + i + "-" + j;
                 betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.POSITION);
+                betInfo.groupName = 'position';
                 this._listBetPlaceInfo.push(betInfo);
             }
             betcode = '';
@@ -125,6 +137,7 @@ class Model extends Subject {
             {
                 betcode = 'Lo' + i + arr[k];
                 betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.POSITION);
+                betInfo.groupName = 'position';
                 this._listBetPlaceInfo.push(betInfo);
             }
         }
@@ -139,6 +152,7 @@ class Model extends Subject {
             else
                 betcode = 'LoG' + i;
             betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.DRAGON_TIGER);
+            betInfo.groupName = 'dt';
             this._listBetPlaceInfo.push(betInfo);
         }
     }
@@ -151,12 +165,14 @@ class Model extends Subject {
         {
             betcode = 'Lo2S' + arr1[i];
             betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 19.5, LotteryBetType.SUM_OF_2);
+            betInfo.groupName = 'sum2';
             this._listBetPlaceInfo.push(betInfo);
         }
         for (let i = 0; i < arr.length; i++)
         {
             betcode = 'Lo2S' + arr[i];
             betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.SUM_OF_2);
+            betInfo.groupName = 'sum2';
             this._listBetPlaceInfo.push(betInfo);
         }
     }
@@ -169,12 +185,14 @@ class Model extends Subject {
         {
             betcode = 'Lo3S' + arr1[i];
             betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.SUM_OF_3);
+            betInfo.groupName = 'sum3';
             this._listBetPlaceInfo.push(betInfo);
         }
         for (let i = 0; i < arr.length; i++)
         {
             betcode = 'Lo3S' + arr[i];
             betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 9.5, LotteryBetType.SUM_OF_3);
+            betInfo.groupName = 'sum3';
             this._listBetPlaceInfo.push(betInfo);
         }
     }
@@ -188,6 +206,7 @@ class Model extends Subject {
                     continue;
                 betcode = 'Lo' + i + j;
                 let betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 44, LotteryBetType.COMBINE_2);
+                betInfo.groupName = 'combine';
                 this._listBetPlaceInfo.push(betInfo);
             }
         }
@@ -206,6 +225,7 @@ class Model extends Subject {
                         continue;
                     betcode = 'Lo' + i + j + k;
                     let betInfo = new BetPlaceInfo(betcode, this._range.maxValue, this._range.minValue, 110, LotteryBetType.COMBINE_3);
+                    betInfo.groupName = 'combine';
                     this._listBetPlaceInfo.push(betInfo);
                 }
             }
@@ -225,6 +245,19 @@ class Model extends Subject {
         } else {
             return null;
         }
+    }
+
+    getBetPlaceInfo(name)
+    {
+        for(let i=0;i < this.listBetPlaceInfo.length -1; i++)
+        {
+            if (this.listBetPlaceInfo[i].betCode == name)
+            {
+                return this.listBetPlaceInfo[i];
+                break;
+            }
+        }
+        return null;
     }
 
     updateData(command, data, isLobby) {
@@ -285,6 +318,28 @@ class Model extends Subject {
             case Command.BET_STOP:
                 if(isLobby){
                     command = Command.STOP_BET_LOBBY;
+                }
+                break;
+            case Command.GET_ODD_LIVE:
+                for (var i = 0; i < data.length; i++)
+                {
+                    if (data[i].key == "LoCo2F")
+                    {
+                        this.objCombine2.oddValue = data[i].odd;
+                        this.objCombine2.isOnline = data[i].isOnline;
+                    }
+                    else if(data[i].key == "LoCo3F")
+                    {
+                        this.objCombine3.oddValue = data[i].odd;
+                        this.objCombine3.isOnline = data[i].isOnline;
+                    }
+                    else
+                    {
+                        var betInfo = this.getBetPlaceInfo(data[i].key);
+                        if (!betInfo)continue;
+                        betInfo.oddValue = parseFloat(''+data[i].odd);
+                        betInfo.isOnline = data[i].isOnline == LotteryResult.TRUE;
+                    }
                 }
                 break;
         }

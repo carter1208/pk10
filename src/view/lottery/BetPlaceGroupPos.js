@@ -6,6 +6,7 @@ import BetPlacePosItem from "../lottery/BetPlacePosItem"
 export default class BetPlaceGroupPos extends Component{
     constructor(props){
         super();
+        this.arrName = ['B','S', 'EV', 'OD'];
     }
 
     componentDidMount(){
@@ -35,6 +36,25 @@ export default class BetPlaceGroupPos extends Component{
         return str;
     }
 
+    updateOdd(){
+        for (let i = 0; i < 10; i++){
+            this.refs['pos' + (i+ 1)].getOdd();
+        }
+        for (let i = 0; i < this.arrName.length; i++){
+            this.refs['pos' + this.arrName[i]].getOdd();
+        }
+    }
+
+    getValue(){
+        let total = 0;
+        for (let i = 0; i < 10; i++){
+            this.refs['pos' + (i+ 1)].getValue();
+        }
+        for (let i = 0; i < this.arrName.length; i++){
+            this.refs['pos' + this.arrName[i]].getValue();
+        }
+    }
+
     onClickBet(e){
         e.preventDefault();
         if(this.props.onClickBet)
@@ -49,13 +69,15 @@ export default class BetPlaceGroupPos extends Component{
     render(){
         let jsxRow = [];
         let jsxCol = [];
+        let idx = 0;
         for (var i = 0; i < 10; i++){
+            idx++;
             if (jsxCol.length > 0) {
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
             }
 
             jsxCol.push(
-                <BetPlacePosItem key={i+ 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)}  onClick={this.onClickBet.bind(this, (i+ 1))} id={(i+ 1)} name={(i+ 1)} oddBetCode={114.15} value={0}/>
+                <BetPlacePosItem ref={'pos' + (i+ 1)} key={i+ 1} idx={idx} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)}  onClick={this.onClickBet.bind(this, (i+ 1))} id={(i+ 1)} name={(i+ 1)} oddBetCode={114.15} value={0}/>
             );
             if (jsxCol.length > 7 || i == 9) {
                 if (jsxRow.length > 0) {
@@ -69,10 +91,11 @@ export default class BetPlaceGroupPos extends Component{
                 jsxCol = [];
             }
         }
-        let arrName = ['B','S', 'EV', 'OD'];
-        for (var i = 0; i < arrName.length; i++){
+
+        for (var i = 0; i < this.arrName.length; i++){
+            idx++;
             jsxCol.push(
-                <BetPlacePosItem key={arrName[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)}  onClick={this.onClickBet.bind(this, (i+ 1))} id={this.getNamebyKey(arrName[i])} name={arrName[i]} oddBetCode={114.15} value={0}/>
+                <BetPlacePosItem ref={'pos' + this.arrName[i]} idx={idx} key={this.arrName[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)}  onClick={this.onClickBet.bind(this, (i+ 1))} id={this.getNamebyKey(this.arrName[i])} name={this.arrName[i]} oddBetCode={114.15} value={0}/>
             );
         }
         jsxCol.push(

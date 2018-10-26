@@ -1,0 +1,22 @@
+.game-menu{
+  margin-top: 10px;
+  margin-left: 20px;
+  text-align: center;
+  width: 230px;
+  height: 350px;
+  .btnUp{
+    cursor: pointer;
+    width: 100%;
+  }
+  .btnDown{
+    cursor: pointer;
+    width: 100%;
+  }
+  .content {
+    height:310px;
+    overflow: hidden;
+    .game-menu-item {
+      padding: 0;
+    }
+  }
+}

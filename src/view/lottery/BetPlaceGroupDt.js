@@ -6,10 +6,12 @@ import BetPlaceDtItem from "../lottery/BetPlaceDtItem"
 export default class BetPlaceGroupDt extends Component{
     constructor(props){
         super();
+
+        this.arrName = ['D1','D2','D3', 'G10', 'G9', 'G8', 'D4', 'D5', 'G7', 'G6'];
     }
 
     componentDidMount(){
-
+        this.updateOdd();
     }
 
     onClickBet(event,index) {
@@ -75,10 +77,21 @@ export default class BetPlaceGroupDt extends Component{
             this.props.onBlurBet();
     }
 
+    getValue(){
+        for (let i = 0; i < this.arrName.length; i++){
+            this.refs['dt' + this.arrName[i]].getValue();
+        }
+    }
+
+    updateOdd(){
+        for (let i = 0; i < this.arrName.length; i++){
+            this.refs['dt' + this.arrName[i]].getOdd();
+        }
+    }
+
     render(){
         let jsxRow = [];
         let jsxCol = [];
-        let arrName = ['D1','D2','D3', 'G10', 'G9', 'G8', 'D4', 'D5', 'G7', 'G6'];
         let idx = 0;
         for (var i = 0; i < 12; i++){
             if (jsxCol.length > 0) {
@@ -90,8 +103,8 @@ export default class BetPlaceGroupDt extends Component{
                 );
             }else {
                 jsxCol.push(
-                    <BetPlaceDtItem key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i + 1))}
-                                    id={this.getNamebyKey(i+1)} name={arrName[idx]} oddBetCode={114.15}
+                    <BetPlaceDtItem ref={'dt'+this.arrName[idx]} idx={idx} key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i + 1))}
+                                    id={this.getNamebyKey(i+1)} name={this.arrName[idx]} oddBetCode={114.15}
                                     value={0}/>
                 );
                 idx++;

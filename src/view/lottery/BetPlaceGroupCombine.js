@@ -58,6 +58,10 @@ export default class BetPlaceGroupCombine extends Component {
             this.props.onClickBet(e);
     }
 
+    updateOdd(){
+
+    }
+
     render() {
         let jsxRow = [];
         let jsxCol = [];
@@ -67,12 +71,12 @@ export default class BetPlaceGroupCombine extends Component {
             }
             if(this.state.sence == CB2){
                 jsxCol.push(
-                    <BetPlaceCombine2Item ref={"combine2-"+i} idItem={"combine2-"+i} key={i+1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClickItem={this.onClickItem.bind(this)} obBlurItem={this.onBlur.bind(this)} oddBetCode={114.15} value={0}/>
+                    <BetPlaceCombine2Item idx={i+1} ref={"combine2-"+i} idItem={"combine2-"+i} key={i+1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClickItem={this.onClickItem.bind(this)} onBlurItem={this.onBlur.bind(this)} oddBetCode={114.15} value={0}/>
                 );
             }
             else {
                 jsxCol.push(
-                    <BetPlaceCombine3Item ref={"combine3-"+i} idItem={"combine3-"+i} key={i+1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClickItem={this.onClickItem.bind(this)} obBlurItem={this.onBlur.bind(this)} oddBetCode={114.15} value={0}/>
+                    <BetPlaceCombine3Item idx={i+1} ref={"combine3-"+i} idItem={"combine3-"+i} key={i+1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClickItem={this.onClickItem.bind(this)} onBlurItem={this.onBlur.bind(this)} oddBetCode={114.15} value={0}/>
                 );
             }
             if (jsxCol.length > 2 || i == 9) {

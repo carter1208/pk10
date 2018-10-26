@@ -14,7 +14,6 @@ export default class ReportPanel extends Component{
     }
 
     openReport(e){
-        console.log('click', e.currentTarget.id);
         model.update(EventType.SHOW_POPUP, e.currentTarget.id);
     }
 

@@ -45,7 +45,6 @@ export default class ListTable extends Component {
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
             }
             tbInfo = model.listTable[i];
-            console.log('table id', tbInfo.id);
             logoID = 'img/logo'+tbInfo.id+'.png';
             jsxCol.push(
                 <Table ref={'tb'+ tbInfo.id} key={i+ 1} onClick={this.onClick.bind(this, (i+ 1))} logo={logoID} tbInfo={tbInfo}/>

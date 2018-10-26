@@ -13,6 +13,7 @@ import ResultStat from "./ResultStat";
 import PopupContainer from '../../component/PopupContainer'
 import TableHistory from "../common/TableHistory";
 import ReportPanel from "../common/ReportPanel";
+import GameMenu from "../common/GameMenu";
 
 export default class Lottery extends Component {
     constructor(props) {
@@ -48,7 +49,6 @@ export default class Lottery extends Component {
     }
 
     onLoadInfoCompleteHandler(){
-        console.log("init...");
         gameServer.getStart(this.state.tbID, false);
         gameServer.getTableHistory(this.state.tbID, false);
         gameServer.getServerDate(false);
@@ -96,6 +96,7 @@ export default class Lottery extends Component {
                     <div className="left" style={{float:'left'}}>
                         <LeftMenu/>
                         <ResultStat arrRes={this.state.arrRes}/>
+                        <GameMenu/>
                     </div>
                     <div className="center" style={{float:'center', width:'830px', height:'880px', marginLeft:'20px'}}>
                         <Game ref="gameContainer"/>

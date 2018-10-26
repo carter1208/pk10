@@ -89,7 +89,6 @@ export default class ResultBettingPanel extends Component {
 
     selectDateFrom(){
         let date = new Date();
-        console.log("123: " + new Date((date.getMonth() +1) + "/" + (date.getDate() - 1) + "/" + date.getFullYear()));
         $('[data-date-time-from]').datetimepicker({
             format: 'DD/MM/YYYY',
             defaultDate:new Date((date.getMonth() + 1) + "/" + (date.getDate() - 1) + "/" + date.getFullYear())
