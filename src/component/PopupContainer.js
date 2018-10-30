@@ -7,7 +7,7 @@ import Betting from '../view/common/ResultBettingPanel';
 import Result from '../view/common/ResultHistoryPanel';
 import {model} from '../model/Model';
 import EventType from '../constant/EventType';
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class PopupContainer extends Component {
     constructor(props) {
@@ -68,11 +68,6 @@ export default class PopupContainer extends Component {
             case EventType.PP_BETTING:
                 jsx = (
                     <Betting onClickClosePopup={this.onClickClose.bind(this)}/>
-                );
-                break;
-            case EventType.PP_GAMERULE:
-                jsx = (
-                    <Redirect to='/resource/E/gamerule.html' />
                 );
                 break;
         }

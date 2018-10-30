@@ -3,73 +3,76 @@
   width: 830px;
   height: 160px;
   background-color: white;
-  .table-row{
-    display: flex;
-    margin-top: 5px;
-    #item{
+  .result-panel {
+    .table-row {
       display: flex;
-      width: 160px;
-      img{
-        margin-top:10px;
-      }
-      .pos{
-        display: flex;
-        padding: 10px;
-      }
-    }
-    .idx{
       margin-top: 5px;
-      color: #8c8c8c;
-      font-size: 9pt;
-      text-align: center;
-      width: 30px;
-      font-weight: bold;
+      #item {
+        display: flex;
+        width: 160px;
+        img {
+          margin-top: 10px;
+        }
+        .pos {
+          display: flex;
+          padding: 10px;
+        }
+      }
+      .idx {
+        margin-top: 5px;
+        color: #8c8c8c;
+        font-size: 9pt;
+        text-align: center;
+        width: 40px;
+        font-weight: bold;
+      }
+      #num {
+        margin-left: 5px;
+        width: 30px;
+        height: 27px;
+        font-size: 15pt;
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px black;
+        text-align: center;
+      }
+      .num1 {
+        background-color: #FFEA00;
+      }
+      .num2 {
+        background-color: #389DF4;
+      }
+      .num3 {
+        background-color: #616161;
+      }
+      .num4 {
+        background-color: #FE790C;
+      }
+      .num5 {
+        background-color: #54FBFB;
+      }
+      .num6 {
+        background-color: #5E19EF;
+      }
+      .num7 {
+        background-color: #DEE0E1;
+      }
+      .num8 {
+        background-color: #FE4141;
+      }
+      .num9 {
+        background-color: #8E0B0B;
+      }
+      .num10 {
+        background-color: #54BD39;
+      }
     }
-    #num{
-      width: 30px;
-      height: 27px;
-      font-size: 15pt;
-      color: white;
-      font-weight: bold;
-      text-shadow: 1px 1px black;
-      text-align: center;
+    .space-x {
+      width: 10px;
     }
-    .num1{
-      background-color: #FFEA00;
+    .space-y {
+      height: 20px;
     }
-    .num2{
-      background-color: #389DF4;
-    }
-    .num3{
-      background-color: #616161;
-    }
-    .num4{
-      background-color: #FE790C;
-    }
-    .num5{
-      background-color: #54FBFB;
-    }
-    .num6{
-      background-color: #5E19EF;
-    }
-    .num7{
-      background-color: #DEE0E1;
-    }
-    .num8{
-      background-color: #FE4141;
-    }
-    .num9{
-      background-color: #8E0B0B;
-    }
-    .num10{
-      background-color: #54BD39;
-    }
-  }
-  .space-x {
-    width: 10px;
-  }
-  .space-y {
-    height: 20px;
   }
   .his-control {
     .item {
@@ -110,6 +113,42 @@
           }
         }
       }
+    }
+  }
+  .history-panel{
+    .sub{
+      display: flex;
+      line-height: 30px;
+      font-size: 9pt;
+      div {
+        cursor: pointer;
+        min-width: 43px;
+        text-align: center;
+        background-color: #eee;
+        height: 30px;
+        border-right: 2px solid white;
+      }
+      .his-sub-active{
+        color: #db2222;
+      }
+      .dt{
+        width: 130px
+      }
+      .sum2{
+        width: 140px
+      }
+      .sum3{
+        width: 180px
+      }
+    }
+    .his-menu{
+      background-color: #eee;
+      border-bottom: 1px solid white;
+      text-align: center;
+      cursor: pointer;
+    }
+    .sub-is-active{
+      background-color: #9d9d9d;
     }
   }
 }

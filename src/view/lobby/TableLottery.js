@@ -17,7 +17,7 @@ export default class TableLottery extends Component {
     }
 
     updateBetResult(data){
-        this.refs.rank.updateRank(data.numbers)
+        this.refs.rank.updateRank(data)
     }
 
     startCountdown(data){

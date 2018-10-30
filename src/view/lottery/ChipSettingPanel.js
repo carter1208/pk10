@@ -6,6 +6,7 @@ import {model} from '../../model/Model'
 import ChipSettingItem from "./ChipSettingItem";
 import GameUtil from "../util/GameUtil";
 import Command from "../../constant/Command";
+import {T} from '../../model/language/Translator'
 export default class ChipSettingPanel extends Component{
     constructor(props){
         super(props);
@@ -213,18 +214,18 @@ export default class ChipSettingPanel extends Component{
             <div className="chip-setting-panel">
                 <div className="container">
                     <div className="header">
-                        <span>Chip Setting</span>
+                        <span>{T.translate('lbTitleChipAmt')}</span>
                         <img src="img/close.png" width='21' height='20' onClick={this.close.bind(this)}/>
                     </div>
-                    <span>Note: Setting are only saved on your computer.Clearing the browser cache or changing the computer will show the default value</span>
+                    <span style={{minHeight:'55px', display:'flex'}}>{T.translate('lbDesChipAmt')}</span>
                     <div className="content">
                         {jsxCol}
                     </div>
                     <div className="footer">
-                        <button type="button" id ='save' onClick={this.confirm.bind(this)}>Save</button>&nbsp;
-                        <button type="button" id ='clear' onClick={this.clearBet.bind(this)}>Clear</button>
+                        <button type="button" id ='save' onClick={this.confirm.bind(this)}>{T.translate('lblOk')}</button>&nbsp;
+                        <button type="button" id ='clear' onClick={this.clearBet.bind(this)}>{T.translate('btnCancel')}</button>
                     </div>
-                    <span id="text_save" style={{visibility:'hidden', color:'#db2222', textAlign:'center', width:'250px', position:'absolute'}}>Save successful</span>
+                    <span id="text_save" style={{visibility:'hidden', color:'#db2222', textAlign:'center', width:'250px', position:'absolute'}}>{T.translate('lbSave')}</span>
                 </div>
             </div>
         )

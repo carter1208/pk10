@@ -7,6 +7,7 @@ import  ResultBettingItem from './ResultBettingItem';
 import  {model} from '../../model/Model';
 import  {lobbyServer} from '../../controller/ServerLobby';
 import  Command from '../../constant/Command';
+import  {T} from '../../model/language/Translator';
 import  SelectChannel from '../../component/SelectChannel';
 import DisplayUtil from '../util/DisplayUtil';
 
@@ -125,10 +126,11 @@ export default class ResultBettingPanel extends Component {
             <div className="betting-rpt">
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('./img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
+                    <div className="name">{T.translate('lblBettingHistory').toUpperCase()}</div>
                 </div>
                 <div className="date-picker">
                     <div className="form-group">
-                        <span className="text-right txt-date">From:</span>
+                        <span className="text-right txt-date">{T.translate('lblFrom')}</span>
                         <div className="wrap-date">
                             <div className="input-group" data-date-time-from="" >
                                 <input className="input-date" id="from" placeholder="07/07/2017" type="text"/>
@@ -147,7 +149,7 @@ export default class ResultBettingPanel extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <span className="text-right txt-date">To:</span>
+                        <span className="text-right txt-date">{T.translate('lblTo')}</span>
                         <div className="wrap-date">
                             <div className="input-group" data-date-time-to="" >
                                 <input className="input-date" id="to" placeholder="07/07/2017" type="text"/>
@@ -156,18 +158,18 @@ export default class ResultBettingPanel extends Component {
                         </div>
                         <span className="toCutOff" style={{paddingLeft:'10px', fontSize:'12pt'}}>{this.state.cutOffTime}</span>
                     </div>
-                    <button type="button" className="btn-select-line" onMouseDown={this.onSearch.bind(this)}>Search</button>
+                    <button type="button" className="btn-select-line" onMouseDown={this.onSearch.bind(this)}>{T.translate('lblSearch')}</button>
                 </div>
                 <div className="betting-container">
                     <div className="header" style={{fontWeight:'bold'}}>
-                        <div className="title">GAME</div>
-                        <div className="trans">TRANS ID</div>
-                        <div className="date">DATE TIME</div>
-                        <div>DRAW NO</div>
-                        <div className="betcode">BET CODE</div>
-                        <div>BET AMOUNT</div>
-                        <div>WIN/LOSS</div>
-                        <div>RESULT</div>
+                        <div className="title">{T.translate('lblGame').toUpperCase()}</div>
+                        <div className="trans">{T.translate('lblTranId').toUpperCase()}</div>
+                        <div className="date">{T.translate('lblDate').toUpperCase()}</div>
+                        <div>{T.translate('lblDrawNo').toUpperCase()}</div>
+                        <div className="betcode">{T.translate('lblBetCode').toUpperCase()}</div>
+                        <div>{T.translate('lblBetAmt').toUpperCase()}</div>
+                        <div>{T.translate('lblWin/Loss').toUpperCase()}</div>
+                        <div>{T.translate('mnuResult').toUpperCase()}</div>
                     </div>
                     {jsxCol}
                 </div>

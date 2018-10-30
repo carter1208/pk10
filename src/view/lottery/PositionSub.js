@@ -3,6 +3,7 @@
  */
 import React,{Component} from 'react'
 import {model} from '../../model/Model'
+import {T} from '../../model/language/Translator'
 export default class PositionSub extends Component{
     constructor(props){
         super();
@@ -27,16 +28,16 @@ export default class PositionSub extends Component{
             <div className="sub-position">
                 <div className="collapse navbar-collapse" id="myNavbar">
                     <ul className="nav navbar-nav navbar-left">
-                        <li><a href="#" id="1" className="is-active" onClick={this.activeNav.bind(this)}>1ST</a></li>
-                        <li><a href="#" id="2" onClick={this.activeNav.bind(this)}>2ND</a></li>
-                        <li><a href="#" id="3" onClick={this.activeNav.bind(this)}>3RD</a></li>
-                        <li><a href="#" id="4" onClick={this.activeNav.bind(this)}>4TH</a></li>
-                        <li><a href="#" id="5" onClick={this.activeNav.bind(this)}>5TH</a></li>
-                        <li><a href="#" id="6" onClick={this.activeNav.bind(this)}>6TH</a></li>
-                        <li><a href="#" id="7" onClick={this.activeNav.bind(this)}>7TH</a></li>
-                        <li><a href="#" id="8" onClick={this.activeNav.bind(this)}>8TH</a></li>
-                        <li><a href="#" id="9" onClick={this.activeNav.bind(this)}>9TH</a></li>
-                        <li id="sub10"><a href="#" id="10" onClick={this.activeNav.bind(this)}>10TH</a></li>
+                        <li><a href="#" id="1" className="is-active" onClick={this.activeNav.bind(this)}>{T.translate('lbl1').toUpperCase()}</a></li>
+                        <li><a href="#" id="2" onClick={this.activeNav.bind(this)}>{T.translate('lbl2').toUpperCase()}</a></li>
+                        <li><a href="#" id="3" onClick={this.activeNav.bind(this)}>{T.translate('lbl3').toUpperCase()}</a></li>
+                        <li><a href="#" id="4" onClick={this.activeNav.bind(this)}>{T.translate('lbl4').toUpperCase()}</a></li>
+                        <li><a href="#" id="5" onClick={this.activeNav.bind(this)}>{T.translate('lbl5').toUpperCase()}</a></li>
+                        <li><a href="#" id="6" onClick={this.activeNav.bind(this)}>{T.translate('lbl6').toUpperCase()}</a></li>
+                        <li><a href="#" id="7" onClick={this.activeNav.bind(this)}>{T.translate('lbl7').toUpperCase()}</a></li>
+                        <li><a href="#" id="8" onClick={this.activeNav.bind(this)}>{T.translate('lbl8').toUpperCase()}</a></li>
+                        <li><a href="#" id="9" onClick={this.activeNav.bind(this)}>{T.translate('lbl9').toUpperCase()}</a></li>
+                        <li id="sub10"><a href="#" id="10" onClick={this.activeNav.bind(this)}>{T.translate('lbl10').toUpperCase()}</a></li>
                     </ul>
                 </div>
             </div>

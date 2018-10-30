@@ -19,16 +19,27 @@
       height: 40px;
       border: 1px solid #eeeeee;
       width: 166px;
+      justify-content: left;
+      align-items: center;
       #title{
         font-size: 16pt;
         color: white;
         margin-left: 10px;
-        margin-top: 5px;
         text-align: center;
         width: 30px;
         height: 30px;
         font-weight: bold;
         text-shadow: 1px 1.5px black;
+      }
+      #title-txt{
+        font-size: 11pt;
+        color: #545454;
+        margin-left: 10px;
+        text-align: left;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
       }
       .name1{
         background-color: #FFEA00;
@@ -61,42 +72,10 @@
         background-color: #54BD39;
         text-align: center;
       }
-      .nameSMALL{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 2px !important;
-        margin-top: 10px !important;
-        width: 40px !important;
-      }
-      .nameEVEN{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 10px !important;
-        width: 35px !important;
-      }
-      .nameODD{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 10px !important;
-        width: 35px !important;
-      }
-      .nameBIG{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 10px !important;
-        width: 35px !important;
-      }
       .odd{
+        text-align: center;
         margin-left: 10px;
         padding-top: 5px;
-        margin-top: 5px;
         font-size: 11pt !important;
         color: #db2222;
         font-weight: bold;
@@ -106,8 +85,6 @@
       .value{
         text-align: right;
         margin-left: 5px;
-        padding-top: 5px;
-        margin-top: 5px;
         padding-right: 5px;
         width: 50px;
         height: 30px;
@@ -141,6 +118,8 @@
     }
     .dt {
       display: flex;
+      justify-content: left;
+      align-items: center;
       height: 35px;
       border: 1px solid #eeeeee;
       width: 277px;
@@ -148,27 +127,25 @@
         font-size: 11pt;
         color: #545454;
         margin-left: 20px;
-        margin-top: 10px;
         text-align: left;
         width: 110px;
         height: 30px;
+        line-height: 30px;
         font-weight: bold;
       }
       .odd{
+        text-align: center;
         margin-left: 10px;
-        padding-top: 0px;
-        margin-top: 10px;
         font-size: 11pt !important;
         color: #db2222;
         font-weight: bold;
         width: 70px;
         height: 30px;
+        line-height: 30px;
       }
       .value{
         text-align: right;
         margin-left: 5px;
-        padding-top: 0px;
-        margin-top: 2px;
         padding-right: 5px;
         width: 50px;
         height: 30px;
@@ -199,66 +176,45 @@
       height: 40px;
       border: 1px solid #eeeeee;
       width: 166px;
+      justify-content: left;
+      align-items: center;
       #title{
         font-size: 12pt;
         color: #545454;
         margin-left: 10px;
-        margin-top: 10px;
         text-align: center;
         width: 30px;
         height: 30px;
+        line-height: 30px;
         font-weight: bold;
       }
-      .nameSMALL{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 2px !important;
-        margin-top: 10px !important;
-        width: 40px !important;
-      }
-      .nameEVEN{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 10px !important;
-        width: 35px !important;
-      }
-      .nameODD{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 10px !important;
-        width: 35px !important;
-      }
-      .nameBIG{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 10px !important;
-        width: 35px !important;
+      #title-txt{
+        font-size: 11pt;
+        color: #545454;
+        margin-left: 10px;
+        text-align: left;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
       }
       .odd{
+        text-align: center;
         margin-left: 10px;
-        padding-top: 5px;
-        margin-top: 5px;
         font-size: 11pt !important;
         color: #db2222;
         font-weight: bold;
         width: 50px;
         height: 30px;
+        line-height: 30px;
       }
       .value{
         text-align: right;
         margin-left: 5px;
-        padding-top: 5px;
-        margin-top: 5px;
         padding-right: 5px;
         width: 50px;
         height: 30px;
+        line-height: 30px;
         border: 1.3px solid #999;
         border-radius: 5px;
         outline: none;
@@ -289,69 +245,38 @@
     }
     .pos {
       display: flex;
+      justify-content: left;
+      align-items: center;
       height: 35px;
       border: 1px solid #eeeeee;
       width: 166px;
-      #title{
-        font-size: 12pt;
+      #title, #title-txt{
+        font-size: 11pt;
         color: #545454;
         margin-left: 10px;
-        margin-top: 5px;
         text-align: center;
         width: 30px;
         height: 30px;
+        line-height: 30px;
         font-weight: bold;
       }
-      .nameSMALL{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 0px !important;
-        margin-top: 7px !important;
-        width: 40px !important;
-      }
-      .nameEVEN{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 7px !important;
-        width: 35px !important;
-      }
-      .nameODD{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 7px !important;
-        width: 35px !important;
-      }
-      .nameBIG{
-        color: #545454 !important;
-        text-shadow: none !important;
-        font-size: 11pt !important;
-        margin-left: 5px !important;
-        margin-top: 7px !important;
-        width: 35px !important;
-      }
       .odd{
+        text-align: center;
         margin-left: 10px;
-        padding-top: 5px;
-        margin-top: 2px;
         font-size: 11pt !important;
         color: #db2222;
         font-weight: bold;
         width: 50px;
         height: 30px;
+        line-height: 30px;
       }
       .value{
         text-align: right;
         margin-left: 5px;
-        padding-top: 5px;
-        margin-top: 2px;
         padding-right: 5px;
         width: 50px;
         height: 30px;
+        line-height: 30px;
         border: 1.3px solid #999;
         border-radius: 5px;
         outline: none;
@@ -382,6 +307,8 @@
     }
     .combine2 {
       display: flex;
+      justify-content: left;
+      align-items: center;
       height: 35px;
       border: 1px solid #eeeeee;
       width: 415px;
@@ -389,60 +316,54 @@
         font-size: 12pt;
         color: #545454;
         margin-left: 10px;
-        margin-top: 5px;
         text-align: center;
         width: 70px;
         height: 30px;
         font-weight: bold;
       }
       .odd {
-        margin-left: 10px;
-        padding-top: 5px;
         text-align: center;
-        margin-top: 2px;
+        margin-left: 10px;
+        text-align: center;
         font-size: 11pt !important;
         color: #db2222;
         font-weight: bold;
         width: 70px;
         height: 30px;
+        line-height: 30px;
       }
       .value {
         text-align: right;
         margin-left: 5px;
-        padding-top: 5px;
-        margin-top: 2px;
         padding-right: 5px;
         width: 50px;
         height: 30px;
+        line-height: 30px;
         border: 1.3px solid #999;
         border-radius: 5px;
         outline: none;
       }
       .dropCb {
+        cursor: pointer;
         border: 2px solid #d4d4d4;
         border-radius: 5px;
         width: 40px;
-        height: 30px;
-        margin-top: 2px;
-        .btn {
+        height: 27px;
+        .btn-drop {
+          height: 25px;
           display: flex;
-          position: absolute;
-          padding-left: 0;
-          padding-top: 0px;
+          align-items:center;
+          text-align: center;
           :focus :active {
             background-color: transparent;
           }
         }
-        span {
-          margin-top: 10px;
-        }
         .title {
-          font-size: 12pt;
-          font-weight:bold;
+          height: 23px;
+          line-height: 23px;
           background-color: #999999;
           width: 25px !important;
           border: 1px solid #F6E67B;
-          margin: 0;
           color: white;
           text-shadow: 0.5px 1px black;
         }
@@ -450,24 +371,26 @@
     }
     .combine3 {
       display: flex;
+      justify-content: left;
+      align-items: center;
       height: 35px;
       border: 1px solid #eeeeee;
       width: 415px;
+      line-height: 30px;
       .name1 {
         font-size: 12pt;
         color: #545454;
         margin-left: 10px;
-        margin-top: 5px;
         text-align: center;
         width: 40px;
         height: 30px;
+        line-height: 30px;
         font-weight: bold;
       }
       .odd {
-        margin-left: 10px;
-        padding-top: 5px;
         text-align: center;
-        margin-top: 2px;
+        margin-left: 10px;
+        text-align: center;
         font-size: 11pt !important;
         color: #db2222;
         font-weight: bold;
@@ -477,8 +400,6 @@
       .value {
         text-align: right;
         margin-left: 5px;
-        padding-top: 5px;
-        margin-top: 2px;
         padding-right: 5px;
         width: 50px;
         height: 30px;
@@ -487,28 +408,26 @@
         outline: none;
       }
       .dropCb {
+        cursor: pointer;
         border: 2px solid #d4d4d4;
         border-radius: 5px;
         width: 40px;
         height: 27px;
-        margin-top: 2px;
-        .btn {
+        .btn-drop {
+          height: 25px;
           display: flex;
-          position: absolute;
-          padding-left: 0;
-          padding-top: 0px;
+          align-items:center;
+          text-align: center;
           :focus :active {
             background-color: transparent;
           }
         }
-        span {
-          margin-top: 10px;
-        }
         .title {
+          height: 23px;
+          line-height: 23px;
           background-color: #999999;
           width: 25px !important;
           border: 1px solid #F6E67B;
-          margin: 0;
           color: white;
           text-shadow: 0.5px 1px black;
         }

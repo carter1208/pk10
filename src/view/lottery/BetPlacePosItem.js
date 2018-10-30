@@ -107,9 +107,13 @@ export default class BetPlacePosItem extends Component{
     }
 
     render(){
+        let txt = 'title'
+        if(isNaN(this.state.id)){
+            txt = 'title-txt';
+        }
         return(
             <div className={'pos'} id={'pos'+this.state.name}>
-                <div className={'name' + this.state.id} id="title">{this.state.id}</div>
+                <div className={'name' + this.state.id} id={txt}>{this.state.id}</div>
                 <div className="odd">{this.state.oddBetCode}</div>
                 <input type="text" className="value" id={'value'+this.state.name} onClick={this.onClick.bind(this)} onKeyPress={this.onChange.bind(this)} onBlur={this.onMoveLeave.bind(this)} tabIndex={this.props.idx} defaultValue={0}></input>
             </div>

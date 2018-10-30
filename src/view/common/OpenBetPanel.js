@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react';
 import  Pagination from 'react-js-pagination';
 import  OpenBetItem from './OpenBetItem';
 import  {model} from '../../model/Model';
+import  {T} from '../../model/language/Translator';
 import  {lobbyServer} from '../../controller/ServerLobby';
 import DisplayUtil from '../util/DisplayUtil';
 import  Command from '../../constant/Command';
@@ -67,15 +68,16 @@ export default class OpenBetPanel extends Component {
             <div className="open-bet">
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('./img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
+                    <div className="name">{T.translate('lblOpenBetting').toUpperCase()}</div>
                 </div>
                 <div className="open-container">
                     <div className="header" style={{fontWeight:'bold'}}>
-                        <div className="title">GAME</div>
-                        <div className="trans">TRANS ID</div>
-                        <div className="date">DATE TIME</div>
-                        <div>DRAW NO</div>
-                        <div className="betcode">BET CODE</div>
-                        <div>BET AMOUNT</div>
+                        <div className="title">{T.translate('lblGame').toUpperCase()}</div>
+                        <div className="trans">{T.translate('lblTranId').toUpperCase()}</div>
+                        <div className="date">{T.translate('lblDate').toUpperCase()}</div>
+                        <div>{T.translate('lblDrawNo').toUpperCase()}</div>
+                        <div className="betcode">{T.translate('lblBetCode').toUpperCase()}</div>
+                        <div>{T.translate('lblBetAmt').toUpperCase()}</div>
                     </div>
                     {jsxCol}
                 </div>

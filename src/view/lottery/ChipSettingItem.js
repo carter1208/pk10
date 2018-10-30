@@ -2,6 +2,8 @@
  * Created by carter on 10/22/2018.
  */
 import React,{Component} from 'react';
+import {T} from '../../model/language/Translator';
+
 export default class ChipSettingItem extends Component{
     constructor(props){
         super(props);
@@ -44,13 +46,13 @@ export default class ChipSettingItem extends Component{
         let objBtn = [];
         if(this.props.isFull){
             objBtn.push(
-                <button key={Math.random()} type="button" id ='del' onClick={this.clear.bind(this)}>Delete</button>
+                <button key={Math.random()} type="button" id ='del' onClick={this.clear.bind(this)}>{T.translate('lbDel')}</button>
             );
         }else {
             objBtn.push(
                 <div key={Math.random()}>
-                    <button  key={Math.random()} type="button" id ='insert' onClick={this.insert.bind(this)}>Insert</button>
-                    <button key={Math.random()} type="button" id ='del' onClick={this.clear.bind(this)}>Delete</button>
+                    <button  key={Math.random()} type="button" id ='insert' onClick={this.insert.bind(this)}>{T.translate('lbInsert')}</button>
+                    <button key={Math.random()} type="button" id ='del' onClick={this.clear.bind(this)}>{T.translate('lbDel')}</button>
                 </div>
             );
         }

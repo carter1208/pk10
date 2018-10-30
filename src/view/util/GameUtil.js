@@ -1,6 +1,7 @@
 /**
  * Created by carter on 10/13/2017.
  */
+import {T} from '../../model/language/Translator'
 export default class GameUtil {
     static sortArrayNumber(arr, type = 1) {
         arr.sort(function (a, b) {
@@ -12,6 +13,25 @@ export default class GameUtil {
                 return 0;
             }
         });
+    }
+
+    static getNamebyKey(key){
+        let str = '';
+        switch (key){
+            case 'B':
+                str = T.translate('LoBig').toUpperCase();
+                break;
+            case 'S':
+                str = T.translate('LoSm').toUpperCase();
+                break;
+            case 'OD':
+                str = T.translate('LoOdd').toUpperCase();
+                break;
+            case 'EV':
+                str = T.translate('LoEven').toUpperCase();
+                break;
+        }
+        return str;
     }
 
     static getChipText(value) {

@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react';
 import DisplayUtil from '../util/DisplayUtil'
 import EventType from '../../constant/EventType'
 import {model} from '../../model/Model'
+import {T} from "../../model/language/Translator";
 
 export default class SubMenu extends Component {
     constructor(props){
@@ -24,19 +25,19 @@ export default class SubMenu extends Component {
             <div className="sub-menu" style={DisplayUtil.backgroundStyle('./img/bgSubMenu.png')} tabIndex={1}>
                 <div id={EventType.PP_BET_STATUS} onMouseDown={this.showPopup.bind(this)}>
                     <img src="img/icOpen.png"/>
-                    <span>OPEN BETS</span>
+                    <span>{T.translate('mnuOpenBets').toUpperCase()}</span>
                 </div>
                 <div id={EventType.PP_RESULT_RPT} onMouseDown={this.showPopup.bind(this)}>
                     <img src="img/icRes.png"/>
-                    <span>RESULT</span>
+                    <span>{T.translate('mnuResult').toUpperCase()}</span>
                 </div>
                 <div id={EventType.PP_BETTING} onMouseDown={this.showPopup.bind(this)}>
                     <img src="img/icBet.png"/>
-                    <span>BETTING HISTORY</span>
+                    <span>{T.translate('mnuBettingHistory').toUpperCase()}</span>
                 </div>
                 <div id={EventType.PP_GAMERULE} onMouseDown={this.showPopup.bind(this)}>
                     <img src="img/icGame.png"/>
-                    <span>GAME RULE</span>
+                    <span>{T.translate('mnuGameRule').toUpperCase()}</span>
                 </div>
             </div>
         )

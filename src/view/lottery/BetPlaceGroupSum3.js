@@ -3,6 +3,8 @@
  */
 import React,{Component} from 'react'
 import BetPlacePosItem from "../lottery/BetPlacePosItem"
+import GameUtil from '../util/GameUtil'
+
 export default class BetPlaceGroupSum3 extends Component{
     constructor(props){
         super();
@@ -16,25 +18,6 @@ export default class BetPlaceGroupSum3 extends Component{
 
     onClickBet(event, index) {
         event.preventDefault();
-    }
-
-    getNamebyKey(key){
-        let str = '';
-        switch (key){
-            case 'B':
-                str = 'BIG'
-                break;
-            case 'S':
-                str = 'SMALL'
-                break;
-            case 'OD':
-                str = 'ODD'
-                break;
-            case 'EV':
-                str = 'EVEN'
-                break;
-        }
-        return str;
     }
 
     onClickBet(e){
@@ -91,7 +74,7 @@ export default class BetPlaceGroupSum3 extends Component{
         for (var i = 0; i < this.arrName1.length; i++){
             idx++;
             jsxCol.push(
-                <BetPlacePosItem idx={idx} ref={'sum3' + this.arrName1[i]} key={this.arrName1[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i+ 1))} id={this.getNamebyKey(this.arrName1[i])} name={'3S'+this.arrName1[i]} oddBetCode={114.15} value={0}/>
+                <BetPlacePosItem idx={idx} ref={'sum3' + this.arrName1[i]} key={this.arrName1[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i+ 1))} id={GameUtil.getNamebyKey(this.arrName1[i])} name={'3S'+this.arrName1[i]} oddBetCode={114.15} value={0}/>
             );
         }
         jsxCol.push(

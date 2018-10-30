@@ -3,6 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import ATimer from '../../component/ATimer'
+import {T} from '../../model/language/Translator'
 
 export default class CountDownPanel extends Component {
     constructor(props){
@@ -48,7 +49,7 @@ export default class CountDownPanel extends Component {
         return (
             <div className="countdown">
                 <div className="drawNo">
-                    <div className="title">Next Draw</div>
+                    <div className="title">{T.translate('lblNextDraw')}</div>
                     <div className="draw">{this.state.drawNo}</div>
                 </div>
                 <div className="time">{this.state.countDownTime}</div>

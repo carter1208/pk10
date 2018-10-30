@@ -14,6 +14,7 @@ export default class Main extends Component {
         this.state = {
             tbID:'0',
             isLogin:true,
+            isShow:false,
             sence: LOBBY
         }
     }
@@ -24,6 +25,10 @@ export default class Main extends Component {
     componentWillUnmount(){
         model.unsubscribe(Command.OPEN_TABLE, this);
         model.unsubscribe(Command.BACK_LOBBY, this);
+    }
+
+    show(){
+        this.setState({isShow:true});
     }
     update(command, data) {
         switch (command) {
@@ -43,6 +48,8 @@ export default class Main extends Component {
         }
     }
     render() {
+        if(!this.state.isShow)
+            return(<div></div>)
         let jsx = this.state.sence == LOBBY ? <Lobby ref="lobby" isLogin={this.state.isLogin}/> : <Game ref="game" key={Math.random()} tbID={this.state.tbID}/>;
         return (
             <div className="main-page">

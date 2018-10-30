@@ -191,17 +191,17 @@ export default class BetPlaceCombine3Item extends Component{
             <div className={'combine3'} id={this.props.idItem}>
                 <div className={'name1'} id="title">1ST</div>
                 <div className="dropCb" id="btn1" tabIndex={0} onClick={this.onClick.bind(this)} onBlur={this.onBlur.bind(this)}>
-                    <div className="btn"><div ref='drop1' className="title" style={{backgroundColor:this.state.color1}}>{this.state.value1}</div>
+                    <div className="btn-drop"><div ref='drop1' className="title" style={{backgroundColor:this.state.color1}}>{this.state.value1}</div>
                         <span className="caret"></span></div>
                 </div>
                 <div className={'name1'} id="title">2ND</div>
                 <div className="dropCb" id="btn2" tabIndex={0} onClick={this.onClick.bind(this)} onBlur={this.onBlur.bind(this)}>
-                    <div className="btn"><div ref='drop2' className="title" style={{backgroundColor:this.state.color2}}>{this.state.value2}</div>
+                    <div className="btn-drop"><div ref='drop2' className="title" style={{backgroundColor:this.state.color2}}>{this.state.value2}</div>
                         <span className="caret"></span></div>
                 </div>
                 <div className={'name1'} id="title">3RD</div>
                 <div className="dropCb" id="btn3" tabIndex={0} onClick={this.onClick.bind(this)} onBlur={this.onBlur.bind(this)}>
-                    <div className="btn"><div ref='drop3' className="title" style={{backgroundColor:this.state.color3}}>{this.state.value3}</div>
+                    <div className="btn-drop"><div ref='drop3' className="title" style={{backgroundColor:this.state.color3}}>{this.state.value3}</div>
                         <span className="caret"></span></div>
                 </div>
                 <div className="odd">{this.state.oddBetCode}</div>

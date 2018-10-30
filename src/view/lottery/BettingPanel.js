@@ -3,7 +3,6 @@
  */
 import React,{Component} from 'react';
 import PositionSub from '../lottery/PositionSub'
-import DTSub from '../lottery/DTSub'
 import CombineSub from '../lottery/CombineSub'
 import SumSub from '../lottery/SumSub'
 import BetPlaceGroupPos from '../lottery/BetPlaceGroupPos'
@@ -14,6 +13,7 @@ import BetPlaceGroupCombine from '../lottery/BetPlaceGroupCombine'
 import BetValue from '../lottery/BetValue'
 import ChipSettingPanel from "./ChipSettingPanel";
 import {model} from '../../model/Model'
+import {T} from '../../model/language/Translator'
 
 export default class BettingPanel extends Component{
     constructor(props){
@@ -148,27 +148,27 @@ export default class BettingPanel extends Component{
         return (
             <div className="betting">
                 <div className="btn-group">
-                    <button type="button" id ='position' className="active" onClick={this.show.bind(this)}>POSITION
+                    <button type="button" id ='position' className="active" onClick={this.show.bind(this)}>{T.translate('lblPosition').toUpperCase()}
                         <div className="img" id="position_tick" style={{visibility:'hidden'}}>
                             <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
                         </div>
                     </button>
-                    <button type="button" id='dt' onClick={this.show.bind(this)}>DRAGON/TIGER
+                    <button type="button" id='dt' onClick={this.show.bind(this)}>{T.translate('lblDT').toUpperCase()}
                         <div className="img" id="dt_tick" style={{visibility:'hidden'}}>
                             <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
                         </div>
                     </button>
-                    <button type="button" id='sum2' onClick={this.show.bind(this)}>SUM OF 1ST + 2ND
+                    <button type="button" id='sum2' onClick={this.show.bind(this)}>{T.translate('lblSum2').toUpperCase()}
                         <div className="img" id="sum2_tick" style={{visibility:'hidden'}}>
                             <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
                         </div>
                     </button>
-                    <button type="button" id='sum3' onClick={this.show.bind(this)}>SUM OF 1ST + 2ST + 3RD
+                    <button type="button" id='sum3' onClick={this.show.bind(this)}>{T.translate('lblSum3').toUpperCase()}
                         <div className="img" id="sum3_tick" style={{visibility:'hidden'}}>
                             <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
                         </div>
                     </button>
-                    <button type="button" id ='combine' onClick={this.show.bind(this)}>COMBINE
+                    <button type="button" id ='combine' onClick={this.show.bind(this)}>{T.translate('lblCombine').toUpperCase()}
                         <div className="img" id="combine_tick" style={{visibility:'hidden'}}>
                             <img src="img/tick.png" width='12px' height='12px' style={{float:'right'}}/>
                         </div>
@@ -178,10 +178,10 @@ export default class BettingPanel extends Component{
                 {jsxBetPlace}
                 <div className="btn-confirm">
                     <div className="control">
-                        <button type="button" id ='confirm' onClick={this.confirmBet.bind(this)}>CONFIRM</button>&nbsp;
-                        <button type="button" id ='clear' onClick={this.clearBet.bind(this)}>CLEAR</button>
+                        <button type="button" id ='confirm' onClick={this.confirmBet.bind(this)}>{T.translate('btnConfirm').toUpperCase()}</button>&nbsp;
+                        <button type="button" id ='clear' onClick={this.clearBet.bind(this)}>{T.translate('btnClear').toUpperCase()}</button>
                     </div>
-                    <button type="button" id ='quick' onClick={this.quickChange.bind(this)}>QUICK CHANGE</button>
+                    <button type="button" id ='quick' onClick={this.quickChange.bind(this)}>{T.translate('lbQuickChange').toUpperCase()}</button>
                 </div>
                 <BetValue ref="betvalue" onClickItem={this.chooseBetValue.bind(this)}/>
                 <ChipSettingPanel ref="chipSetting"/>

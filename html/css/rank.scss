@@ -1,10 +1,11 @@
 .rank{
-  margin-top:75px;
-  margin-left: 60px;
+  margin-top:10px;
   text-align: center;
   .top3{
     display: flex;
-    margin-left: -10px;
+    height: 90px;
+    align-items: center;
+    justify-content: center;
     .info{
       margin-top:-10px;
     }
@@ -15,8 +16,9 @@
   }
   .list{
     display: flex;
-    margin-top: 20px;
-    margin-left: 10px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
     .pos{
       width: 80px;
     }

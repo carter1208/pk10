@@ -14,10 +14,20 @@
       margin-left:0;
       height: 60px;
       width: 465px;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      .name{
+        margin-left: 150px;
+        border-left: 2px solid white;
+        color: white;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+      }
       .icon{
-        position: absolute;
         margin-left: 10px;
-        margin-top: 10px;
         width: 38px;
         height: 36px;
         outline: none;
@@ -89,6 +99,15 @@
       display: flex;
       align-items: center;
       justify-content: left;
+      .name{
+        margin-left: 5px;
+        border-left: 2px solid white;
+        color: white;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+      }
       .icon{
         margin-left: 10px;
         position: absolute;
@@ -249,13 +268,22 @@
     width: 1420px;
     height: 60px;
     .top{
-      margin-left:0;
+      display: flex;
+      align-items: center;
+      justify-content:left ;
       height: 60px;
       width: 465px;
+      .name{
+        margin-left: 150px;
+        border-left: 2px solid white;
+        color: white;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+      }
       .icon{
-        position: absolute;
         margin-left: 10px;
-        margin-top: 10px;
         width: 38px;
         height: 36px;
         outline: none;

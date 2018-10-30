@@ -7,6 +7,7 @@ import  ResultHistoryItem from './ResultHistoryItem';
 import DisplayUtil from '../util/DisplayUtil';
 import  {lobbyServer} from '../../controller/ServerLobby';
 import  {model} from '../../model/Model';
+import  {T} from '../../model/language/Translator';
 import  Command from '../../constant/Command';
 import  SelectLanguage from '../../component/SelectLanguage';
 
@@ -197,12 +198,14 @@ export default class ResultHistoryPanel extends Component {
                         onChangeSelect={this.hdlChangeTable.bind(this)}
                         />
                     </div>
+                    <div className="name">{T.translate('lblResultBetting').toUpperCase()}</div>
                 </div>
+
                 <canvas id="line" style={{ left: 0, top:0}} width={'1440px'} height={'720px'}>
 
                 </canvas>
                 <div className="title">
-                    <div className="id">Select Number:</div>
+                    <div className="id">{T.translate('lbSelect')}</div>
                     <div className="label-num">
                         <input type="checkbox" className="radio" value="1" name="num" onClick={this.chooseNum.bind(this)}/>1</div>
                     <div className="label-num">
@@ -224,7 +227,7 @@ export default class ResultHistoryPanel extends Component {
                     <div className="label-num">
                         <input type="checkbox" className="radio" value="10" name="num" onClick={this.chooseNum.bind(this)}/>10</div>
 
-                    <button type="button" className="btn-select-line" onMouseDown={this.activeLine.bind(this)}>Select</button>
+                    <button type="button" className="btn-select-line" onMouseDown={this.activeLine.bind(this)}>{T.translate('lbSelect').toUpperCase()}</button>
                     <div className="wrap-date">
                         <div className="input-group" data-date-time-result="" >
                             <input className="input-date" id="from" placeholder="07/07/2017" type="text"/>
@@ -234,8 +237,8 @@ export default class ResultHistoryPanel extends Component {
                 </div>
                 <div className="res-container">
                     <div className="result-item" style={{fontWeight:'bold'}}>
-                        <div className="info">DRAW NO</div>
-                        <div className="list">RESULT</div>
+                        <div className="info">{T.translate('lblDrawNo').toUpperCase()}</div>
+                        <div className="list">{T.translate('mnuResult').toUpperCase()}</div>
                     </div>
                     {jsxCol}
                 </div>

@@ -56,6 +56,7 @@ module.exports = {
             { from: "./html/index.html", to: "index.html" },
             { from: "./html/img/", to: "img"},
             { from: "./html/assets/", to: "assets"},
+            { from: "./html/resource/", to: "resource"},
             { from: "./node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2", to: "fonts/glyphicons-halflings-regular.woff2"}
         ]),
         new MergeIntoSingleFilePlugin({

@@ -176,11 +176,11 @@ export default class BetPlaceCombine2Item extends Component{
 
     render(){
         let jsx = ( <div className="dropCb" id="btn1" tabIndex={0} onClick={this.onClick.bind(this)} onBlur={this.onBlur.bind(this)}>
-            <div className="btn"><div ref='drop1' className="title" style={{backgroundColor:this.state.color1}}>{this.state.value1}</div>
+            <div className="btn-drop"><div ref='drop1' className="title" style={{backgroundColor:this.state.color1}}>{this.state.value1}</div>
                 <span className="caret"></span></div>
         </div>);
          let jsx1 = (  <div className="dropCb" id="btn2" tabIndex={0} onClick={this.onClick.bind(this)} onBlur={this.onBlur.bind(this)}>
-             <div className="btn drop2"><div className="title"style={{backgroundColor:this.state.color2}}>{this.state.value2}</div>
+             <div className="btn-drop drop2"><div className="title"style={{backgroundColor:this.state.color2}}>{this.state.value2}</div>
                  <span className="caret"></span></div>
          </div>);
 

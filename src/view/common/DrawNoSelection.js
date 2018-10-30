@@ -3,6 +3,7 @@
  */
 import React,{Component} from 'react';
 import {model} from '../../model/Model'
+import {T} from '../../model/language/Translator'
 export default class DrawNoSelection extends Component {
     constructor(props){
         super(props);
@@ -15,14 +16,14 @@ export default class DrawNoSelection extends Component {
 
     componentDidMount() {
     }
+
     updateHistory(){
         let arr = model.table.history.getHistory;
         this.setState({
             arrRes:arr,
-            idx:arr.length -1,
+            idx:arr.length-1,
             drawNoHis:arr[arr.length -1].drawNoRef
         });
-        this.updateResult(this.state.drawNoHis);
     }
 
     prev(){
@@ -43,9 +44,8 @@ export default class DrawNoSelection extends Component {
 
     updateResult(drawNo)
     {
-        let arr = model.getHistoryByDrawNo(drawNo);
         if(this.props.updateRes){
-            this.props.updateRes(arr);
+            this.props.updateRes(drawNo);
         }
         this.setState({
             drawNoHis:this.state.arrRes[this.state.idx].drawNoRef
@@ -54,10 +54,10 @@ export default class DrawNoSelection extends Component {
 
     render() {
         return(
-            <div className="sel-drawno">
+            <div className="sel-drawno" id="select-drawno">
                 <div className="sel-container">
                     <img className='prev' src="img/mcPrev.png" width='auto' height='auto' onClick={this.prev.bind(this)}/>
-                    <span>drawno: {this.state.drawNoHis}</span>
+                    <span>{T.translate('lblDrawNo') +': '+ this.state.drawNoHis}</span>
                     <img className='next' src="img/mcNext.png" width='auto' height='auto' onClick={this.next.bind(this)}/>
                 </div>
             </div>

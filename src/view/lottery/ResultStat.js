@@ -3,7 +3,7 @@
  */
 import React, {Component} from "react";
 import {model} from "../../model/Model";
-import Command from "../../constant/Command";
+import {T} from "../../model/language/Translator";
 import EventType from '../../constant/EventType'
 
 export default class ResultStat extends Component{
@@ -42,9 +42,9 @@ export default class ResultStat extends Component{
         }
         return (
             <div className="res-stat">
-                <div className="header" style={{paddingLeft:10}}>Lottery Time</div>
+                <div className="header" style={{paddingLeft:10}}>{T.translate('lbLottery')}</div>
                 {jsxCol}
-                <div className="btn-Sel" onClick={this.openResultRpt.bind(this)}>Detail Result</div>
+                <div className="btn-Sel" onClick={this.openResultRpt.bind(this)}>{T.translate('lbMoreResult')}</div>
             </div>
         )
     }
