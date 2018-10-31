@@ -21,10 +21,11 @@
         margin-left: 150px;
         border-left: 2px solid white;
         color: white;
-        width: 100px;
+        width: 170px;
         height: 30px;
         line-height: 30px;
         font-weight: bold;
+        font-size: 14pt;
       }
       .icon{
         margin-left: 10px;
@@ -100,13 +101,15 @@
       align-items: center;
       justify-content: left;
       .name{
-        margin-left: 5px;
+        position: absolute;
+        margin-left: 390px;
         border-left: 2px solid white;
         color: white;
-        width: 100px;
+        width: 200px;
         height: 30px;
         line-height: 30px;
         font-weight: bold;
+        font-size: 14pt;
       }
       .icon{
         margin-left: 10px;
@@ -145,6 +148,7 @@
       height: 60px;
       margin-left: 20px;
       background-color: white;
+      font-weight: bold;
       .btn-select-line{
         background-color: #db2222;
         color: white;
@@ -228,7 +232,7 @@
               background-color: #389DF4;
             }
             .num3{
-              background-color: #616161;
+              background-color: #383838;
             }
             .num4{
               background-color: #FE790C;
@@ -277,10 +281,11 @@
         margin-left: 150px;
         border-left: 2px solid white;
         color: white;
-        width: 100px;
+        width: 200px;
         height: 30px;
         line-height: 30px;
         font-weight: bold;
+        font-size: 14pt;
       }
       .icon{
         margin-left: 10px;
@@ -442,10 +447,8 @@
   }
   .paging {
     width: 1400px;
-    //top: 600px;
     position: absolute;
     text-align: center;
-    bottom: 0px;
     font-weight: bold;
     li{
      font-size: 12pt;

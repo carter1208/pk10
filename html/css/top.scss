@@ -1,14 +1,21 @@
 .top-panel{
-  width: 100%;
+  width: 1440px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: left;
-  .icon{
-    margin-left: 10px;
-    width: 38px;
-    height: 36px;
-    outline: none;
-    cursor: pointer;
+  .left {
+    width: 1045px;
+    .icon {
+      margin-left: 10px;
+      width: 38px;
+      height: 36px;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  .right{
+    width: 395px;
+    height: 100%;
   }
 }

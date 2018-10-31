@@ -2,36 +2,77 @@
  * Created by carter on 9/27/2018.
  */
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import DisplayUtil from '../util/DisplayUtil'
 import RankPanel from "./RankPanel";
 import CountDownPanel from "./CountDownPanel";
 import {model} from '../../model/Model';
+import {lobbyServer} from '../../controller/ServerLobby'
 import Command from '../../constant/Command'
 
 export default class TableLottery extends Component {
     constructor(props){
         super(props);
         this.tbInfo = this.props.tbInfo;
+        this.data = null;
     }
     componentDidMount() {
+        model.subscribe(Command.BET_RESULT, this);
+        model.subscribe(Command.START_BET_LOBBY, this);
+        model.subscribe(Command.STOP_BET_LOBBY, this);
+        model.subscribe(Command.LAST_DRAW_RESULT, this);
+        this.getResult();
     }
 
-    updateBetResult(data){
-        this.refs.rank.updateRank(data)
+    componentWillUnmount(){
+        this.mounted = false;
+        model.unsubscribe(Command.BET_RESULT, this);
+        model.unsubscribe(Command.START_BET_LOBBY, this);
+        model.unsubscribe(Command.STOP_BET_LOBBY, this);
+        model.unsubscribe(Command.LAST_DRAW_RESULT, this);
     }
 
-    startCountdown(data){
+    getResult(){
+        lobbyServer.getLastDrawResult(this.tbInfo.id, "1");
+    }
+
+    updateBetResult(){
+        this.refs.rank.updateRank(this.data);
+    }
+
+    startCountdown(){
         console.log('startCountdown', this.tbInfo.id);
-        this.refs.countdown.startCountDown(data.countDown, data.drawNo);
+        this.refs.countdown.startCountDown(this.data.countDown, this.data.drawNo);
     }
 
-    stopCountdown(data){
+    stopCountdown(){
         console.log('stopCountdown', this.tbInfo.id);
-        this.refs.countdown.stopCountDown(data.countDown, data.drawNo);
+        this.refs.countdown.stopCountDown(this.data.countDown, this.data.drawNo);
     }
 
     hdlOpenTb(e){
         model.update(Command.OPEN_TABLE, this.tbInfo.id);
+    }
+
+
+
+    update(command, data) {
+        if(this.tbInfo.id != data.tableId) return;
+        this.data = data;
+        switch (command) {
+            case Command.BET_RESULT:
+                this.updateBetResult();
+                break;
+            case Command.LAST_DRAW_RESULT:
+                this.updateBetResult();
+                break;
+            case Command.START_BET_LOBBY:
+                this.startCountdown();
+                break;
+            case Command.STOP_BET_LOBBY:
+                this.stopCountdown();
+                break;
+        }
     }
 
     render() {

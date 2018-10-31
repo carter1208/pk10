@@ -18,6 +18,9 @@ export default class SelectLanguage extends Component {
 
     onChange(val) {
         this.setState({selectValue:val});
+        if(this.props.onSelectChange){
+            this.props.onSelectChange(val)
+        }
     }
 
     render() {

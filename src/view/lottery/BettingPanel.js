@@ -13,7 +13,10 @@ import BetPlaceGroupCombine from '../lottery/BetPlaceGroupCombine'
 import BetValue from '../lottery/BetValue'
 import ChipSettingPanel from "./ChipSettingPanel";
 import {model} from '../../model/Model'
+import {gameServer} from '../../controller/GameServer'
+import Command from '../../constant/Command'
 import {T} from '../../model/language/Translator'
+import BetDetailPanel from "./BetDetailPanel";
 
 export default class BettingPanel extends Component{
     constructor(props){
@@ -24,6 +27,7 @@ export default class BettingPanel extends Component{
         }
     }
     componentDidMount() {
+        model.subscribe(Command.UPDATE_BETTING, this);
     }
 
     init(){
@@ -83,7 +87,10 @@ export default class BettingPanel extends Component{
         }
     }
 
-    confirmBet(){}
+    confirmBet(e){
+        let obj = JSON.parse('{"data":{"result":{"ListBetDetail":[{"Status":"T","Odds":"8.08","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3386","BetCode":"Lo1-1","AccBetAmt":100},{"Status":"T","Odds":"9.7","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3387","BetCode":"Lo1-2","AccBetAmt":100},{"Status":"T","Odds":"9.7","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3392","BetCode":"Lo1-7","AccBetAmt":100},{"Status":"T","Odds":"1.95","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"4381","BetCode":"Lo1B","AccBetAmt":100}],"AvailCredit":2400.053,"TbID":79,"TrID":"61c68ef0b"},"errorMessage":"","error":0}}');
+        gameServer.onExtensionResponse(Command.UPDATE_BETTING,obj);
+    }
 
     clearBet(){}
 
@@ -94,11 +101,17 @@ export default class BettingPanel extends Component{
     updateOdd(){
         this.refs[this.state.subMenu].updateOdd();
     }
+    updateBetting(data){
+        this.refs.betDetail.updateBetting(data);
+    }
 
     update(command, data) {
         switch (command) {
             case Command.GET_ODD_LIVE:
                 this.updateOdd();
+                break;
+            case Command.UPDATE_BETTING:
+                this.updateBetting(data);
                 break;
         }
     }
@@ -181,10 +194,13 @@ export default class BettingPanel extends Component{
                         <button type="button" id ='confirm' onClick={this.confirmBet.bind(this)}>{T.translate('btnConfirm').toUpperCase()}</button>&nbsp;
                         <button type="button" id ='clear' onClick={this.clearBet.bind(this)}>{T.translate('btnClear').toUpperCase()}</button>
                     </div>
-                    <button type="button" id ='quick' onClick={this.quickChange.bind(this)}>{T.translate('lbQuickChange').toUpperCase()}</button>
+                    <div className="setting">
+                        <button type="button" id ='quick' onClick={this.quickChange.bind(this)}>{T.translate('lbQuickChange').toUpperCase()}</button>
+                    </div>
                 </div>
                 <BetValue ref="betvalue" onClickItem={this.chooseBetValue.bind(this)}/>
                 <ChipSettingPanel ref="chipSetting"/>
+                <BetDetailPanel ref="betDetail"/>
             </div>
 
         )

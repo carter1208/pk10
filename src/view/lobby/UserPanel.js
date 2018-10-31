@@ -72,10 +72,10 @@ export default class UserPanel extends Component{
                 &emsp;
                 <div className="userItem" tabIndex={0} onClick={this.showBonus.bind(this)} onBlur={this.onBlur.bind(this)}>
                     <div className="txt">
-                        <span>{this.state.txtBalance}</span>
+                        <div className="bal">{this.state.txtBalance}</div>
                         <div className="bonus">
                             <div className="tooltiptext"></div>
-                            {DisplayUtil.formatCurrency(this.state.bonus, 2, '')}
+                            <span>{DisplayUtil.formatCurrency(this.state.bonus, 2, '')}</span>
                         </div>
                     </div>
                 </div>

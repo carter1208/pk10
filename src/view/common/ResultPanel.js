@@ -2,7 +2,7 @@
  * Created by carter on 10/29/2018.
  */
 import React,{Component} from 'react';
-import ItemHistory from "./ItemHistory";
+import ItemResult from "./ItemResult";
 import {model} from '../../model/Model'
 export default class ResultPanel extends Component{
     constructor(props){
@@ -57,9 +57,9 @@ export default class ResultPanel extends Component{
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
             }
             jsxCol.push(
-                <ItemHistory ref={'item'+ (i+1)} key={i+ 1} pos={i+1} id={this.state.arrRes[i]}/>
+                <ItemResult ref={'item'+ (i+1)} key={i+ 1} pos={i+1} id={this.state.arrRes[i]}/>
             );
-            this.state.arrCar.push(<ItemHistory ref={div => this['item'+ (i+1)] = div} key={i+ 1} pos={i+1} id={this.state.arrRes[i]}/>);
+            this.state.arrCar.push(<ItemResult ref={div => this['item'+ (i+1)] = div} key={i+ 1} pos={i+1} id={this.state.arrRes[i]}/>);
             if (jsxCol.length > 7 || i == this.state.arrRes.length-1) {
                 if (jsxRow.length > 0) {
                     jsxRow.push(<div key={'spacey' + i} className="space-y"/>);

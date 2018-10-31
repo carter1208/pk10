@@ -3,7 +3,7 @@
  */
 import React,{Component} from 'react';
 import {T} from "../../model/language/Translator";
-export default class ItemHistory extends Component{
+export default class ItemResult extends Component{
     constructor(props){
         super(props);
         this.indexX = this.props.id > 5 ? this.props.id - 6 : this.props.id - 1;
@@ -34,7 +34,7 @@ export default class ItemHistory extends Component{
             <div className={'item-his'+this.props.id} id={'item'} ref={div => this.item = div}>
                 <div className="info">
                     <div className={'num' + this.props.id} id="num">{this.props.id}</div>
-                    <div className="idx">{T.translate('lbl'+this.state.pos)}</div>
+                    <div className="idx">{T.translate('lbl'+this.state.pos).toUpperCase()}</div>
                 </div>
                 <img src={'img/car-' + this.props.id + '.png'} width='120' height='39'/>
             </div>

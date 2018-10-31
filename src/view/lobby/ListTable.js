@@ -4,36 +4,19 @@
 import React, {Component, PropTypes} from 'react';
 import Table from './TableLottery'
 import {model} from '../../model/Model'
-import Command from '../../constant/Command'
 
 export default class ListTable extends Component {
     constructor(props){
         super(props);
     }
     componentDidMount() {
-        model.subscribe(Command.BET_RESULT, this);
-        model.subscribe(Command.START_BET_LOBBY, this);
-        model.subscribe(Command.STOP_BET_LOBBY, this);
+
     }
 
     onClick(e){
 
     }
 
-
-    update(command, data) {
-        switch (command) {
-            case Command.BET_RESULT:
-                this.refs['tb' + data.tableId].updateBetResult(data);
-                break;
-            case Command.START_BET_LOBBY:
-                this.refs['tb' + data.tbId].startCountdown(data);
-                break;
-            case Command.STOP_BET_LOBBY:
-                this.refs['tb' + data.tbId].stopCountdown(data);
-                break;
-        }
-    }
 
     render() {
         let jsxRow = [];

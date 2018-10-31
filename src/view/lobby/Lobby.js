@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react';
 import {lobbyServer} from '../../controller/ServerLobby'
 import {model} from '../../model/Model'
 import MainPage from "./MainPage";
+import ServerConfig from "../../config/ServerConfig";
 
 export default class Lobby extends Component {
     constructor(props) {
@@ -22,7 +23,8 @@ export default class Lobby extends Component {
     }
 
     onLogin(){
-        model.loginName = 'rubby';
+        model.loginName = 'testpk10100';
+        ServerConfig.agentId = '23947';
         model.loginPass = '123456';
         lobbyServer.startWaiting(this.onConnectSuccessHandler.bind(this));
         lobbyServer.connect(model.loginName, model.loginPass);

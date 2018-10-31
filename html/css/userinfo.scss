@@ -1,13 +1,9 @@
 .user-info {
-  width: 300px;
-  right: 0;
-  position: absolute;
   color: #fff;
   font-size: 14pt;
-  text-align: right;
   display: flex;
-  top:18px;
   outline: none;
+  line-height: 60px;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -15,48 +11,49 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
   .userName{
-    position: absolute;
-    right: 220px;
+    width: 55%;
+    text-align: center;
   }
   .userItem{
     cursor: pointer;
     outline: none;
-    position: absolute;
-    right: 20px;
-    width: 180px;
-    height: 37px;
-    margin-top: -7px;
-    padding-right: 10px;
-    padding-top: 7px;
-    .bonus{
-      opacity: 0;
-      height: 25px;
-      cursor: auto;
-      background-color: #9B0D0D;
-      color: gold;
-      top: 45px;
-      width: 135px;
-      border: 1px solid #8E0B0B;
-      border-radius: 8px;
-      position: absolute;
-      right: 0;
-      padding-right: 20px;
-      .tooltiptext::after {
-        content: " ";
-        position: absolute;
-        margin-top: -15px;
-        margin-left: 27.5px;
-        border-width: 8px;
-        right: 10px;
-        border-style: solid;
-        border-color: transparent transparent #9B0D0D transparent;
+    width: 45%;
+    height: 100%;
+    text-align: center;
+    .txt {
+      .bal{
+        height: 55px;
       }
-    }
-    .bonus.active{
-      opacity: 1;
-    }
-    .bonus:before {
-      opacity: 1;
+      .bonus {
+        width: 140px;
+        color: gold;
+        border-radius: 6px;
+        opacity: 0;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        z-index: 1;
+        background-color: #8D0D0D;
+        .tooltiptext{
+          height: 0;
+        }
+        .tooltiptext::after{
+          top: -38px;
+          left: 38px;
+          content: " ";
+          position: relative;
+          border-width: 8px;
+          border-style: solid;
+          border-color: transparent transparent #9B0D0D transparent;
+        }
+      }
+
+      .bonus.active {
+        opacity: 1;
+      }
+      .bonus:before {
+        opacity: 1;
+      }
     }
   }
 }

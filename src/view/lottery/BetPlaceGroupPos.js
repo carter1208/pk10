@@ -8,7 +8,7 @@ import GameUtil from '../util/GameUtil'
 export default class BetPlaceGroupPos extends Component{
     constructor(props){
         super();
-        this.arrName = ['B','S', 'EV', 'OD'];
+        this.arrName = ['B','S', 'OD', 'EV'];
     }
 
     componentDidMount(){

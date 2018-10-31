@@ -69,7 +69,7 @@ export default class TableHistory extends Component{
                 <div className="his-control">
                     <div className="item">
                         <div className="tab">
-                            <button className="his-active" onClick={this.hdlClick.bind(this)} type="button" id ={RESULT}>{T.translate('btnResult').toUpperCase()}</button>
+                            <button className="his-active" onClick={this.hdlClick.bind(this)} type="button" id ={RESULT}>{T.translate('btnResult').toUpperCase()}</button>&nbsp;
                             <button type="button" id ={TREND} onClick={this.hdlClick.bind(this)}>{T.translate('btnTrend').toUpperCase()}</button>
                         </div>
                         <DrawNoSelection ref="cbDraw" updateRes={this.updateResult.bind(this)}/>

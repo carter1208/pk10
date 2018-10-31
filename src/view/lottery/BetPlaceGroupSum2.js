@@ -9,7 +9,7 @@ export default class BetPlaceGroupSum2 extends Component{
     constructor(props){
         super();
         this.arrName = [3,4,7,8,11,12,15,16,19];
-        this.arrName1 = ['B','S', 'EV', 'OD'];
+        this.arrName1 = ['B','S', 'OD', 'EV'];
     }
 
     componentDidMount(){

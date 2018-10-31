@@ -19,6 +19,7 @@ export default class ResultHistoryPanel extends Component {
         this.arrItem = [];
         this.arrPos = [];
         this.idx = 0;
+        this.tableId = 80;
         this.state = {
             activePage: 1,
             arr:[],
@@ -34,6 +35,7 @@ export default class ResultHistoryPanel extends Component {
         $('[data-date-time-result]').datetimepicker({
             format: 'DD/MM/YYYY'
         }).on('dp.change', this.changeDate.bind(this));
+        this.tableId = model.listTable[0].id;
         this.getResultRpt();
     }
 
@@ -46,7 +48,7 @@ export default class ResultHistoryPanel extends Component {
         let dateF = document.getElementById('from').value.split('/');
         let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         let monthF = parseInt(dateF[1]);
-        lobbyServer.getResultReport('80',dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2], page, ITEM_PER_PAGE, 1);
+        lobbyServer.getResultReport(this.tableId, dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2], page, ITEM_PER_PAGE, 1);
     }
 
     hideMenu(e){
@@ -87,11 +89,13 @@ export default class ResultHistoryPanel extends Component {
 
     activeLine(e){
         if(this.arrItem.length < 1) return;
+        this.removeLine();
         this.drawLine(this.idx);
     }
 
     hdlChangeTable(obj){
-
+        this.tableId = obj.value;
+        this.getResultRpt();
     }
 
     removeLine(){
@@ -110,7 +114,7 @@ export default class ResultHistoryPanel extends Component {
                 color = '#389DF4';
                 break;
             case 3:
-                color = '#616161';
+                color = '#383838';
                 break;
             case 4:
                 color = '#FE790C';
@@ -138,7 +142,6 @@ export default class ResultHistoryPanel extends Component {
     }
 
     drawLine(num){
-        this.removeLine();
         this.arrPos = [];
         for(var i = 0; i < this.arrItem.length; i++){
             var p = this.refs['item'+(i+1)].getPosition(i, num);
@@ -161,13 +164,15 @@ export default class ResultHistoryPanel extends Component {
     update(command, data) {
         switch (command) {
             case Command.REPORT_RESULT:
+                this.removeLine();
                 this.setState({
                     arr: data ? data.records : [],
                     activePage: data ? parseInt(data.page): 1,
                     data:data,
                     totalRow:data ? parseInt(data.totalRow):0
                 });
-                if(data) this.drawLine(this.idx);
+                if(data)
+                    this.drawLine(this.idx);
                 break;
         }
     }
@@ -194,8 +199,7 @@ export default class ResultHistoryPanel extends Component {
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
                     <div className="sel">
-                        <SelectLanguage className="sel-market" options={jsxTb}
-                        onChangeSelect={this.hdlChangeTable.bind(this)}
+                        <SelectLanguage className="sel-market" options={jsxTb} onSelectChange={this.hdlChangeTable.bind(this)}
                         />
                     </div>
                     <div className="name">{T.translate('lblResultBetting').toUpperCase()}</div>
@@ -227,7 +231,7 @@ export default class ResultHistoryPanel extends Component {
                     <div className="label-num">
                         <input type="checkbox" className="radio" value="10" name="num" onClick={this.chooseNum.bind(this)}/>10</div>
 
-                    <button type="button" className="btn-select-line" onMouseDown={this.activeLine.bind(this)}>{T.translate('lbSelect').toUpperCase()}</button>
+                    <button type="button" className="btn-select-line" onMouseDown={this.activeLine.bind(this)}>{T.translate('lblUpdate')}</button>
                     <div className="wrap-date">
                         <div className="input-group" data-date-time-result="" >
                             <input className="input-date" id="from" placeholder="07/07/2017" type="text"/>

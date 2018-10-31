@@ -189,5 +189,8 @@ class ServerConnection {
     getStart(tableId, isWaiting = false) {
         this.sendExtension(Command.TABLE_START, {tableId}, isWaiting);
     }
+    getLastDrawResult(tableId, rowNo, isWaiting = false) {
+        this.sendExtension(Command.LAST_DRAW_RESULT, {tableId, rowNo}, isWaiting);
+    }
 }
 export default ServerConnection;

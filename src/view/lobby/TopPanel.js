@@ -46,9 +46,13 @@ export default class TopPanel extends Component {
         let icon = this.state.isLobby ? './img/menu_lb.png' : './img/menu_game.png';
         return (
             <div className="top-panel" style={DisplayUtil.backgroundStyle('./img/bgTop.png')}>
-                <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle(icon)} onClick={this.showMenu.bind(this)} onBlur={this.onBlur.bind(this)}>
+                <div className="left">
+                    <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle(icon)} onClick={this.showMenu.bind(this)} onBlur={this.onBlur.bind(this)}>
+                    </div>
                 </div>
-                <UserPanel ref="userPanel"/>
+                <div className="right">
+                    <UserPanel ref="userPanel"/>
+                </div>
                 <SubMenu/>
             </div>
         )

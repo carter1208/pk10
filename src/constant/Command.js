@@ -19,6 +19,8 @@ export default class Command {
     static GET_ODD_LIVE   			 = "@oddLive";
     static TABLE_HISTORY   			 = "@tableHistory";
     static SERVER_DATE   			 = "@serverDate";
+    static LAST_DRAW_RESULT		     = "@lastDrawResult";
+    static UPDATE_BETTING		     = "@updateBetting";
     static TABLE_START   			 = "@betStarting";
 
     static UPDATE_CHIP_SETTING		 = "update_chip_setting";

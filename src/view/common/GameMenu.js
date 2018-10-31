@@ -32,8 +32,8 @@ export default class GameMenu extends Component {
         this.isMove = false;
         if (this.py > 0) {
             this.py = 0;
-        } else if (this.py < 310 - this.contentH) {
-            this.py = 310 - this.contentH;
+        } else if (this.py < 315 - this.contentH) {
+            this.py = 315 - this.contentH;
         }
 
         TweenLite.to(this.item, .5, { y:this.py, onComplete:this.onTweenComplete.bind(this)} );

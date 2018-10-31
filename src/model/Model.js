@@ -342,6 +342,10 @@ class Model extends Subject {
                     }
                 }
                 break;
+            case Command.LAST_DRAW_RESULT:
+                res = new ResultInfo(data);
+                data = res;
+                break;
         }
         this.update(command, data);
     }

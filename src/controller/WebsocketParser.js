@@ -279,6 +279,38 @@ export default class WebsocketParser {
                     obj = objRes.DateTime;
                 }
                 break;
+            case Command.LAST_DRAW_RESULT:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    let item = objJs.result;
+                    let objRes = item.listResult[0];
+                    obj = {};
+                    obj.num = objRes.Nums;
+                    obj.tableId = item.TbID;
+                    obj.drawNoRef = objRes.DrawNoRef;
+                }
+                break;
+            case Command.UPDATE_BETTING:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (data.error == DATA_SUCCESS) {
+                    obj = [];
+                    let objRes = objJs.result;
+                    let arr = objRes.ListBetDetail;
+                    for (let i = 0; i < arr.length; i++)
+                    {
+                        var objBet = {};
+                        var item = arr[i];
+                        objBet.betCode = item.BetCode;
+                        objBet.totalBet = item.BetAmt;
+                        objBet.betAmt = item.AccBetAmt;
+                        objBet.odd = item.Odds;
+                        objBet.status = item.Status;
+                        obj.push(objBet);
+                    }
+                }
+                break;
         }
         data.result = obj;
         return data;
