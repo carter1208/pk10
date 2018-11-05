@@ -8,43 +8,79 @@ export default class BetDetailPanel extends Component {
     constructor(props) {
         super(props);
         this.state={
-            arrBet:[]
+            arrBet:[],
+            arrBetItem:[],
+            isShow:false
         }
-        this.isShow = true;
+        this.isShowBtn = true;
     }
-    //Got text message: {"mes":{"p":{"data":{"result":{"ListBetDetail":[{"Status":"T","Odds":"8.08","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3386","BetCode":"Lo1-1","AccBetAmt":100},{"Status":"T","Odds":"9.7","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3387","BetCode":"Lo1-2","AccBetAmt":100},{"Status":"T","Odds":"9.7","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3392","BetCode":"Lo1-7","AccBetAmt":100},{"Status":"T","Odds":"1.95","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"4381","BetCode":"Lo1B","AccBetAmt":100}],"AvailCredit":2400.053,"TbID":79,"TrID":"61c68ef0b"},"errorMessage":"","error":0}},"c":"@updateBetting"},"rid":13,"cid":1}
+
     componentDidMount() {
     }
 
     updateBetting(data){
         this.setState({
+            isShow:true,
             arrBet:data
         })
     }
 
-    confirmBet(){}
+    confirmBet(){
+        //call bet function
+    }
 
-    clearBet(){}
+    clearBet(){
+        for(let i = 0; i < this.state.arrBet.length; i++){
+            let item = this.refs['item'+(i+1)];
+            item.removeValueBet();
+        }
+    }
+
+
+    close(e){
+        this.clearBet();
+        this.setState({
+            isShow:false
+        });
+    }
 
     render() {
+        if(!this.state.isShow)
+            return(<div></div>);
         let jsxCol = [];
-        this.isShow = false;
+        this.isShowBtn = false;
         for(let i = 0; i < this.state.arrBet.length; i++){
             let item = this.state.arrBet[i];
             if(parseInt(item.odd) <= 0) return;
             if (item.status == "SplitBetCode" || item.status == "BetOddsChanged")
             {
-                this.isShow = true;
+                this.isShowBtn = true;
             }
-            jsxCol.push(<BetDetailItem betCode={item.betCode} odd={item.odd} betAmt={item.betAmt} status={item.status}/>)
+            jsxCol.push(<BetDetailItem key={i} ref={'item'+ (i+1)} betCode={item.betCode} odd={item.odd} betAmt={item.betAmt} status={item.status}/>)
         }
         return(
             <div className="bet-detail-panel">
-                <div className="header">{T.translate('lblBetDetails').toUpperCase()}</div>
-                <div className="content"></div>
-                <div className="footer" style={{visibility:this.isShow ? 'visible':'hidden'}}>
-                    <button type="button" id ='confirm' onClick={this.confirmBet.bind(this)}>{T.translate('btnConfirm').toUpperCase()}</button>&nbsp;
-                    <button type="button" id ='cancel' onClick={this.clearBet.bind(this)}>{T.translate('btnCancel').toUpperCase()}</button>
+                <div className="detail-container">
+                    <div className="header">
+                        <span>{T.translate('lblBetDetails').toUpperCase()}</span>
+                        <img src="img/close.png" width='21' height='20' onClick={this.close.bind(this)}/>
+                    </div>
+                    <div className="content">
+                        <div className="desc">{T.translate('messBetDetails')}</div>
+                        <div className="title-detail">
+                            <div className="betcode">{T.translate('lblBetCode').toUpperCase()}</div>
+                            <div className="odd">{T.translate('LoOdd').toUpperCase()}</div>
+                            <div className="betamt">{T.translate('lblBetAmt').toUpperCase()}</div>
+                            <div className="status">{T.translate('lbStatus').toUpperCase()}</div>
+                        </div>
+                        <div className="list sroll-content">
+                            {jsxCol}
+                        </div>
+                    </div>
+                    <div className="footer" style={{visibility:this.isShowBtn ? 'visible':'hidden'}}>
+                        <button type="button" id ='confirm' onClick={this.confirmBet.bind(this)}>{T.translate('btnConfirm')}</button>&nbsp;
+                        <button type="button" id ='cancel' onClick={this.clearBet.bind(this)}>{T.translate('btnCancel')}</button>
+                    </div>
                 </div>
             </div>
         )

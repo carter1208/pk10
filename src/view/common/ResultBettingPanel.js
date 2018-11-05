@@ -130,7 +130,7 @@ export default class ResultBettingPanel extends Component {
                 </div>
                 <div className="date-picker">
                     <div className="form-group">
-                        <span className="text-right txt-date">{T.translate('lblFrom')}</span>
+                        <span className="text-right txt-date">{T.translate('lblFrom')}</span>&nbsp;
                         <div className="wrap-date">
                             <div className="input-group" data-date-time-from="" >
                                 <input className="input-date" id="from" placeholder="07/07/2017" type="text"/>
@@ -149,7 +149,7 @@ export default class ResultBettingPanel extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <span className="text-right txt-date">{T.translate('lblTo')}</span>
+                        <span className="text-right txt-date">{T.translate('lblTo')}</span>&nbsp;
                         <div className="wrap-date">
                             <div className="input-group" data-date-time-to="" >
                                 <input className="input-date" id="to" placeholder="07/07/2017" type="text"/>
@@ -160,7 +160,7 @@ export default class ResultBettingPanel extends Component {
                     </div>
                     <button type="button" className="btn-select-line" onMouseDown={this.onSearch.bind(this)}>{T.translate('lblSearch')}</button>
                 </div>
-                <div className="betting-container">
+                <div className="betting-container" style={{height:'550px'}}>
                     <div className="header" style={{fontWeight:'bold'}}>
                         <div className="title">{T.translate('lblGame').toUpperCase()}</div>
                         <div className="trans">{T.translate('lblTranId').toUpperCase()}</div>

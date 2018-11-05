@@ -12,6 +12,7 @@
     .pos{
       display: flex;
       padding: 10px;
+      text-align: -webkit-center;
     }
   }
   .list{
@@ -21,6 +22,7 @@
     justify-content: center;
     .pos{
       width: 80px;
+      text-align: -webkit-center;
     }
   }
   #num{
@@ -36,7 +38,7 @@
     color: #8c8c8c;
     font-size: 9pt;
     text-align: center;
-    width: 30px;
+    width: 40px;
     font-weight: bold;
   }
   .num1{

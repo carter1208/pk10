@@ -16,6 +16,10 @@ export default class SubMenu extends Component {
 
     showPopup(e){
         console.log('click report',e.currentTarget.id)
+        if(e.currentTarget.id == EventType.PP_GAMERULE){
+            window.open("./resource/E/gamerule.html", "_blank");
+            return;
+        }
         model.update(EventType.SHOW_POPUP, e.currentTarget.id);
         $('.sub-menu').removeClass('active');
     }

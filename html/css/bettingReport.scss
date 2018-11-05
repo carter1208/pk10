@@ -37,11 +37,11 @@
     }
     .open-container{
       margin-left: 20px;
-      background-color: white;
       margin-top: 20px;
       .header{
         display: flex;
         height: 58px;
+        background-color: white;
         div {
           display: flex;
           height: 58px;
@@ -66,6 +66,7 @@
       .open-bet-item{
         display: flex;
         height: 58px;
+        background-color: white;
         div {
           display: flex;
           height: 58px;
@@ -122,16 +123,20 @@
       .sel{
         margin-left: 200px;
         width: 180px;
+        .is-open{
+          background-color: #8D0D0D;
+          border-radius: 6px;
+        }
         .Select {
           .Select-control {
-            background-color: #8D0D0D;
+            background-color: transparent;
             border: none;
             .Select-input {
               display: none !important;
             }
           }
           .Select-menu-outer{
-            border-color: #db2222;
+            border-color: #8D0D0D;
             .Select-option{
               height: 45px;
             }
@@ -391,13 +396,12 @@
       }
     }
     .betting-container{
-
       margin-left: 20px;
-      background-color: white;
       margin-top: 20px;
       .header {
         display: flex;
         height: 50px;
+        background-color: white;
         div {
           display: flex;
           height: 50px;
@@ -422,6 +426,7 @@
       .betting-item {
         display: flex;
         height: 50px;
+        background-color: white;
         div {
           display: flex;
           height: 50px;

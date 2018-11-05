@@ -199,7 +199,7 @@ export default class ResultHistoryPanel extends Component {
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
                     <div className="sel">
-                        <SelectLanguage className="sel-market" options={jsxTb} onSelectChange={this.hdlChangeTable.bind(this)}
+                        <SelectLanguage className="sel-market" activeTb={model.tableId} options={jsxTb} onSelectChange={this.hdlChangeTable.bind(this)}
                         />
                     </div>
                     <div className="name">{T.translate('lblResultBetting').toUpperCase()}</div>
@@ -239,7 +239,7 @@ export default class ResultHistoryPanel extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="res-container">
+                <div className="res-container" style={{height:'550px'}}>
                     <div className="result-item" style={{fontWeight:'bold'}}>
                         <div className="info">{T.translate('lblDrawNo').toUpperCase()}</div>
                         <div className="list">{T.translate('mnuResult').toUpperCase()}</div>

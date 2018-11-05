@@ -9,6 +9,8 @@ export default class ServerConfig {
 
     static serverPath                   = "10.10.100.215";
     static serverPort                   = 8002;
+    // static serverPath                   = "10.10.100.213";
+    // static serverPort                   = 9002;
     static siteName                     = "localhost";
     static ip                           = "113.161.74.45";
     static lang                         = "E";

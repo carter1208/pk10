@@ -60,6 +60,8 @@
     p{
       color: white;
       font-size: 20pt;
+      width: 40px;
+      text-align: center;
     }
     .total{
       span{
@@ -67,15 +69,14 @@
         width: 100px;
       }
       .total{
-        left:105px;
-        width: 40px;
+        left:106px;
         text-align: center;
       }
       .bs{
-        left:174px;
+        left:162px;
       }
       .ov{
-        left:230px;
+        left:221px;
       }
     }
     .dt {
@@ -83,19 +84,19 @@
         left: 300px;
       }
       .d1 {
-        left: 482px;
+        left: 470px;
       }
       .d2 {
-        left: 538px;
+        left: 526px;
       }
       .d3 {
-        left: 593px;
+        left: 582px;
       }
       .d4 {
-        left: 650px;
+        left: 638px;
       }
       .d5 {
-        left: 705px;
+        left: 694px;
       }
     }
   }

@@ -70,7 +70,7 @@ export default class OpenBetPanel extends Component {
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('./img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
                     <div className="name">{T.translate('lblOpenBetting').toUpperCase()}</div>
                 </div>
-                <div className="open-container">
+                <div className="open-container" style={{height:'550px'}}>
                     <div className="header" style={{fontWeight:'bold'}}>
                         <div className="title">{T.translate('lblGame').toUpperCase()}</div>
                         <div className="trans">{T.translate('lblTranId').toUpperCase()}</div>

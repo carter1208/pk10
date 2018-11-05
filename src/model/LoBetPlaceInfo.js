@@ -8,6 +8,7 @@ export default class LoBetPlaceInfo
 
 		//set oddvalue MUST after set maxrange and minrange
 		this.oddValue = 0;
+		this.isOnline = true;
 
 		this.lastValue = 0;
 		this.confirmedValue = 0;
@@ -78,6 +79,7 @@ export default class LoBetPlaceInfo
 
 	set tempValue(value)
 	{
+		if(!this.isOnline) return;
 		this._tempValue = value;
 	}
 
@@ -88,6 +90,7 @@ export default class LoBetPlaceInfo
 
 	set confirmedValue(value)
 	{
+        if(!this.isOnline) return;
 		this._confirmedValue = value;
 	}
 
@@ -98,6 +101,7 @@ export default class LoBetPlaceInfo
 
 	set currentValue(value)
 	{
+        if(!this.isOnline) return;
 		this._currentValue = value;
 	}
 

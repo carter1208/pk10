@@ -83,8 +83,9 @@ export default class ChipSettingPanel extends Component{
     }
 
     clearBet(e){
-
+        this.show(new Event('click'));
     }
+
     confirm(e){
         if (this.checkEmpty())
         {

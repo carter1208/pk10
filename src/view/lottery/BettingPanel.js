@@ -38,7 +38,7 @@ export default class BettingPanel extends Component{
         e.preventDefault();
         $('button').removeClass('active');
         $(e.currentTarget).addClass('active');
-       this.setState({subMenu:e.currentTarget.id});
+        this.setState({subMenu:e.currentTarget.id});
     }
 
     hdlActiveCombine(id){
@@ -88,7 +88,8 @@ export default class BettingPanel extends Component{
     }
 
     confirmBet(e){
-        let obj = JSON.parse('{"data":{"result":{"ListBetDetail":[{"Status":"T","Odds":"8.08","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3386","BetCode":"Lo1-1","AccBetAmt":100},{"Status":"T","Odds":"9.7","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3387","BetCode":"Lo1-2","AccBetAmt":100},{"Status":"T","Odds":"9.7","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"3392","BetCode":"Lo1-7","AccBetAmt":100},{"Status":"T","Odds":"1.95","AgAccBetAmt":100,"BetAmt":"100","BetCodeID":"4381","BetCode":"Lo1B","AccBetAmt":100}],"AvailCredit":2400.053,"TbID":79,"TrID":"61c68ef0b"},"errorMessage":"","error":0}}');
+        let obj = JSON.parse('{"data":{"result":{"ListBetDetail":[{"Status":"T","Odds":"8.07","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3386","BetCode":"Lo1-1","AccBetAmt":100},{"Status":"SplitBetCode","Odds":8.06,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3386","BetCode":"Lo1-1","AccBetAmt":100},{"Status":"T","Odds":"9.69","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3387","BetCode":"Lo1-2","AccBetAmt":100},{"Status":"SplitBetCode","Odds":9.68,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3387","BetCode":"Lo1-2","AccBetAmt":100},{"Status":"T","Odds":"9.69","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3388","BetCode":"Lo1-3","AccBetAmt":100},{"Status":"SplitBetCode","Odds":9.68,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3388","BetCode":"Lo1-3","AccBetAmt":100},{"Status":"T","Odds":"9.69","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3389","BetCode":"Lo1-4","AccBetAmt":100},{"Status":"SplitBetCode","Odds":9.68,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3389","BetCode":"Lo1-4","AccBetAmt":100},{"Status":"T","Odds":"9.69","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3393","BetCode":"Lo1-8","AccBetAmt":100},{"Status":"SplitBetCode","Odds":9.68,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3393","BetCode":"Lo1-8","AccBetAmt":100},{"Status":"T","Odds":"9.79","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3394","BetCode":"Lo1-9","AccBetAmt":100},{"Status":"SplitBetCode","Odds":9.78,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3394","BetCode":"Lo1-9","AccBetAmt":100}],"AvailCredit":2170.053,"TbID":79,"TrID":"634dbc216"},"errorMessage":"","error":0}}');
+        // let obj = JSON.parse('{"data":{"result":{"ListBetDetail":[{"Status":"T","Odds":"8.07","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3386","BetCode":"Lo1-1","AccBetAmt":100},{"Status":"SplitBetCode","Odds":8.06,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3386","BetCode":"Lo1-1","AccBetAmt":100},{"Status":"T","Odds":"9.69","AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3387","BetCode":"Lo1-2","AccBetAmt":100},{"Status":"SplitBetCode","Odds":9.68,"AgAccBetAmt":100,"BetAmt":200,"BetCodeID":"3387","BetCode":"Lo1-2","AccBetAmt":100}],"AvailCredit":2170.053,"TbID":79,"TrID":"634dbc216"},"errorMessage":"","error":0}}');
         gameServer.onExtensionResponse(Command.UPDATE_BETTING,obj);
     }
 
@@ -188,7 +189,9 @@ export default class BettingPanel extends Component{
                     </button>
                 </div>
                 {jsxSub}
-                {jsxBetPlace}
+                <div style={{height:'145px'}}>
+                    {jsxBetPlace}
+                </div>
                 <div className="btn-confirm">
                     <div className="control">
                         <button type="button" id ='confirm' onClick={this.confirmBet.bind(this)}>{T.translate('btnConfirm').toUpperCase()}</button>&nbsp;

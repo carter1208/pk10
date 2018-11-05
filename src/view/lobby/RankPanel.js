@@ -53,7 +53,7 @@ export default class RankPanel extends Component {
                 <div className="list">
                     <div className="pos">
                         <div className={'num' + this.state.arrRes[3]} id="num">{this.state.arrRes[3]}</div>
-                        <div className="idx">{T.translate('lbl4').toUpperCase()}</div>
+                        <div className="idx"><span>{T.translate('lbl4').toUpperCase()}</span></div>
                     </div>
                     <div className="pos">
                         <div className={'num' + this.state.arrRes[4]} id="num">{this.state.arrRes[4]}</div>

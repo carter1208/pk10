@@ -12,6 +12,14 @@ export default class SelectLanguage extends Component {
         }
     }
     componentDidMount() {
+        for(let i =0; i< this.props.options.length; i++){
+            if(this.props.options[i].value == this.props.activeTb){
+                this.state = {
+                    selectValue: this.props.options[i].value
+                }
+                break;
+            }
+        }
     }
     componentWillUnmount() {
     }
@@ -21,6 +29,15 @@ export default class SelectLanguage extends Component {
         if(this.props.onSelectChange){
             this.props.onSelectChange(val)
         }
+    }
+
+    renderArrow(e){
+        let url = '';
+        if(e.isOpen)
+            url = './img/up.png'
+        else
+            url = './img/down.png'
+        return <img src={url} width='19px' height='18px'/>
     }
 
     render() {

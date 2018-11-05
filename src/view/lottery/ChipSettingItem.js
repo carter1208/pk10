@@ -51,7 +51,7 @@ export default class ChipSettingItem extends Component{
         }else {
             objBtn.push(
                 <div key={Math.random()}>
-                    <button  key={Math.random()} type="button" id ='insert' onClick={this.insert.bind(this)}>{T.translate('lbInsert')}</button>
+                    <button  key={Math.random()} type="button" id ='insert' onClick={this.insert.bind(this)}>{T.translate('lbInsert')}</button>&nbsp;
                     <button key={Math.random()} type="button" id ='del' onClick={this.clear.bind(this)}>{T.translate('lbDel')}</button>
                 </div>
             );

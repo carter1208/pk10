@@ -1,0 +1,133 @@
+.bet-detail-panel{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 960px;
+  background:rgba(0,0,0,0.5);
+  z-index: 5;
+  .detail-container {
+    width: 600px;
+    height: 470px;
+    .header {
+      background-color: #db2222;
+      color: white;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      span{
+        margin-left: 10px;
+      }
+      img{
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: 5px;
+      }
+    }
+    .content {
+      background-color: white;
+      .desc{
+        margin-left: 10px;
+        height: 30px;
+        line-height: 30px;
+        text-align: left;
+      }
+      text-align: center;
+      .title-detail{
+        width: 580px;
+        margin-left: 10px;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5f5f5;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+        .betcode{
+          width: 30%;
+        }
+        .odd{
+          width: 10%;
+        }
+        .betamt{
+          width: 20%;
+        }
+        .status{
+          width: 38%;
+        }
+      }
+      .sroll-content {
+        height: 300px;
+        overflow-y: auto;
+      }
+      .list {
+        .bet-detail-item {
+          input{
+            cursor: pointer;
+          }
+          margin-left: 10px;
+          width: 580px;
+          border-top: 1px solid #eeeeee;
+          border-bottom: 1px solid #eeeeee;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 30px;
+          line-height: 30px;
+          .betcode {
+            width: 30%;
+          }
+          .odd {
+            width: 10%;
+          }
+          .betamt {
+            width: 20%;
+          }
+          .status {
+            justify-content: center;
+            width: 38%;
+            display: flex;
+          }
+        }
+      }
+    }
+    .footer {
+      background-color: white;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      button{
+        background-color: #db2222;
+        color: white;
+        border: 1px solid #da2222;
+        border-radius: 6px;
+        font-size: 10pt;
+        min-width: 100px;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    ::-webkit-scrollbar-track-piece {
+      height: 10px;
+      width: 10px;
+    }
+  }
+}

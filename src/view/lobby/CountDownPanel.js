@@ -8,6 +8,7 @@ import {T} from '../../model/language/Translator'
 export default class CountDownPanel extends Component {
     constructor(props){
         super(props);
+        this.time = null;
         this.state= {
             drawNo:'',
             countDownTime:'00:00'
@@ -17,11 +18,19 @@ export default class CountDownPanel extends Component {
         this.time = new ATimer();
     }
 
+    componentWillUnmount(){
+        this.mounted = false;
+        this.time.stopTimer();
+    }
+
     onTimerHandler(t){
         let minutes = Math.floor(t / 60);
         let seconds = t % 60;
         if (t <= 0){
-            this.timer.stopTimer();
+            if(!this.time){
+                return;
+            }
+            this.time.stopTimer();
             seconds = 0;
             minutes = 0;
         }
@@ -31,6 +40,9 @@ export default class CountDownPanel extends Component {
     }
 
     startCountDown(remainTime, drawNo){
+        if(!this.time){
+            return;
+        }
         this.time.startTimer(remainTime, this.onTimerHandler.bind(this));
         this.setState({
             drawNo: drawNo
@@ -38,6 +50,9 @@ export default class CountDownPanel extends Component {
     }
 
     stopCountDown(remainTime, drawNo){
+        if(!this.time){
+            return;
+        }
         this.time.stopTimer();
         this.setState({
             drawNo:drawNo,

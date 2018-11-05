@@ -11,19 +11,32 @@ export default class BetDetailItem extends Component {
     }
 
     componentDidMount() {
+        var $box = $('.radio');
+        $box.prop("checked", true);
+        this.setValueBet(parseInt(this.props.betAmt));
     }
 
     hdlClick(e){
         var $box = $(e.currentTarget);
         if ($box.is(":checked")) {
-            var group = "input:checkbox[name='" + $box.attr("name") + "']";
-            $(group).prop("checked", false);
             $box.prop("checked", true);
-            this.idx = parseInt(e.currentTarget.value);
+            this.setValueBet(parseInt(this.props.betAmt));
         } else {
             $box.prop("checked", false);
-            this.idx = 0;
+            this.setValueBet(0);
         }
+
+    }
+
+    removeValueBet(){
+        var $box = $('.radio');
+        $box.prop("checked", false);
+        this.setValueBet(0);
+    }
+
+    setValueBet(val){
+        console.log('setValueBet', this.props.betCode, val)
+        this.betInfo.tempValue = val;
     }
 
     render() {
@@ -39,7 +52,7 @@ export default class BetDetailItem extends Component {
         }
         return(
             <div className="bet-detail-item">
-                <div className="betcode">{this.props.betCode}</div>
+                <div className="betcode">{T.translate(this.props.betCode)}</div>
                 <div className="odd">{this.props.odd}</div>
                 <div className="betamt">{this.props.betAmt}</div>
                 <div className="status">{jsxCol}</div>
