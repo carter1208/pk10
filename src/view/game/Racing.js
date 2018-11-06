@@ -93,7 +93,7 @@ export default class Racing extends PIXI.Container{
         this.soundPlayer = null;
         this.soundPlayer1.volume = 0;
         this.soundPlayer1 = null;
-        this.arrCar = [];
+        // this.arrCar = [];
         this.grades = [];
         this.mcBg = null;
         this.gate1 = null;
@@ -268,7 +268,7 @@ export default class Racing extends PIXI.Container{
         this.arrCar.map((item, idx) =>{
             arrx.push({id:idx, x:item.x});
         });
-        arrx.sort((a,b)=> a.x > b.x);
+        arrx.sort((a,b)=> a.x < b.x ? -1 : (a.x > b.x ? 1 : 0));
         return arrx;
     }
 }

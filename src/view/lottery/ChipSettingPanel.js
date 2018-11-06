@@ -21,7 +21,6 @@ export default class ChipSettingPanel extends Component{
     }
 
     componentDidMount() {
-
     }
 
     init(){
@@ -153,8 +152,14 @@ export default class ChipSettingPanel extends Component{
                 return;
             }
         }
-        this.state.arrTemp = this.state.arrSelect.concat();
-        this.state.arrNormal = this.state.arrSelect.concat();
+        this.state.arrTemp = [];
+        this.state.arrNormal = [];
+        for(let i =0; i < this.state.arrSelect.length; i++){
+            if(this.state.arrSelect[i] != 0){
+                this.state.arrTemp.push(this.state.arrSelect[i])
+                this.state.arrNormal.push(this.state.arrSelect[i])
+            }
+        }
         this.state.arrSelect.push(0);
         let arr = this.state.arrSelect.concat();
         this.setState({
@@ -182,14 +187,21 @@ export default class ChipSettingPanel extends Component{
     {
         if (this.state.arrSelect.length < 2)
         {
-            // alert("chipSettingWarning", "errMsg", "fail");
-            alert("length > 0");
+            alert(T.translate('chipSettingWarning'));
             return;
         }
         let val = data == "" ? 0 : parseInt(data);
 
-        this.state.arrSelect.splice(this.state.arrSelect.indexOf(val), 1);
-        this.state.arrNormal = this.state.arrSelect.concat();
+        // this.state.arrSelect.splice(this.state.arrSelect.indexOf(val), 1);
+        this.state.arrSelect = this.state.arrSelect.filter((s, sidx) => val !== s)
+        this.state.arrTemp = [];
+        this.state.arrNormal = [];
+        for(let i=0; i < this.state.arrSelect.length; i++){
+            if(this.state.arrSelect[i] != 0){
+                this.state.arrTemp.push(this.state.arrSelect[i]);
+                this.state.arrNormal.push(this.state.arrSelect[i]);
+            }
+        }
         let arr = this.state.arrSelect.concat();
         this.setState({
             arrShow:arr

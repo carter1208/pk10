@@ -4,6 +4,8 @@
 import React, {Component, PropTypes} from 'react';
 import {T} from '../../model/language/Translator'
 import {model} from '../../model/Model';
+import GameUtil from '../util/GameUtil'
+
 export default class BetDetailItem extends Component {
     constructor(props) {
         super(props);
@@ -41,6 +43,7 @@ export default class BetDetailItem extends Component {
 
     render() {
         let jsxCol = {};
+        let styleText = '#545454';
         if(this.props.status == "SplitBetCode" || this.props.status == "BetOddsChanged")
         {
             jsxCol = <input type="checkbox" className="radio" value="1" name="num" onClick={this.hdlClick.bind(this)}/>
@@ -48,14 +51,15 @@ export default class BetDetailItem extends Component {
             jsxCol = T.translate('BSuccess').toUpperCase();
         }
         else {
-            jsxCol = this.props.status;
+            jsxCol = T.translate(this.props.status);
+            styleText = '#db2222';
         }
         return(
             <div className="bet-detail-item">
                 <div className="betcode">{T.translate(this.props.betCode)}</div>
                 <div className="odd">{this.props.odd}</div>
-                <div className="betamt">{this.props.betAmt}</div>
-                <div className="status">{jsxCol}</div>
+                <div className="betamt">{GameUtil.formatCurrency(this.props.betAmt, 2, '')}</div>
+                <div className="status" style={{color:styleText}}>{jsxCol}</div>
             </div>
         )
     }

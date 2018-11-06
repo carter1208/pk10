@@ -15,7 +15,9 @@ export default class SubMenu extends Component {
     }
 
     showPopup(e){
-        console.log('click report',e.currentTarget.id)
+        console.log('click report',e.nativeEvent.which)
+        if(e.nativeEvent.which != 1) return;
+        e.stopPropagation();
         if(e.currentTarget.id == EventType.PP_GAMERULE){
             window.open("./resource/E/gamerule.html", "_blank");
             return;
@@ -26,7 +28,7 @@ export default class SubMenu extends Component {
 
     render() {
         return (
-            <div className="sub-menu" style={DisplayUtil.backgroundStyle('./img/bgSubMenu.png')} tabIndex={1}>
+            <div className="sub-menu" id="subMenu" style={DisplayUtil.backgroundStyle('./img/bgSubMenu.png')} tabIndex={0}>
                 <div id={EventType.PP_BET_STATUS} onMouseDown={this.showPopup.bind(this)}>
                     <img src="img/icOpen.png"/>
                     <span>{T.translate('mnuOpenBets').toUpperCase()}</span>

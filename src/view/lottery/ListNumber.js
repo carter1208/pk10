@@ -18,6 +18,7 @@ export default class ListNumber extends Component{
 
     onClick(event){
         event.preventDefault();
+        if(event.nativeEvent.which != 1) return;
         if(this.props.onClickItem){
             this.props.onClickItem(event.currentTarget.innerHTML);
         }

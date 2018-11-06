@@ -20,14 +20,15 @@ export default class TopPanel extends Component {
     }
 
     onBlur(e){
-        $('.sub-menu').removeClass('active')
+        e.stopPropagation();
         this.setState({
             showMenu:false
         });
+        $('.sub-menu').removeClass('active')
     }
 
     showMenu(e){
-        e.preventDefault();
+        e.stopPropagation();
         if(this.state.isLobby) {
             if (!this.state.showMenu) {
                 $('.sub-menu').addClass('active')
@@ -47,7 +48,7 @@ export default class TopPanel extends Component {
         return (
             <div className="top-panel" style={DisplayUtil.backgroundStyle('./img/bgTop.png')}>
                 <div className="left">
-                    <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle(icon)} onClick={this.showMenu.bind(this)} onBlur={this.onBlur.bind(this)}>
+                    <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle(icon)} onClick={this.showMenu.bind(this)}  onBlur={this.onBlur.bind(this)}>
                     </div>
                 </div>
                 <div className="right">

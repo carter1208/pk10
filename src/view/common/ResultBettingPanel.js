@@ -158,7 +158,7 @@ export default class ResultBettingPanel extends Component {
                         </div>
                         <span className="toCutOff" style={{paddingLeft:'10px', fontSize:'12pt'}}>{this.state.cutOffTime}</span>
                     </div>
-                    <button type="button" className="btn-select-line" onMouseDown={this.onSearch.bind(this)}>{T.translate('lblSearch')}</button>
+                    <button type="button" className="btn-select-line" onClick={this.onSearch.bind(this)}>{T.translate('lblSearch')}</button>
                 </div>
                 <div className="betting-container" style={{height:'550px'}}>
                     <div className="header" style={{fontWeight:'bold'}}>

@@ -231,7 +231,7 @@ export default class ResultHistoryPanel extends Component {
                     <div className="label-num">
                         <input type="checkbox" className="radio" value="10" name="num" onClick={this.chooseNum.bind(this)}/>10</div>
 
-                    <button type="button" className="btn-select-line" onMouseDown={this.activeLine.bind(this)}>{T.translate('lblUpdate')}</button>
+                    <button type="button" className="btn-select-line" onClick={this.activeLine.bind(this)}>{T.translate('lblUpdate')}</button>
                     <div className="wrap-date">
                         <div className="input-group" data-date-time-result="" >
                             <input className="input-date" id="from" placeholder="07/07/2017" type="text"/>

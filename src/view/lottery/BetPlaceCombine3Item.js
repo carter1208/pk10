@@ -4,6 +4,7 @@
 import React,{Component} from 'react'
 import {model} from '../../model/Model'
 import GlobalState from './GlobalState'
+import {T} from '../../model/language/Translator'
 
 export default class BetPlaceCombine3Item extends Component{
     constructor(props){
@@ -83,16 +84,19 @@ export default class BetPlaceCombine3Item extends Component{
         }
         for(let key in GlobalState){
             if(GlobalState[key].value1 == this.state.value1 && GlobalState[key].value2 == this.state.value2 && GlobalState[key].value3 == this.state.value3){
-                alert('betcode is exist.');
-                this.setState({
-                    value1:'0',
-                    value2:'0',
-                    value3:'0',
-                    color1:'#999',
-                    color2:'#999',
-                    color3:'#999'
-                });
-                return;
+                alert(T.translate('betcode_exist'));
+                if(this.betInfo){
+                    let input = document.getElementById('value'+this.props.idItem);
+                    input.value = 0;
+                    this.setBgColor(0);
+                }
+                this.state.value1=0;
+                this.state.color1='#999';
+                this.state.value2=0;
+                this.state.color2='#999';
+                this.state.value3=0;
+                this.state.color3='#999';
+                break;
             }
         }
         this.setState({});
