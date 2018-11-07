@@ -8,6 +8,7 @@ export default class LotteryResult {
     static ODD			     = "0";
     static EVEN		         = "1";
     static TRUE		         = "1";
+    static FALSE	         = "0";
 
     static COLOR_RED	     = 0xFF0000;
     static COLOR_BLUE	     = 0x0000FF;

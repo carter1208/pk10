@@ -39,6 +39,7 @@ export default class Main extends Component {
                 });
                 break;
             case Command.BACK_LOBBY:
+                model.tableId = '0';
                 this.refs.game.removeState();
                 this.setState({
                     isLogin:false,

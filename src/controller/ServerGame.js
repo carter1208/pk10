@@ -4,7 +4,7 @@ import ServerConfig from '../config/ServerConfig';
 import Command from "../constant/Command";
 import ErrorCode from "../constant/ErrorCode";
 
-class GameServer extends ServerConnection {
+class ServerGame extends ServerConnection {
     constructor() {
         super();
         this.sessionId = "0";
@@ -46,4 +46,4 @@ class GameServer extends ServerConnection {
         this.serverStatus = "";
     }
 }
-export let gameServer = new GameServer();
+export let gameServer = new ServerGame();

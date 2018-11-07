@@ -7,6 +7,7 @@ import  OpenBetItem from './OpenBetItem';
 import  {model} from '../../model/Model';
 import  {T} from '../../model/language/Translator';
 import  {lobbyServer} from '../../controller/ServerLobby';
+import  {gameServer} from '../../controller/ServerGame';
 import DisplayUtil from '../util/DisplayUtil';
 import  Command from '../../constant/Command';
 
@@ -15,6 +16,7 @@ const ITEM_PER_PAGE = 10;
 export default class OpenBetPanel extends Component {
     constructor(props) {
         super(props);
+        this.server = null;
         this.state = {
             activePage: 1,
             totalRow: 0,
@@ -24,7 +26,12 @@ export default class OpenBetPanel extends Component {
     }
     componentDidMount() {
         model.subscribe(Command.REPORT_RECENT_BET, this);
-        lobbyServer.getRecentBetReport("0", 1, ITEM_PER_PAGE, 1);
+
+        if(model.tableId == '0')
+            this.server = lobbyServer;
+        else
+            this.server = gameServer;
+        this.server.getRecentBetReport(model.tableId, 1, ITEM_PER_PAGE, 1);
     }
 
     componentWillUnmount() {
@@ -33,7 +40,7 @@ export default class OpenBetPanel extends Component {
     }
 
     handlePageChange(pageNumber) {
-        lobbyServer.getRecentBetReport("0", pageNumber, ITEM_PER_PAGE, 0);
+        this.server.getRecentBetReport(model.tableId, pageNumber, ITEM_PER_PAGE, 0);
     }
 
     hideMenu(e){
@@ -45,6 +52,7 @@ export default class OpenBetPanel extends Component {
     update(command, data) {
         switch (command) {
             case Command.REPORT_RECENT_BET:
+                if(data == Command.BET_START) return;
                 this.setState({
                     arr: data ? data.records : [],
                     activePage: data ? parseInt(data.page): 1,

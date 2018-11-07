@@ -6,7 +6,7 @@ import Game from '../game/Game'
 import TopPanel from '../lobby/TopPanel'
 import BettingPanel from './BettingPanel'
 import {model} from '../../model/Model'
-import {gameServer} from '../../controller/GameServer'
+import {gameServer} from '../../controller/ServerGame'
 import LeftMenu from "../common/LeftMenu";
 import Command from "../../constant/Command";
 import ResultStat from "./ResultStat";

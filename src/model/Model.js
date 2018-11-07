@@ -277,7 +277,8 @@ class Model extends Subject {
                     let tb;
                     let casino = this.checkExistCasino(dataResult[i]['RoomID']); // only add casinoid
                     let gameType = this.checkExistGameType(dataResult[i]['GameTpCode']);
-                    if (this.checkVisibleCasino(dataResult[i]['RoomID'])) {
+                    let isOpenTb = dataResult[i]['IsEnabled'] == LotteryResult.TRUE;
+                    if (this.checkVisibleCasino(dataResult[i]['RoomID']) && isOpenTb) {
                         if (!casino) {
                             this._listCasino.push(dataResult[i]['RoomID']);
                         }
@@ -313,6 +314,8 @@ class Model extends Subject {
             case Command.BET_START:
                 if(isLobby){
                     command = Command.START_BET_LOBBY;
+                }else {
+                    this.update(Command.REPORT_RECENT_BET, Command.BET_START)
                 }
                 break;
             case Command.BET_STOP:

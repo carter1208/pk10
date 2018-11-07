@@ -93,7 +93,7 @@ export default class Racing extends PIXI.Container{
         this.soundPlayer = null;
         this.soundPlayer1.volume = 0;
         this.soundPlayer1 = null;
-        // this.arrCar = [];
+        this.arrCar = [];
         this.grades = [];
         this.mcBg = null;
         this.gate1 = null;

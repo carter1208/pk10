@@ -6,6 +6,7 @@ import  Pagination from 'react-js-pagination';
 import  ResultBettingItem from './ResultBettingItem';
 import  {model} from '../../model/Model';
 import  {lobbyServer} from '../../controller/ServerLobby';
+import  {gameServer} from '../../controller/ServerGame';
 import  Command from '../../constant/Command';
 import  {T} from '../../model/language/Translator';
 import  SelectChannel from '../../component/SelectChannel';
@@ -16,6 +17,7 @@ const ITEM_PER_PAGE = 10;
 export default class ResultBettingPanel extends Component {
     constructor(props) {
         super(props);
+        this.server = null;
         this.cutOffDate = {
             cutOff1:'23:59:59',
             cutOff2:'08:59:59',
@@ -34,6 +36,11 @@ export default class ResultBettingPanel extends Component {
 
     componentDidMount() {
         model.subscribe(Command.REPORT_BETTING, this);
+        if(model.tableId == '0')
+            this.server = lobbyServer;
+        else
+            this.server = gameServer;
+
         this.selectDateFrom();
         this.selectDateTo();
         this.getHistoryRpt();
@@ -54,7 +61,7 @@ export default class ResultBettingPanel extends Component {
         let fromdate = dateF[0] + '-' + months[monthF - 1] + '-' + dateF[2];
         let todate = dateT[0] + '-' + months[monthT - 1] + '-' + dateT[2];
         if(new Date(fromdate) < new Date(todate) ) {
-            lobbyServer.getBettingReport('0', dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2]+" "+this.state.cutOff, dateT[0] + '/' + months[monthT - 1] + '/' + dateT[2] +" "+ this.state.cutOffTime, pageNo ,ITEM_PER_PAGE, 1);
+            this.server.getBettingReport(model.tableId, dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2]+" "+this.state.cutOff, dateT[0] + '/' + months[monthT - 1] + '/' + dateT[2] +" "+ this.state.cutOffTime, pageNo ,ITEM_PER_PAGE, 1);
         }else{
             alert('fromDate is lower todate')
         }

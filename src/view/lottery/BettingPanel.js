@@ -13,7 +13,7 @@ import BetPlaceGroupCombine from '../lottery/BetPlaceGroupCombine'
 import BetValue from '../lottery/BetValue'
 import ChipSettingPanel from "./ChipSettingPanel";
 import {model} from '../../model/Model'
-import {gameServer} from '../../controller/GameServer'
+import {gameServer} from '../../controller/ServerGame'
 import Command from '../../constant/Command'
 import {T} from '../../model/language/Translator'
 import BetDetailPanel from "./BetDetailPanel";
@@ -27,7 +27,14 @@ export default class BettingPanel extends Component{
         }
     }
     componentDidMount() {
+        model.subscribe(Command.GET_ODD_LIVE, this);
         model.subscribe(Command.UPDATE_BETTING, this);
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+        model.unsubscribe(Command.GET_ODD_LIVE, this);
+        model.unsubscribe(Command.UPDATE_BETTING, this);
     }
 
     init(){
@@ -103,6 +110,7 @@ export default class BettingPanel extends Component{
         this.refs[this.state.subMenu].updateOdd();
     }
     updateBetting(data){
+        gameServer.getPersonInfo();
         this.refs.betDetail.updateBetting(data);
     }
 

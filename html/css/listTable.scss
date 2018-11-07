@@ -2,9 +2,9 @@
   height: 100%;
   padding: 0;
   margin: 20px;
-  display: flex;
   justify-content: center;
   .table-row{
+    display: flex;
     .tb-lo{
       cursor: pointer;
       width: 662px;
@@ -17,9 +17,9 @@
     }
   }
   .space-x {
-    height: 40px;
+    width: 40px;
   }
   .space-y {
-    width: 40px;
+    height: 40px;
   }
 }

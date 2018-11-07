@@ -32,7 +32,7 @@ export default class ListTable extends Component {
             jsxCol.push(
                 <Table ref={'tb'+ tbInfo.id} key={i+ 1} onClick={this.onClick.bind(this, (i+ 1))} logo={logoID} tbInfo={tbInfo}/>
             );
-            if (jsxCol.length > 2 || i == 3) {
+            if (jsxCol.length > 2 || i == model.listTable.length-1) {
                 if (jsxRow.length > 0) {
                     jsxRow.push(<div key={'spacey' + i} className="space-y"/>);
                 }

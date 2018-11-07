@@ -231,7 +231,7 @@ export default class Game extends Component {
             this.mcRacing.on("END_RACE", this.onEndRace.bind(this));
             this.mcRacing.on("FINISH", this.onFinishRace.bind(this));
         }
-        this.intervalId = setInterval(this.updateOrder.bind(this), 100);
+        this.intervalId = setInterval(this.updateOrder.bind(this), 150);
     }
 
     onFinishRace(e)

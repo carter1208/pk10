@@ -86,25 +86,13 @@ export default class ChipSettingPanel extends Component{
     }
 
     confirm(e){
-        if (this.checkEmpty())
+        if (!this.state.arrSelect.every(this.checkEmpty))
         {
             alert("the value must be larger than 0 or not empty.", "errMsg", "fail");
             return;
         }
-        if (this.state.arrSelect.length > this.state.arrNormal.length)
-        {
-            if (this.checkExist(this.state.arrSelect[this.state.arrSelect.length-1]))
-            {
-                alert("the value is exist.", "errMsg", "fail");
-                return;
-            }
-        }
-
-        var arrNewVal = this.compareArray(this.state.arrSelect, this.state.arrNormal);
-        for (var i = 0; i < arrNewVal.length; i++)
-        {
-            this.state.arrNormal.push(parseInt(arrNewVal[i]));
-        }
+        let arrNewVal = this.compareArray(this.state.arrSelect, this.state.arrNormal);
+        this.state.arrNormal.push(...arrNewVal);
         this.state.arrDefault = this.state.arrNormal.concat();
         this.state.arrSelect = this.state.arrNormal.concat();
         let arr = this.state.arrNormal.concat();
@@ -119,11 +107,7 @@ export default class ChipSettingPanel extends Component{
 
     compareArray(arrDefault, arrSelected){
         var arr = [];
-        for(let i=0; i< arrDefault.length; i++){
-            if (arrSelected.indexOf(arrDefault[i]) == -1){
-                arr.push(arrDefault[i]);
-            }
-        }
+        arr = arrDefault.filter(element => !arrSelected.includes(element));
         return arr;
     }
 
@@ -135,31 +119,24 @@ export default class ChipSettingPanel extends Component{
 
     hdlChange(val){
         this.state.arrSelect = this.state.arrTemp.concat();
+        if (this.checkExist(val))
+        {
+            alert("the value is exist.", "errMsg", "fail");
+            return;
+        }
         this.state.arrSelect.push(val);
     }
 
     hdlInsert(){
-        if (this.checkEmpty())
+        if (!this.state.arrSelect.every(this.checkEmpty))
         {
             alert("the value must be larger than 0 or not empty.", "errMsg", "fail");
             return;
         }
-        if (this.state.arrSelect.length > this.state.arrNormal.length)
-        {
-            if (this.checkExist(this.state.arrSelect[this.state.arrSelect.length-1]))
-            {
-                alert("the value is exist.", "errMsg", "fail");
-                return;
-            }
-        }
-        this.state.arrTemp = [];
-        this.state.arrNormal = [];
-        for(let i =0; i < this.state.arrSelect.length; i++){
-            if(this.state.arrSelect[i] != 0){
-                this.state.arrTemp.push(this.state.arrSelect[i])
-                this.state.arrNormal.push(this.state.arrSelect[i])
-            }
-        }
+        let arr1 = this.state.arrSelect.filter(function(value){ return value != 0});
+        this.state.arrTemp = arr1.concat();
+        this.state.arrNormal = arr1.concat();
+
         this.state.arrSelect.push(0);
         let arr = this.state.arrSelect.concat();
         this.setState({
@@ -167,20 +144,13 @@ export default class ChipSettingPanel extends Component{
         });
     }
 
-    checkEmpty(){
-        for(let i = 0; i < this.state.arrSelect.length; i++){
-            if (this.state.arrSelect[i] < 1)
-                return true;
-        };
-        return false;
+    checkEmpty(value){
+        return value > 0;
     }
 
     checkExist(val){
-        for(let i = 0; i < this.state.arrNormal.length; i++){
-            if (this.state.arrNormal[i] == val)
-                return true;
-        };
-        return false;
+        let boolArr = this.state.arrNormal.includes(val)
+        return boolArr;
     }
 
     hdlDel(data)
@@ -194,14 +164,10 @@ export default class ChipSettingPanel extends Component{
 
         // this.state.arrSelect.splice(this.state.arrSelect.indexOf(val), 1);
         this.state.arrSelect = this.state.arrSelect.filter((s, sidx) => val !== s)
-        this.state.arrTemp = [];
-        this.state.arrNormal = [];
-        for(let i=0; i < this.state.arrSelect.length; i++){
-            if(this.state.arrSelect[i] != 0){
-                this.state.arrTemp.push(this.state.arrSelect[i]);
-                this.state.arrNormal.push(this.state.arrSelect[i]);
-            }
-        }
+        let arr1 = this.state.arrSelect.filter(function(value){ return value != 0});
+        this.state.arrTemp = arr1.concat();
+        this.state.arrNormal = arr1.concat();
+
         let arr = this.state.arrSelect.concat();
         this.setState({
             arrShow:arr
@@ -230,7 +196,7 @@ export default class ChipSettingPanel extends Component{
                         <span>{T.translate('lbTitleChipAmt')}</span>
                         <img src="img/close.png" width='21' height='20' onClick={this.close.bind(this)}/>
                     </div>
-                    <span style={{minHeight:'55px', display:'flex'}}>{T.translate('lbDesChipAmt')}</span>
+                    <span className="desc" style={{height:'55px', display:'flex', fontSize:'10pt', textAlign:'center'}}>{T.translate('lbDesChipAmt')}</span>
                     <div className="content">
                         {jsxCol}
                     </div>

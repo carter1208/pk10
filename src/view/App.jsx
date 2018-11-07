@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import HomePage from './HomePage'
 import {lobbyServer} from "../controller/ServerLobby";
-import {gameServer} from "../controller/GameServer";
+import {gameServer} from "../controller/ServerGame";
 
 import {request} from "../loader/HttpRequest";
 import {T} from "../model/language/Translator";

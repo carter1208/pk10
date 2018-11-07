@@ -6,6 +6,7 @@ import  Pagination from 'react-js-pagination';
 import  ResultHistoryItem from './ResultHistoryItem';
 import DisplayUtil from '../util/DisplayUtil';
 import  {lobbyServer} from '../../controller/ServerLobby';
+import  {gameServer} from '../../controller/ServerGame';
 import  {model} from '../../model/Model';
 import  {T} from '../../model/language/Translator';
 import  Command from '../../constant/Command';
@@ -16,10 +17,11 @@ const ITEM_PER_PAGE = 10;
 export default class ResultHistoryPanel extends Component {
     constructor(props) {
         super(props);
+        this.server = null;
         this.arrItem = [];
         this.arrPos = [];
         this.idx = 0;
-        this.tableId = 80;
+        this.tableId = 0;
         this.state = {
             activePage: 1,
             arr:[],
@@ -35,9 +37,16 @@ export default class ResultHistoryPanel extends Component {
         $('[data-date-time-result]').datetimepicker({
             format: 'DD/MM/YYYY'
         }).on('dp.change', this.changeDate.bind(this));
-        this.tableId = model.listTable[0].id;
+        this.tableId = model.tableId == 0 ? model.listTable[0].id : model.tableId;
+
+        if(model.tableId == '0')
+            this.server = lobbyServer;
+        else
+            this.server = gameServer;
         this.getResultRpt();
     }
+
+
 
     componentWillUnmount(){
         this.mounted = false;
@@ -48,7 +57,7 @@ export default class ResultHistoryPanel extends Component {
         let dateF = document.getElementById('from').value.split('/');
         let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         let monthF = parseInt(dateF[1]);
-        lobbyServer.getResultReport(this.tableId, dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2], page, ITEM_PER_PAGE, 1);
+        this.server.getResultReport(this.tableId, dateF[0] + '/' + months[monthF - 1] + '/' + dateF[2], page, ITEM_PER_PAGE, 1);
     }
 
     hideMenu(e){
