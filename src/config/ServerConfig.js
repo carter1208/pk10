@@ -1,6 +1,4 @@
-/**
- * Created by loc on 6/8/2017.
- */
+
 export default class ServerConfig {
     static DEBUG_MODE                   = false; //true: for test. false: for live
     static SERVER_WS                    = "ws";

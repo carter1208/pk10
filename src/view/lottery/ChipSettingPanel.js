@@ -174,8 +174,6 @@ export default class ChipSettingPanel extends Component{
         });
     }
 
-
-
     render() {
         if(!this.state.isShow)
             return(<div></div>);
@@ -196,7 +194,7 @@ export default class ChipSettingPanel extends Component{
                         <span>{T.translate('lbTitleChipAmt')}</span>
                         <img src="img/close.png" width='21' height='20' onClick={this.close.bind(this)}/>
                     </div>
-                    <span className="desc" style={{height:'55px', display:'flex', fontSize:'10pt', textAlign:'center'}}>{T.translate('lbDesChipAmt')}</span>
+                    <span className="desc" style={{height:'55px', display:'flex', fontSize:'10pt', textAlign:'center', paddingTop:'5px'}}>{T.translate('lbDesChipAmt')}</span>
                     <div className="content">
                         {jsxCol}
                     </div>
@@ -204,7 +202,7 @@ export default class ChipSettingPanel extends Component{
                         <button type="button" id ='save' onClick={this.confirm.bind(this)}>{T.translate('lblOk')}</button>&nbsp;
                         <button type="button" id ='clear' onClick={this.clearBet.bind(this)}>{T.translate('btnCancel')}</button>
                     </div>
-                    <span id="text_save" style={{visibility:'hidden', color:'#db2222', textAlign:'center', width:'250px', position:'absolute'}}>{T.translate('lbSave')}</span>
+                    <span id="text_save" style={{visibility:'hidden', color:'#db2222', textAlign:'center', width:'250px', position:'absolute', paddingTop:'2px'}}>{T.translate('lbSave')}</span>
                 </div>
             </div>
         )

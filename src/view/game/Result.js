@@ -3,10 +3,12 @@
  */
 import * as PIXI from 'pixi.js';
 import {TweenMax,TweenLite, Sine, Linear} from "gsap";
+import DisplayUtil from '../util/DisplayUtil'
 
 export default class Result extends PIXI.Container{
     constructor(props){
         super();
+        this.isReady = false;
         this.speed = .3;
         this.bg = PIXI.Sprite.fromImage('../img/bgRes.png');
         this.prize1 = PIXI.Sprite.fromImage('../img/mcPrize1.png');
@@ -41,9 +43,21 @@ export default class Result extends PIXI.Container{
         this.addChild(this.secondCar);
         this.addChild(this.thirdCar);
         this.showResult();
+        this.isReady = true;
+    }
+
+    setVisible(){
+        if(!this.isReady)return;
+        this.firstCar.alpha = 0;
+        this.secondCar.alpha = 0;
+        this.thirdCar.alpha = 0;
+        this.prize1.alpha = 0;
+        this.prize2.alpha = 0;
+        this.prize3.alpha = 0;
     }
 
     showResult(){
+        // this.setVisible(true);
         this.prize1.scale.set(0.9);
         this.prize2.scale.set(0.9);
         this.prize3.scale.set(0.9);

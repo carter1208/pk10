@@ -9,7 +9,7 @@ import  {lobbyServer} from '../../controller/ServerLobby';
 import  {gameServer} from '../../controller/ServerGame';
 import  Command from '../../constant/Command';
 import  {T} from '../../model/language/Translator';
-import  SelectChannel from '../../component/SelectChannel';
+import  SelectCutOff from '../../component/SelectCutOff';
 import DisplayUtil from '../util/DisplayUtil';
 
 const ITEM_PER_PAGE = 10;
@@ -145,13 +145,13 @@ export default class ResultBettingPanel extends Component {
                             </div>
                         </div>
                         <div className="cbCutOff">
-                            <SelectChannel options={[
+                            <SelectCutOff options={[
                                 { label: '00:00:00', value: 'cutOff1'},
                                 { label: '09:00:00', value: 'cutOff2'},
                                 { label: '12:00:00', value: 'cutOff3'},
                                 { label: '13:00:00', value: 'cutOff4'}
                             ]}
-                            onChangeSelect={this.hdlChangeCutOff.bind(this)}
+                                          onChangeSelect={this.hdlChangeCutOff.bind(this)}
                             />
                         </div>
                     </div>

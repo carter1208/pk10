@@ -10,7 +10,6 @@ export default class PositionSub extends Component{
     }
 
     componentDidMount(){
-        model.subMenu = '1';//set default....
     }
 
     activeNav(e){

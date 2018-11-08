@@ -39,7 +39,7 @@ export default class TopPanel extends Component {
             }
             this.state.showMenu = !this.state.showMenu;
         }else {
-            model.update(Command.BACK_LOBBY)
+            model.update(Command.BACK_LOBBY);
         }
     }
 

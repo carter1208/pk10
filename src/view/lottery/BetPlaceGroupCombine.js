@@ -23,13 +23,9 @@ export default class BetPlaceGroupCombine extends Component {
 
     onClickItem(e, exist){
         e.preventDefault();
-        let newArr = this.state.arr.concat();
         var p = $(e.currentTarget).position();
-        for (let i=0; i < exist.length; i++){
-            if(newArr.indexOf(exist[i]) != -1){
-                newArr.splice(newArr.indexOf(exist[i]), 1);
-            }
-        }
+        let newArr = this.state.arr.filter(element => !exist.includes(element));
+
         this.refs.listNum.updateList(newArr, true, p.left, p.top);
         this.currItem = e.currentTarget.parentNode;
     }

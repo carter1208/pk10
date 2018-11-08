@@ -1,61 +1,49 @@
-/**
- * Created by loc on 6/20/2017.
- */
+
 import React, {Component, PropTypes} from 'react';
 import Select from 'react-select';
 
-export default class SelectLanguage extends Component {
+export default class SelectChannel extends Component {
     constructor(props) {
         super(props);
+        let options = this.props.options || [
+            { value: '00:00:00', label: 'cutOff1'},
+            { value: '09:00:00', label: 'cutOff2'},
+            { value: '12:00:00', label: 'cutOff3'},
+            { value: '13:00:00', label: 'cutOff4'}
+        ];
         this.state = {
-            selectValue: this.props.options[0].value
+            options: options,
+            selectValue: options[0]
         }
     }
     componentDidMount() {
-        for(let i =0; i< this.props.options.length; i++){
-            if(this.props.options[i].value == this.props.activeTb){
-                this.state = {
-                    selectValue: this.props.options[i].value
-                }
-                break;
-            }
-        }
     }
     componentWillUnmount() {
     }
 
     onChange(val) {
         this.setState({selectValue:val});
-        if(this.props.onSelectChange){
-            this.props.onSelectChange(val)
+        if(this.props.onChangeSelect){
+            this.props.onChangeSelect(val);
         }
     }
-
-    renderArrow(e){
-        let url = '';
-        if(e.isOpen)
-            url = './img/up.png'
-        else
-            url = './img/down.png'
-        return <img src={url} width='19px' height='18px'/>
+    renderArrow() {
+        return "";
     }
 
     render() {
-        let options = this.props.options || [
-                { value: 'en', label: 'English', icon: './assets/bunny.png'},
-                { value: 'vn', label: 'Viet Nam', icon: './assets/bunny.png'},
-                { value: 'fr', label: 'French', icon: './assets/bunny.png'}
-            ];
         return (
             <div>
                 <Select
-                    arrowRenderer={this.renderArrow}
                     onChange={this.onChange.bind(this)}
                     optionComponent={OptionsComponent}
-                    options={options}
+                    options={this.state.options}
                     value={this.state.selectValue}
                     valueComponent={ValueComponent}
                     clearable={false}
+                    placeholder=""
+                    searchable={false}
+                    autosize={true}
                 />
             </div>
         )
@@ -83,11 +71,10 @@ class OptionsComponent extends Component {
                  onMouseDown={this.handleMouseDown.bind(this)}
                  onMouseEnter={this.handleMouseEnter.bind(this)}
                  onMouseMove={this.handleMouseMove.bind(this)}
-                 style={{display:'flex'}}
             >
-                <div><img src='img/pk10Menu.png'/></div>&nbsp;&nbsp;
-                <div style={{width:'50px'}}><img src={this.props.option.icon} width='100%' height='100%'/></div>
-                {this.props.children}
+                <span>
+                    {this.props.children}
+                </span>
             </div>
         );
     }
@@ -109,12 +96,8 @@ class ValueComponent extends Component {
     }
     render() {
         return (
-            <div className="Select-value" style={{maxWidth:'90%'}}>
-				<span className="Select-value-label" style={{display:'flex'}}>
-					<div><img src='img/pk10Menu.png'/></div>
-					<div><img src={this.props.value.icon == 'img/logo_77.png' ? 'img/logo77.png' : this.props.value.icon} width={'70%'} height={'70%'}/></div>
-                    {this.props.children}
-				</span>
+            <div className="Select-value">
+				{this.props.children}
             </div>
         );
     }

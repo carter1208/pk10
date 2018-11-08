@@ -65,8 +65,8 @@
     }
     .total{
       span{
-        left: 20px;
         width: 100px;
+        text-align: center;
       }
       .total{
         left:106px;
@@ -81,7 +81,9 @@
     }
     .dt {
       span{
-        left: 300px;
+        left: 265px;
+        width: 195px;
+        text-align: right;
       }
       .d1 {
         left: 470px;

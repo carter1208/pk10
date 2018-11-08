@@ -44,7 +44,7 @@ export default class BetPlaceGroupSum3 extends Component{
         let jsxRow = [];
         let jsxCol = [];
         let idx = 0;
-        for (var i = 0; i < this.arrName.length; i++){
+        for (let i = 0; i < this.arrName.length; i++){
             idx++;
             if (jsxCol.length > 0) {
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
@@ -71,7 +71,7 @@ export default class BetPlaceGroupSum3 extends Component{
                 jsxCol = [];
             }
         }
-        for (var i = 0; i < this.arrName1.length; i++){
+        for (let i = 0; i < this.arrName1.length; i++){
             idx++;
             jsxCol.push(
                 <BetPlacePosItem idx={idx} ref={'sum3' + this.arrName1[i]} key={this.arrName1[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i+ 1))} id={GameUtil.getNamebyKey(this.arrName1[i])} name={'3S'+this.arrName1[i]} oddBetCode={114.15} value={0}/>

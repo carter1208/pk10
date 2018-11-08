@@ -50,7 +50,7 @@ class App extends Component {
             xml.loadXML(data);
         }
         T.init(xml.documentElement);
-        T.setLanguage(Language.ENGLISH);
+        T.setLanguage(Language.CHINESE);
         this.refs.home.show();
     }
 

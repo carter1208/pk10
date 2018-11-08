@@ -92,14 +92,13 @@ export default class BetPlacePosItem extends Component{
             this.betCode = "Lo" + model.subMenu + this.state.name;
         }
         this.betInfo = model.getBetPlaceInfo(this.betCode);
+        if(!this.betInfo)return;
+
         if(!this.betInfo.isOnline) {
             let item = document.getElementById('pos' + this.state.name)
             $(item).addClass('disable')
             let value = document.getElementById('value' + this.state.name)
             value.disabled= true;
-        }
-        if(!this.betInfo){
-            return;
         }
         this.setState({
             oddBetCode:this.betInfo.oddValue

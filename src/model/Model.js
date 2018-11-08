@@ -70,36 +70,21 @@ class Model extends Subject {
             return true;
         }
         arrCasinoVisible = this.casinoVisible.split("@");
-        for (let i = 0; i < arrCasinoVisible.length; i++) {
-            if (casinoId == arrCasinoVisible[i]) {
-                return true;
-            }
-        }
-        return false;
+        return arrCasinoVisible.map((item) => {return item == casinoId});
     }
 
     checkExistCasino(casinoID) {
         if (!this.listCasino) {
             return false;
         }
-        for (let i = 0; i < this.listCasino.length; i++) {
-            if (this.listCasino[i] == casinoID) {
-                return true;
-            }
-        }
-        return false;
+        return this.listCasino.map((item) => {return item == casinoID});
     }
 
     checkExistGameType(gameType) {
         if (!this.listGameType) {
             return false;
         }
-        for (let i = 0; i < this.listGameType.length; i++) {
-            if (this.listGameType[i] == gameType) {
-                return true;
-            }
-        }
-        return false;
+        return this.listGameType.map((item) => {return item == gameType});
     }
 
     setBetStatus(data){
@@ -235,16 +220,13 @@ class Model extends Subject {
     getHistoryByDrawNo(drawNo)
     {
         let arr = this.table.history.getHistory;
-        let item = arr.filter((item)=>{
-            if(item.drawNoRef == drawNo){
-                return item.num;
+        for(let i=0; i < arr.length; i++){
+            if(arr[i].drawNoRef == drawNo){
+                return arr[i].num;
+                break;
             }
-        });
-        if (item) {
-            return item[0].num;
-        } else {
-            return null;
         }
+        return null;
     }
 
     getBetPlaceInfo(name)

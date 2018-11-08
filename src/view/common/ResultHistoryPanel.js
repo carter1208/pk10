@@ -10,7 +10,7 @@ import  {gameServer} from '../../controller/ServerGame';
 import  {model} from '../../model/Model';
 import  {T} from '../../model/language/Translator';
 import  Command from '../../constant/Command';
-import  SelectLanguage from '../../component/SelectLanguage';
+import  SelectMarket from '../../component/SelectMarket';
 
 const ITEM_PER_PAGE = 10;
 
@@ -80,9 +80,9 @@ export default class ResultHistoryPanel extends Component {
     }
 
     chooseNum(e){
-        var $box = $(e.currentTarget);
+        let $box = $(e.currentTarget);
         if ($box.is(":checked")) {
-            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            let group = "input:checkbox[name='" + $box.attr("name") + "']";
             $(group).prop("checked", false);
             $box.prop("checked", true);
             this.idx = parseInt(e.currentTarget.value);
@@ -113,7 +113,7 @@ export default class ResultHistoryPanel extends Component {
     }
 
     getColorByNum(num){
-        var color;
+        let color;
         switch (num)
         {
             case 1:
@@ -152,16 +152,16 @@ export default class ResultHistoryPanel extends Component {
 
     drawLine(num){
         this.arrPos = [];
-        for(var i = 0; i < this.arrItem.length; i++){
-            var p = this.refs['item'+(i+1)].getPosition(i, num);
+        for(let i = 0; i < this.arrItem.length; i++){
+            let p = this.refs['item'+(i+1)].getPosition(i, num);
             if(!p) return;
             this.arrPos.push(p);
         }
 
-        for(i = 0; i < this.arrPos.length; i++){
+        for(let i = 0; i < this.arrPos.length; i++){
             if(i == this.arrPos.length - 1) return;
-            var p1 = this.arrPos[i];
-            var p2 = this.arrPos[i+1];
+            let p1 = this.arrPos[i];
+            let p2 = this.arrPos[i+1];
             this.ctx.strokeStyle = this.getColorByNum(num)
             this.ctx.lineWidth = 2;
             this.ctx.moveTo(p1.left,p1.top + 5);
@@ -208,7 +208,7 @@ export default class ResultHistoryPanel extends Component {
                 <div className="top" style={DisplayUtil.backgroundStyle('img/bgTopRpt.png')}>
                     <div className="icon" tabIndex={0} style={DisplayUtil.backgroundStyle('img/menu_game.png')} onClick={this.hideMenu.bind(this)}></div>
                     <div className="sel">
-                        <SelectLanguage className="sel-market" activeTb={model.tableId} options={jsxTb} onSelectChange={this.hdlChangeTable.bind(this)}
+                        <SelectMarket className="sel-market" activeTb={model.tableId} options={jsxTb} onSelectChange={this.hdlChangeTable.bind(this)}
                         />
                     </div>
                     <div className="name">{T.translate('lblResultBetting').toUpperCase()}</div>

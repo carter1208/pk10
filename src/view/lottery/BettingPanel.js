@@ -131,6 +131,7 @@ export default class BettingPanel extends Component{
         model.subMenu = '';
         switch (this.state.subMenu) {
             case  'position':
+                model.subMenu = '1';
                 jsxSub = (
                     <PositionSub changeSub={this.activeSubMenu.bind(this)}/>
                 );

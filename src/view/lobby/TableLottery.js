@@ -57,25 +57,22 @@ export default class TableLottery extends Component {
 
 
     update(command, data) {
+        this.data = data;
         switch (command) {
             case Command.BET_RESULT:
                 if(this.tbInfo.id != data.tableId) return;
-                this.data = data;
                 this.updateBetResult();
                 break;
             case Command.LAST_DRAW_RESULT:
                 if(this.tbInfo.id != data.tableId) return;
-                this.data = data;
                 this.updateBetResult();
                 break;
             case Command.START_BET_LOBBY:
                 if(this.tbInfo.id != data.tbId) return;
-                this.data = data;
                 this.startCountdown();
                 break;
             case Command.STOP_BET_LOBBY:
                 if(this.tbInfo.id != data.tbId) return;
-                this.data = data;
                 this.stopCountdown();
                 break;
         }

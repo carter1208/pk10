@@ -1,6 +1,4 @@
-/**
- * Created by loc on 6/9/2017.
- */
+
 import React, {Component, PropTypes} from 'react';
 import {model} from "../../model/Model";
 import Command from "../../constant/Command";
@@ -19,10 +17,8 @@ export default class UserPanel extends Component{
         }
     }
     componentDidMount() {
-        // model.subscribe(Command.PERSON_INFO, this);
     }
     componentWillUnmount() {
-        // model.unsubscribe(Command.PERSON_INFO, this);
     }
     update(command, data) {
         if (command == Command.PERSON_INFO) {

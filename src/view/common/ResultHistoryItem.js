@@ -13,22 +13,18 @@ export default class ResultHistoryItem extends Component {
     getPosition(id, num){
         this.removeBg(num);
         if(num == 0) return null;
-        var div = document.getElementsByClassName( 'result-item' )[id + 1];
-        var div1 = div.getElementsByClassName('text-center num'+num);
-        var left = div1[0].offsetLeft + 15;
-        var top = div1[0].offsetTop + 15;
-        var p = {top:top, left:left};
+        let div = document.getElementsByClassName( 'result-item' )[id + 1];
+        let div1 = div.getElementsByClassName('text-center num'+num);
+        let left = div1[0].offsetLeft + 15;
+        let top = div1[0].offsetTop + 15;
+        let p = {top:top, left:left};
         return p;
     }
 
     removeBg(num){
         for(let i=1; i <= 10; i++){
             let name = '.num'+i;
-            if(num == 0){
-                $(name).removeClass('active');
-                continue;
-            }
-            if(i== num){
+            if(i== num || num == 0){
                 $(name).removeClass('active');
                 continue;
             }

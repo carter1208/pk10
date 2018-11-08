@@ -90,6 +90,8 @@ export default class Racing extends PIXI.Container{
     removeChild(){
         this.soundUrls = null;
         this.soundPlayer.volume = 0;
+        this.soundPlayer.pause();
+        this.soundPlayer1.pause();
         this.soundPlayer = null;
         this.soundPlayer1.volume = 0;
         this.soundPlayer1 = null;
@@ -115,14 +117,17 @@ export default class Racing extends PIXI.Container{
         if (this.isFinish) {
             this.mcResult.visible  = false;
             this.isReset = false;
-            for (let i = 0; i < this.arrCar.length; i++ ) {
-                this.arrCar[i].x = this.arrPos[i];
-                this.arrCar[i].anim1.stop();
-                this.arrCar[i].anim2.stop();
-            }
+            this.mcCountDown.text = '';
+            // for (let i = 0; i < this.arrCar.length; i++ ) {
+            this.arrCar.map ((obj, i) => {
+                obj.x = this.arrPos[i];
+                obj.anim1.stop();
+                obj.anim2.stop();
+            });
             this.mcBg.reset();
             this.gate1.stop();
             this.mcLandscape.reset();
+            this.mcResult.setVisible();
             this.mcStadium.reset();
             return true;
         } else {
@@ -141,7 +146,7 @@ export default class Racing extends PIXI.Container{
         this.isFinish = false;
         if(this.soundPlayer) {
             this.soundPlayer.src = this.soundUrls['start'];
-            this.soundPlayer.play();
+            this.soundPlayer.play()
         }
     }
 
@@ -193,15 +198,16 @@ export default class Racing extends PIXI.Container{
 
     getResult() {
         var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        var res = [];
-        while (arr.length > 0) {
-            var idx = Math.floor(Math.random() * arr.length);
-            var temp = arr[idx];
-            arr[idx] = arr[0];
-            arr[0] = temp;
-            res.push(arr.shift());
-        }
-        return res;
+        arr.sort(function(a, b){return 0.5 - Math.random()});
+        // var res = [];
+        // while (arr.length > 0) {
+        //     var idx = Math.floor(Math.random() * arr.length);
+        //     var temp = arr[idx];
+        //     arr[idx] = arr[0];
+        //     arr[0] = temp;
+        //     res.push(arr.shift());
+        // }
+        return arr;
     }
 
     onFinishRace(e) {
@@ -217,7 +223,14 @@ export default class Racing extends PIXI.Container{
             return;
         if(this.soundPlayer1) {
             this.soundPlayer1.src = this.soundUrls['win'];
-            this.soundPlayer1.play();
+            var playPromise = this.soundPlayer1.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    this.soundPlayer1.pause();
+                })
+                .catch(error => {
+                });
+            }
         }
         this.mcResult.visible = true;
         this.mcResult.init(this.grades);
@@ -238,7 +251,14 @@ export default class Racing extends PIXI.Container{
             return;
         if(this.soundPlayer1) {
             this.soundPlayer1.src = this.soundUrls['cheer'];
-            this.soundPlayer1.play();
+            var playPromise = this.soundPlayer1.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    this.soundPlayer1.pause();
+                })
+                    .catch(error => {
+                    });
+            }
         }
     }
 

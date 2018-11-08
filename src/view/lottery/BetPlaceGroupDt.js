@@ -93,7 +93,7 @@ export default class BetPlaceGroupDt extends Component{
         let jsxRow = [];
         let jsxCol = [];
         let idx = 0;
-        for (var i = 0; i < 12; i++){
+        for (let i = 0; i < 12; i++){
             if (jsxCol.length > 0) {
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
             }

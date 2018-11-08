@@ -2,11 +2,14 @@
  * Created by carter on 8/23/2018.
  */
 import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
 import * as PIXI from 'pixi.js';
-import Racing from './Racing'
-import ATimer from '../../component/ATimer'
+import Racing from './Racing';
+import Command from '../../constant/Command'
+import ATimer from '../../component/ATimer';
 import {TweenMax,TweenLite, Sine, Linear} from "gsap";
+import {T} from '../../model/language/Translator';
+import {model} from '../../model/Model';
+
 export default class Game extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +23,7 @@ export default class Game extends Component {
             countDownTime:'00:00',
             idResult:'12345678910',
             lbResult:'DrawNo',
-            dateTime:this.updateDateTime(strTime),
+            dateTime:'00:00:00',
             total:'0',
             bigSmall:'B',
             oddEven:'O',
@@ -30,9 +33,16 @@ export default class Game extends Component {
             d4:'D',
             d5:'D'
         }
+
     }
 
     componentDidMount() {
+        model.subscribe(Command.SERVER_DATE, this);
+        model.subscribe(Command.START_BET_LOBBY, this);
+        model.subscribe(Command.STOP_BET_LOBBY, this);
+        model.subscribe(Command.TABLE_START, this);
+        model.subscribe(Command.BET_RESULT, this);
+
         PIXI.loader
             .add('loading1', '../img/mcWheel.json')
             .add('loading2', '../img/blur.json')
@@ -46,6 +56,12 @@ export default class Game extends Component {
 
     componentWillUnmount() {
         this.mounted = false;
+
+        model.unsubscribe(Command.SERVER_DATE, this);
+        model.unsubscribe(Command.START_BET_LOBBY, this);
+        model.unsubscribe(Command.STOP_BET_LOBBY, this);
+        model.unsubscribe(Command.TABLE_START, this);
+        model.unsubscribe(Command.BET_RESULT, this);
         this.setState({
             isShow:false
         });
@@ -53,6 +69,8 @@ export default class Game extends Component {
         clearInterval(this.intervalTime);
         clearInterval(this.intervalId);
         this.mcRacing.removeChild();
+        this.intervalTime = 0;
+        this.intervalId = 0;
         this.app = null;
         this.stage.destroy();
         PIXI.loader.reset();
@@ -142,7 +160,8 @@ export default class Game extends Component {
         this.app.stage.addChild(this.stage);
         this.initOrder();
         this.startCountdown('123456789', 152);
-        setTimeout(this.startGame.bind(this), 3000, this.mcRacing.getResult(), "123456")
+        setTimeout(this.startGame.bind(this), 4000, this.mcRacing.getResult(), "123456")
+        this.call = setInterval(this.startGame.bind(this), 40000, this.mcRacing.getResult(), "123456")
         this.animate.bind(this);
     }
 
@@ -214,6 +233,7 @@ export default class Game extends Component {
     stopCountdown() {
         if (this.isCounting) {
             this.isCounting = false;
+            clearInterval(this.call);
             this.setState({countDownTime:'00:00'});
         }
     }
@@ -249,7 +269,6 @@ export default class Game extends Component {
 
     onEndRace(e) {
         this.mcRacing.off("END_RACE", this.onEndRace.bind(this));
-        // this.dispatchEvent(new Event("END_RACE"));
         clearInterval(this.intervalId);
         this.updateOrder.bind(this);
 
@@ -260,7 +279,7 @@ export default class Game extends Component {
         this.time = time;
         this.timer.startTimer(time, this.onATimerHandler.bind(this));
         this.isCounting = true;
-
+        if(!this.mcRacing)return;
         if (this.mcRacing.resetGame()) {
             this.resetRace(null);
         } else {
@@ -313,6 +332,30 @@ export default class Game extends Component {
         this.setState({isShow:false});
     }
 
+    update(command, data) {
+        if(!data) return;
+        switch (command) {
+            case Command.SERVER_DATE:
+                this.updateDateTime(data);
+                break;
+            case Command.TABLE_START:
+                if(data.tbId != model.tableId)return;
+                this.startCountdown(data.drawNo, data.countDown);
+                break;
+            case Command.START_BET_LOBBY:
+                if(data.tbId != model.tableId)return;
+                this.startCountdown(data.drawNo, data.countDown);
+                break;
+            case Command.STOP_BET_LOBBY:
+                this.stopCountdown(data.drawNo, data.countDown);
+                break;
+            case Command.BET_RESULT:
+                if(data.tableId != model.tableId)return;
+                this.startGame(data.numbers, data.drawNo);
+                break;
+        }
+    }
+
     render() {
         if(!this.state.isShow){
             return <div></div>
@@ -323,7 +366,7 @@ export default class Game extends Component {
                 <div className="dateTime">
                     <div className="drawNo">
                         <div className="lbCurrDraw">
-                            Current Drawno
+                            {T.translate('lblDrawNo')}
                         </div>
                         <div className="txtCurrDraw">
                             {this.state.drawNo}
@@ -337,7 +380,7 @@ export default class Game extends Component {
                 </div>
                 <div className="result" id="resultInfo">
                     <div className="drawNo">
-                        {this.state.lbResult}  {this.state.idResult}
+                        {T.translate('lblResultDrawNo')}  {this.state.idResult}
                     </div>
                     <div className="time">
                         {this.state.dateTime}
@@ -345,13 +388,13 @@ export default class Game extends Component {
                 </div>
                 <div className="stat" id="statInfo">
                     <div className="total">
-                        <span>Top 3</span>
+                        <span>{T.translate('lblTop3')}</span>
                         <p className="total">{this.state.total}</p>
                         <p className="bs">{this.state.bigSmall}</p>
                         <p className="ov">{this.state.oddEven}</p>
                     </div>
                     <div className="dt">
-                        <span>Dragon/Tiger</span>
+                        <span>{T.translate('lblDT')}</span>
                         <p className="d1">{this.state.d1}</p>
                         <p className="d2">{this.state.d2}</p>
                         <p className="d3">{this.state.d3}</p>

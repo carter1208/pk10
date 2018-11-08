@@ -1,6 +1,4 @@
-/**
- * Created by loc on 6/15/2017.
- */
+
 export default class GameType {
     static BACCARAT			     = "Ba";
     static BACCARAT_INSURANCE	 = "Bi";

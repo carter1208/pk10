@@ -24,17 +24,15 @@ export default class HistoryView extends PIXI.Container{
         this.colorFill = 0xFFFFFF;
         this.colorStroke = 0x949494;
         if (isDraw)
-        {
             this.drawTable();
-        }
         this.addChild(this.tbGraphic);
         this.addChild(this.mcHistory);
     }
 
     drawTable() {
-        var i;
-        var cw = this.tbWidth / this.tbCol;
-        var ch = this.tbHeight / this.tbRow;
+        let i;
+        let cw = this.tbWidth / this.tbCol;
+        let ch = this.tbHeight / this.tbRow;
         this.tbGraphic.beginFill( this.colorFill);
         this.tbGraphic.lineStyle(1,  this.colorStroke);
         this.tbGraphic.drawRect(1, 0,  this.tbWidth,  this.tbHeight);
@@ -60,9 +58,9 @@ export default class HistoryView extends PIXI.Container{
     }
 
     attachIconPosition(arr, key, range, limit) {
-        var tie = "/";
-        var mcHisIcon = new HistoryIcon();
-        var value = 0;
+        let tie = "/";
+        let mcHisIcon = new HistoryIcon();
+        let value = 0;
         switch (range)
         {
             case 12:
@@ -97,24 +95,23 @@ export default class HistoryView extends PIXI.Container{
                 }
                 break;
             case 'sumPoint':
-                var num = value;
+                let num = value;
                 this.keyWord = value.toString();
                 if (num < 811) {
                     mcHisIcon.setColor(LotteryResult.COLOR_BLUE);
                 }else {
                     mcHisIcon.setColor(LotteryResult.COLOR_RED);
                 }
-
                 break;
         }
         return mcHisIcon;
     }
 
     attachIconDT(arr, key) {
-        var tie = "/";
-        var mcHisIcon = new HistoryIcon();
-        var val1 = "";
-        var val2 = "";
+        let tie = "/";
+        let mcHisIcon = new HistoryIcon();
+        let val1 = "";
+        let val2 = "";
 
         switch (key) {
             case "1V10":
@@ -149,8 +146,8 @@ export default class HistoryView extends PIXI.Container{
     }
 
     calcLenLineDisplay(arrHis, key, typeHis) {
-        var range = 0;
-        var limit = 0;
+        let range = 0;
+        let limit = 0;
 
         switch (typeHis)
         {
@@ -165,14 +162,14 @@ export default class HistoryView extends PIXI.Container{
         }
         range = parseInt(typeHis);
 
-        var row = 0;
-        var col = 0;
-        var preValue = "";
-        var currValue = "";
-        var colNext = 1;
-        var endRow = this.tbRow;
-        var tailEnd = [];
-        var index = Math.max(0, arrHis.length - this.tbRow*this.tbCol);
+        let row = 0;
+        let col = 0;
+        let preValue = "";
+        let currValue = "";
+        let colNext = 1;
+        let endRow = this.tbRow;
+        let tailEnd = [];
+        let index = Math.max(0, arrHis.length - this.tbRow*this.tbCol);
         while (index < arrHis.length) {
             row = col = 0;
             preValue = currValue = "";
@@ -185,7 +182,7 @@ export default class HistoryView extends PIXI.Container{
             }
 
             for (var i = index; i < arrHis.length; i++ ) {
-                var iconHis;
+                let iconHis;
                 if (typeHis == IDX_DT)
                     iconHis = this.attachIconDT(arrHis[i].num, key);
                 else
@@ -234,22 +231,22 @@ export default class HistoryView extends PIXI.Container{
 
     displaySequence(arrHis, key, typeHis) {
         this.removeHistory(this.mcHistory);
-        var i = this.calcLenLineDisplay(arrHis, key, typeHis);
-        var cw = this.tbWidth / this.tbCol;
-        var ch = this.tbHeight / this.tbRow;
-        var px = -cw/2;
-        var py = -ch/2;
-        var row = 0;
-        var col = 0;
-        var range = 0;
-        var limit = 0;
+        let i = this.calcLenLineDisplay(arrHis, key, typeHis);
+        let cw = this.tbWidth / this.tbCol;
+        let ch = this.tbHeight / this.tbRow;
+        let px = -cw/2;
+        let py = -ch/2;
+        let row = 0;
+        let col = 0;
+        let range = 0;
+        let limit = 0;
 
-        var preValue = "";
-        var currValue = "";
-        var colNext = 1;
-        var endRow = this.tbRow;
+        let preValue = "";
+        let currValue = "";
+        let colNext = 1;
+        let endRow = this.tbRow;
 
-        var tailOfRow = [];
+        let tailOfRow = [];
         while (tailOfRow.length < this.tbRow + 1) { //array starts at 1
             tailOfRow.push(0);
         }
@@ -267,7 +264,7 @@ export default class HistoryView extends PIXI.Container{
         }
         range = parseInt(typeHis);
         for (i; i < arrHis.length; i++)	{
-            var iconHis;
+            let iconHis;
             if (typeHis == IDX_DT)
                 iconHis = this.attachIconDT(arrHis[i].num, key);
             else

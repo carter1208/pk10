@@ -21,7 +21,7 @@ export default class BetValue extends Component{
 
     onClick(e){
         e.preventDefault();
-        if(e.nativeEvent.which != 1) return;
+        if(e.nativeEvent.which != 1) return; // remove right click event
         if(this.props.onClickItem){
             this.props.onClickItem(e.currentTarget.innerHTML);
         }

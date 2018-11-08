@@ -1,6 +1,4 @@
-/**
- * Created by loc on 6/8/2017.
- */
+
 const CONTROLLER_KEY    = "cid";
 const REQUEST_KEY       = "rid";
 const MESSAGE_KEY       = "mes";

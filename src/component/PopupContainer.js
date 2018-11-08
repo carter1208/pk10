@@ -1,6 +1,4 @@
-/**
- * Created by loc on 8/3/2017.
- */
+
 import React, {Component, PropTypes} from 'react';
 import BetStatus from '../view/common/OpenBetPanel';
 import Betting from '../view/common/ResultBettingPanel';

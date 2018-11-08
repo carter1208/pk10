@@ -53,7 +53,7 @@ export default class BetPlaceGroupPos extends Component{
         let jsxRow = [];
         let jsxCol = [];
         let idx = 0;
-        for (var i = 0; i < 10; i++){
+        for (let i = 0; i < 10; i++){
             idx++;
             if (jsxCol.length > 0) {
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
@@ -75,7 +75,7 @@ export default class BetPlaceGroupPos extends Component{
             }
         }
 
-        for (var i = 0; i < this.arrName.length; i++){
+        for (let i = 0; i < this.arrName.length; i++){
             idx++;
             jsxCol.push(
                 <BetPlacePosItem ref={'pos' + this.arrName[i]} idx={idx} key={this.arrName[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)}  onClick={this.onClickBet.bind(this, (i+ 1))} id={GameUtil.getNamebyKey(this.arrName[i])} name={this.arrName[i]} oddBetCode={114.15} value={0}/>

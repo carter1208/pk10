@@ -1,6 +1,4 @@
-/**
- * Created by loc on 6/9/2017.
- */
+
 import Command from '../constant/Command';
 import ConstData from '../constant/ConstData';
 import {model} from "../model/Model";
@@ -104,6 +102,21 @@ export default class WebsocketParser {
                 break;
 
             case Command.BET_START:
+                objJs = JSON.parse(strData);
+                data = this.createResult(objJs);
+                if (objJs.error == DATA_SUCCESS) {
+                    obj = {};
+                    let objRes = objJs.result;
+                    obj = new Object();
+                    obj.countDown = result.countdown;
+                    obj.tbId = objRes.TbID;
+                    obj.drawNo = objRes.DrawNoRef;
+                    obj.gameSet =  objRes.GameSet;
+                    obj.gameNo =  objRes.GameNo;
+                }
+                break;
+
+            case Command.TABLE_HAS_START:
                 objJs = JSON.parse(strData);
                 data = this.createResult(objJs);
                 if (objJs.error == DATA_SUCCESS) {
