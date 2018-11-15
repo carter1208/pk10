@@ -8,11 +8,13 @@ import Background from './Background';
 import Stadium from './Stadium';
 import Landscape from './Landscape';
 import Gate from './Gate';
+import GameUtil from '../util/GameUtil';
 import Result from './Result';
-import {TweenMax,TweenLite, Sine, Linear} from "gsap";
+import {TweenMax, TweenLite, Sine, Linear} from "gsap";
 export default class Racing extends PIXI.Container{
     constructor(props) {
         super();
+        this.grades = []
         this.soundUrls = {};
         this.soundPlayer = new Audio();
         this.soundPlayer1 = new Audio();
@@ -21,6 +23,9 @@ export default class Racing extends PIXI.Container{
         this.soundUrls['win'] = 'assets/sound/2_SoundWin.mp3';
         this.soundUrls['run'] = 'assets/sound/running.mp3';
         this.soundUrls['start'] = 'assets/sound/4_SoundStart.mp3';
+
+        this.stage = new PIXI.Container();
+
     }
 
     init(){
@@ -30,7 +35,7 @@ export default class Racing extends PIXI.Container{
         this.mcResult = new Result();
 
         this.gate1 = new Gate();
-        this.gate2 = PIXI.Sprite.fromImage('../img/gate2.png');
+        this.gate2 = PIXI.Sprite.fromImage('./img/gate2.png');
 
         this.gate1.init();
         this.gate1.x = 580;
@@ -49,20 +54,21 @@ export default class Racing extends PIXI.Container{
         this.addChild(this.mcLandscape);
         this.addChild(this.mcStadium);
         this.addChild(this.mcBg);
+        this.addChild(this.stage);
         this.arrCar = [];
         this.arrPos = [];
         this.dir = -1;
-        for (var i = 0; i < 10; i++){
-            var myCar = new Car();
+        for (let i = 0; i < 10; i++){
+            let myCar = new Car();
             myCar.init( PIXI.Sprite.fromFrame('mcBody000'+ i), PIXI.Sprite.fromFrame('mcBlur000'+i));
             myCar.scale.set(0.6);
             myCar.x = 667 - ((9 - i)*6.5);
-            myCar.y = 145 + (9 - i)*24;
+            myCar.y = 143 + (9 - i)*24;
             myCar.width = 97;
             myCar.height = 20;
             this.arrCar.push(myCar);
             this.arrPos.push(myCar.x);
-            this.addChild(myCar);
+            this.stage.addChild(myCar);
         }
         this.mcCountDown = new PIXI.Text('', {fontFamily : 'Haettenschweiler', fontSize: 80, fill : 0xffffff, align : 'center'});
 
@@ -85,25 +91,27 @@ export default class Racing extends PIXI.Container{
         this.isReset  = false;
         this.isClose  = false;
         this.mcResult.visible  = false;
+        this.arrCar.map((item)=> {
+            item.on("THE_FIRST", () => this.onTheFirst());
+            item.on("THE_LAST", () => this.onTheLast());
+            item.on("FINISH", () => this.onFinishRace());
+        });
     }
 
     removeChild(){
-        this.soundUrls = null;
-        this.soundPlayer.volume = 0;
         this.soundPlayer.pause();
         this.soundPlayer1.pause();
-        this.soundPlayer = null;
-        this.soundPlayer1.volume = 0;
-        this.soundPlayer1 = null;
-        this.arrCar = [];
-        this.grades = [];
-        this.mcBg = null;
-        this.gate1 = null;
-        this.gate2 = null;
-        this.mcLandscape = null;
-        this.mcStadium = null;
-        this.mcResult = null;
-        TweenLite.killTweensOf(this.stopRace.bind(this))
+        delete this.soundPlayer;
+        delete this.soundPlayer1;
+        this.arrCar.map((item)=> {
+            item.off("THE_FIRST", () => this.onTheFirst());
+            item.off("THE_LAST", () => this.onTheLast());
+            item.off("FINISH", () => this.onFinishRace());
+            item.removeAllListeners()
+        });
+
+        delete this.stage;
+        TweenLite.killDelayedCallsTo(this.stopRace());
         clearInterval(this.interval);
     }
 
@@ -118,15 +126,14 @@ export default class Racing extends PIXI.Container{
             this.mcResult.visible  = false;
             this.isReset = false;
             this.mcCountDown.text = '';
-            // for (let i = 0; i < this.arrCar.length; i++ ) {
             this.arrCar.map ((obj, i) => {
                 obj.x = this.arrPos[i];
-                obj.anim1.stop();
-                obj.anim2.stop();
+                obj.stop();
             });
             this.mcBg.reset();
             this.gate1.stop();
             this.mcLandscape.reset();
+            this.mcResult.reset();
             this.mcResult.setVisible();
             this.mcStadium.reset();
             return true;
@@ -141,7 +148,7 @@ export default class Racing extends PIXI.Container{
         this.time = time;
         this.grades = grades;
         this.countDown = 3;
-        this.interval = setInterval(this.onCountDown.bind(this), 1000);
+        this.interval = setInterval(() => this.onCountDown(), 1000);
         this.mcCountDown.visible = true;
         this.isFinish = false;
         if(this.soundPlayer) {
@@ -176,38 +183,20 @@ export default class Racing extends PIXI.Container{
             this.soundPlayer.src = this.soundUrls['run'];
             this.soundPlayer.play();
         }
-        let px;
+        let px = 0;
         this.mcBg.startRace(this.dir);
         this.mcStadium.startRace(this.dir);
         this.mcLandscape.startRace(this.dir);
         this.arrCar.map((item)=> {
-            item.on("THE_FIRST", this.onTheFirst.bind(this));
-            item.on("THE_LAST", this.onTheLast.bind(this));
-            item.on("FINISH", this.onFinishRace.bind(this));
             px = (this.dir == 1) ? 400 + Math.random() * 300 : 600 - Math.random() * 300;
-            item.anim1.play();
-            item.anim2.play();
+            item.startRace();
             TweenLite.to(item, 3, {x: px, onComplete: this.onTweenComplete.bind(this), onCompleteParams:[item], ease: Sine.easeInOut});
         });
-        TweenLite.delayedCall(this.time, this.stopRace.bind(this));
+        TweenLite.delayedCall(this.time, () => this.stopRace());
     }
 
     onTweenComplete(mcCar) {
         mcCar.startRace(this.dir);
-    }
-
-    getResult() {
-        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        arr.sort(function(a, b){return 0.5 - Math.random()});
-        // var res = [];
-        // while (arr.length > 0) {
-        //     var idx = Math.floor(Math.random() * arr.length);
-        //     var temp = arr[idx];
-        //     arr[idx] = arr[0];
-        //     arr[0] = temp;
-        //     res.push(arr.shift());
-        // }
-        return arr;
     }
 
     onFinishRace(e) {
@@ -270,6 +259,7 @@ export default class Racing extends PIXI.Container{
     }
 
     stopRace(){
+        console.log('stopRace......')
         if(this.grades.length < 1) return;
         this.grades.map ((item, idx) => {
             this.arrCar[item-1].stopRace(idx);

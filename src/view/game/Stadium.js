@@ -13,10 +13,10 @@ export default class Stadium extends PIXI.Container {
         this.speed = 1;
         this.mcWidth = 900;
         this.dir = 1;
-        this.mcStart = PIXI.Sprite.fromImage('../img/mcStadiumStart.png');
-        this.mcFinish = PIXI.Sprite.fromImage('../img/mcStadiumEnd.png');
-        this.mc1 = PIXI.Sprite.fromImage('../img/mcStadiumLoop.png');
-        this.mc2 = PIXI.Sprite.fromImage('../img/mcStadiumLoop.png');
+        this.mcStart = PIXI.Sprite.fromImage('./img/mcStadiumStart.png');
+        this.mcFinish = PIXI.Sprite.fromImage('./img/mcStadiumEnd.png');
+        this.mc1 = PIXI.Sprite.fromImage('./img/mcStadiumLoop.png');
+        this.mc2 = PIXI.Sprite.fromImage('./img/mcStadiumLoop.png');
         this.mcFinish.x = -900;
         this.mc2.x = 1050;
         this.mc1.visible = false;

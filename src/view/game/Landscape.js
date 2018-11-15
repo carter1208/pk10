@@ -13,8 +13,8 @@ export default class Background extends PIXI.Container {
         this.speed = 3;
         this.dir = 1;
         this.accelerate = 0.05;
-        this.mc1 = PIXI.Sprite.fromImage('../img/mcLandscapeLoop.png');
-        this.mc2 = PIXI.Sprite.fromImage('../img/mcLandscapeLoop.png');
+        this.mc1 = PIXI.Sprite.fromImage('./img/mcLandscapeLoop.png');
+        this.mc2 = PIXI.Sprite.fromImage('./img/mcLandscapeLoop.png');
         this.mcWidth = 876;
         this.mc2.x = 875;
         this.addChild(this.mc1);

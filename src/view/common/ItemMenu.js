@@ -28,8 +28,10 @@ export default class ItemMenu extends Component{
     render() {
         let logoID = 'img/logo'+ (this.props.id == 77 ? "_"+ this.props.id: this.props.id) +'.png';
         let bgColor = this.props.id == model.tableId ? "#F7D7D9":"#f5f5f5";
+        let active = this.props.id == model.tableId ? 'auto': 'pointer';
+        let handler = this.props.id == model.tableId ? 'disibled': 'none';
         return (
-            <div className="item" ref={'tb'+ this.props.id} id={this.props.id} style={{borderBottom:this.props.line,backgroundColor:bgColor }}  onClick={this.hdlClick.bind(this)}>
+            <div className={"item "+handler} ref={'tb'+ this.props.id} id={this.props.id} style={{borderBottom:this.props.line,backgroundColor:bgColor, cursor: active, pointerEvent:handler}}  onClick={this.hdlClick.bind(this)}>
                 <div className="logo1"><img src='img/pk10Menu.png'/></div>&nbsp;&nbsp;
                 <div className="logo2"><img src={logoID} width='70%' height='70%'/></div>
             </div>

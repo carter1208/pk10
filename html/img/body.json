@@ -10,7 +10,7 @@
 },
 "mcBody0001":
 {
-	"frame": {"x":263,"y":0,"w":263,"h":60},
+	"frame": {"x":264,"y":0,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -18,7 +18,7 @@
 },
 "mcBody0002":
 {
-	"frame": {"x":0,"y":60,"w":263,"h":60},
+	"frame": {"x":0,"y":61,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -26,7 +26,7 @@
 },
 "mcBody0003":
 {
-	"frame": {"x":263,"y":60,"w":263,"h":60},
+	"frame": {"x":264,"y":61,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -34,7 +34,7 @@
 },
 "mcBody0004":
 {
-	"frame": {"x":0,"y":120,"w":263,"h":60},
+	"frame": {"x":0,"y":122,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -42,7 +42,7 @@
 },
 "mcBody0005":
 {
-	"frame": {"x":263,"y":120,"w":263,"h":60},
+	"frame": {"x":264,"y":122,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -50,7 +50,7 @@
 },
 "mcBody0006":
 {
-	"frame": {"x":0,"y":180,"w":263,"h":60},
+	"frame": {"x":0,"y":183,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -58,7 +58,7 @@
 },
 "mcBody0007":
 {
-	"frame": {"x":263,"y":180,"w":263,"h":60},
+	"frame": {"x":264,"y":183,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -66,7 +66,7 @@
 },
 "mcBody0008":
 {
-	"frame": {"x":0,"y":240,"w":263,"h":60},
+	"frame": {"x":0,"y":244,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -74,7 +74,7 @@
 },
 "mcBody0009":
 {
-	"frame": {"x":263,"y":240,"w":263,"h":60},
+	"frame": {"x":264,"y":244,"w":263,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":263,"h":60},
@@ -85,7 +85,7 @@
 	"version": "16.0.0.112",
 	"image": "body.png",
 	"format": "RGBA8888",
-	"size": {"w":530,"h":310},
+	"size": {"w":530,"h":350},
 	"scale": "1"
 }
 }

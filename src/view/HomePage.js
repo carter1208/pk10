@@ -21,6 +21,15 @@ export default class Main extends Component {
     componentDidMount() {
         model.subscribe(Command.OPEN_TABLE, this);
         model.subscribe(Command.BACK_LOBBY, this);
+        PIXI.loader
+            .add('loading1', './img/mcWheel.json')
+            .add('loading2', './img/blur.json')
+            .add('loading3', './img/body.json')
+            .add('loading4', './img/light.json')
+            .add('loading5', './img/num.json')
+            .add('loading6', './img/CarRes.json')
+            .add('loading7', './img/iconSound.json')
+            .load();
     }
     componentWillUnmount(){
         model.unsubscribe(Command.OPEN_TABLE, this);

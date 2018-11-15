@@ -6,6 +6,7 @@ import {T} from "../../model/language/Translator";
 import DrawNoSelection from "./DrawNoSelection";
 import ResultPanel from "./ResultPanel";
 import {model} from '../../model/Model'
+import {gameServer} from '../../controller/ServerGame'
 import HistoryPanel from "./HistoryPanel";
 const RESULT = 'result';
 const TREND = 'trend';

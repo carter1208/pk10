@@ -44,6 +44,7 @@ class Model extends Subject {
     constructor() {
         super();
         this.isBetting = false;
+        this.clientReady = false;
         this.gameMode = 's';
         this.gameType = "Pk10";
         this.language = "E";

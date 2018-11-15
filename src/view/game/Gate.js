@@ -15,7 +15,7 @@ export default class  Gate extends PIXI.Container {
             let val = i < 10 ? '0' + i : i;
             frames.push(PIXI.Texture.fromFrame('mcLight100' + val));
         }
-        this.gate = PIXI.Sprite.fromImage('../img/gate1.png');
+        this.gate = PIXI.Sprite.fromImage('./img/gate1.png');
         this.anim1 = new PIXI.extras.AnimatedSprite(frames);
         this.anim2 = new PIXI.extras.AnimatedSprite(frames);
         this.anim1.x = 92.85;

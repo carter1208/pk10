@@ -10,7 +10,7 @@
 },
 "mcCar10001":
 {
-	"frame": {"x":0,"y":100,"w":316,"h":100},
+	"frame": {"x":317,"y":0,"w":316,"h":100},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":316,"h":101},
@@ -18,7 +18,7 @@
 },
 "mcCar10002":
 {
-	"frame": {"x":0,"y":200,"w":316,"h":100},
+	"frame": {"x":0,"y":101,"w":316,"h":100},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":316,"h":101},
@@ -26,7 +26,7 @@
 },
 "mcCar10003":
 {
-	"frame": {"x":0,"y":300,"w":316,"h":100},
+	"frame": {"x":317,"y":101,"w":316,"h":100},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":316,"h":101},
@@ -34,7 +34,7 @@
 },
 "mcCar10004":
 {
-	"frame": {"x":0,"y":400,"w":316,"h":100},
+	"frame": {"x":0,"y":202,"w":316,"h":100},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":316,"h":101},
@@ -42,7 +42,7 @@
 },
 "mcCar10005":
 {
-	"frame": {"x":0,"y":500,"w":316,"h":101},
+	"frame": {"x":317,"y":202,"w":316,"h":101},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":101},
@@ -50,7 +50,7 @@
 },
 "mcCar10006":
 {
-	"frame": {"x":0,"y":601,"w":316,"h":100},
+	"frame": {"x":0,"y":304,"w":316,"h":100},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":316,"h":101},
@@ -58,7 +58,7 @@
 },
 "mcCar10007":
 {
-	"frame": {"x":0,"y":701,"w":316,"h":101},
+	"frame": {"x":317,"y":304,"w":316,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":101},
@@ -66,7 +66,7 @@
 },
 "mcCar10008":
 {
-	"frame": {"x":0,"y":802,"w":316,"h":101},
+	"frame": {"x":0,"y":406,"w":316,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":101},
@@ -74,7 +74,7 @@
 },
 "mcCar10009":
 {
-	"frame": {"x":0,"y":903,"w":316,"h":101},
+	"frame": {"x":317,"y":406,"w":316,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":101},
@@ -85,7 +85,7 @@
 	"version": "16.0.0.112",
 	"image": "CarRes.png",
 	"format": "RGBA8888",
-	"size": {"w":512,"h":1024},
+	"size": {"w":680,"h":512},
 	"scale": "1"
 }
 }

@@ -1,12 +1,12 @@
 /**
  * Created by carter on 10/17/2018.
  */
-import React,{Component} from 'react';
-import {model} from '../../model/Model'
+import React, {Component} from "react";
+import {model} from "../../model/Model";
 import ItemMenu from "./ItemMenu";
 import Command from "../../constant/Command";
-export default class LeftMenu extends Component{
-    constructor(props){
+export default class LeftMenu extends Component {
+    constructor(props) {
         super(props);
     }
 
@@ -14,19 +14,20 @@ export default class LeftMenu extends Component{
 
     }
 
-    openGame(e){
-        console.log('click', e.currentTarget.id);
+    openGame(e) {
+        console.log('click', e.currentTarget.id, model.clientReady);
+        if (!model.clientReady) return;
         model.update(Command.OPEN_TABLE, e.currentTarget.id);
     }
 
     render() {
         let jsxCol = [];
         let obj;
-        for (let i = 0; i < model.listTable.length; i++){
+        for (let i = 0; i < model.listTable.length; i++) {
             obj = model.listTable[i];
             let style = '1px solid #ccc';
             jsxCol.push(
-                <ItemMenu key={i+ 1} line={style} id={obj.id} onOpenGame={this.openGame.bind(this)}/>
+                <ItemMenu key={i + 1} line={style} id={obj.id} onOpenGame={this.openGame.bind(this)}/>
             );
         }
         return (

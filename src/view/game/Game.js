@@ -6,6 +6,7 @@ import * as PIXI from 'pixi.js';
 import Racing from './Racing';
 import Command from '../../constant/Command'
 import ATimer from '../../component/ATimer';
+import GameUtil from '../util/GameUtil';
 import {TweenMax,TweenLite, Sine, Linear} from "gsap";
 import {T} from '../../model/language/Translator';
 import {model} from '../../model/Model';
@@ -14,9 +15,13 @@ export default class Game extends Component {
     constructor(props) {
         super(props);
         this.dtime ='';
+        this.total = 0;
+        this.grades = [];
+        this.mcRacing = null;
         this.isMute = false;
+        this.isStarted = false;
+        this.isCounting = false;
         this.timer = new ATimer();
-        let strTime = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate() + " " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
         this.state = {
             isShow:true,
             drawNo:'123456',
@@ -33,7 +38,10 @@ export default class Game extends Component {
             d4:'D',
             d5:'D'
         }
+    }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return true;
     }
 
     componentDidMount() {
@@ -43,15 +51,9 @@ export default class Game extends Component {
         model.subscribe(Command.TABLE_START, this);
         model.subscribe(Command.BET_RESULT, this);
 
-        PIXI.loader
-            .add('loading1', '../img/mcWheel.json')
-            .add('loading2', '../img/blur.json')
-            .add('loading3', '../img/body.json')
-            .add('loading4', '../img/light.json')
-            .add('loading5', '../img/num.json')
-            .add('loading6', '../img/CarRes.json')
-            .add('loading7', '../img/iconSound.json')
-            .load(this.init.bind(this));
+        this.app = new PIXI.Application(830, 440, {backgroundColor: 'transparent', transparent:true});
+        this.refs.canvasContainer.appendChild(this.app.view);
+        this.init();
     }
 
     componentWillUnmount() {
@@ -62,30 +64,35 @@ export default class Game extends Component {
         model.unsubscribe(Command.STOP_BET_LOBBY, this);
         model.unsubscribe(Command.TABLE_START, this);
         model.unsubscribe(Command.BET_RESULT, this);
-        this.setState({
-            isShow:false
-        });
-        this.timer.stopTimer();
-        clearInterval(this.intervalTime);
-        clearInterval(this.intervalId);
         this.mcRacing.removeChild();
-        this.intervalTime = 0;
-        this.intervalId = 0;
-        this.app = null;
-        this.stage.destroy();
-        PIXI.loader.reset();
+        this.mcRacing.removeAllListeners();
+        this.timer.stopTimer();
+        cancelAnimationFrame(this.intervalTime);
+        clearInterval(this.intervalId);
+        clearTimeout(this.callTimeout)
+        clearInterval(this.call);
 
-        PIXI.utils.clearTextureCache();
+        this.stage.destroy();
+        this.isStarted = false;
+        this.app.renderer.destroy();
+        this.app = null;
+        delete this.stage;
+        delete this.app;
+        // PIXI.loader.reset();
+        // PIXI.utils.clearTextureCache();
     }
 
+
     init() {
-        this.app = new PIXI.Application(830, 440, {backgroundColor: 'transparent', transparent:true});
-        this.refs.canvasContainer.appendChild(this.app.view);
         this.stage = new PIXI.Container();
 
         this.mcRacing = new Racing();
         this.mcRacing.init();
         this.mcRacing.height = 400;
+
+        this.mcRacing.on("END_RACE", this.onEndRace.bind(this));
+        this.mcRacing.on("FINISH", this.onFinishRace.bind(this));
+
         this.mcOderHolder = new PIXI.Container();
         this.mcOderHolder.x = 180;
         this.mcOderHolder.y = 8;
@@ -151,7 +158,7 @@ export default class Game extends Component {
         this.stage.addChild(this.mcOderHolder);
         this.stage.addChild(this.mcMute);
 
-        let iconTime = PIXI.Sprite.fromImage('../img/clock.png');
+        let iconTime = PIXI.Sprite.fromImage('./img/clock.png');
 
         iconTime.scale.set(0.13);
         this.stage.addChild(iconTime);
@@ -160,9 +167,22 @@ export default class Game extends Component {
         this.app.stage.addChild(this.stage);
         this.initOrder();
         this.startCountdown('123456789', 152);
-        setTimeout(this.startGame.bind(this), 4000, this.mcRacing.getResult(), "123456")
-        this.call = setInterval(this.startGame.bind(this), 40000, this.mcRacing.getResult(), "123456")
+
         this.animate.bind(this);
+
+        model.clientReady = true;
+        // this.callTimeout = setTimeout(this.startGame.bind(this), 4000, this.getResult(), "123456")
+        // this.call = setInterval(this.testRacing.bind(this), 15000);
+    }
+
+    testRacing(){
+        this.startGame(this.getResult(), "123456");
+    }
+
+    getResult() {
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        arr.sort(function(a, b){return 0.5 - Math.random()});
+        return arr;
     }
 
     hdlSound(){
@@ -193,7 +213,7 @@ export default class Game extends Component {
         var ld = new Date();
         this.dtime = sd.getTime() - ld.getTime();
 
-        this.intervalTime = setInterval(this.onEnterFrameHandler.bind(this),33);
+        requestAnimationFrame(() => this.onEnterFrameHandler());
     }
 
     onEnterFrameHandler()
@@ -207,6 +227,7 @@ export default class Game extends Component {
         this.setState({
             dateTime: strDate+" "+strTime
         })
+        this.intervalTime = requestAnimationFrame(this.onEnterFrameHandler.bind(this));
     }
 
     formatString(n) {
@@ -248,10 +269,8 @@ export default class Game extends Component {
         this.isStarted = true;
         if(this.app) {
             this.mcRacing.startGame(10, arr);
-            this.mcRacing.on("END_RACE", this.onEndRace.bind(this));
-            this.mcRacing.on("FINISH", this.onFinishRace.bind(this));
         }
-        this.intervalId = setInterval(this.updateOrder.bind(this), 150);
+        this.intervalId = setInterval(() => this.updateOrder(), 100);
     }
 
     onFinishRace(e)
@@ -270,16 +289,16 @@ export default class Game extends Component {
     onEndRace(e) {
         this.mcRacing.off("END_RACE", this.onEndRace.bind(this));
         clearInterval(this.intervalId);
-        this.updateOrder.bind(this);
-
+        this.updateOrder();
     }
 
     startCountdown(drawNo, time) {
         this.drawNo = drawNo;
         this.time = time;
-        this.timer.startTimer(time, this.onATimerHandler.bind(this));
+        this.timer.startTimer(time, (t) => this.onATimerHandler(t));
         this.isCounting = true;
         if(!this.mcRacing)return;
+        this.mcRacing.off("RESET", this.resetRace.bind(this));
         if (this.mcRacing.resetGame()) {
             this.resetRace(null);
         } else {
@@ -288,6 +307,9 @@ export default class Game extends Component {
     }
 
     onATimerHandler(t) {
+        if(t > 0 && t % 25 == 0){
+            this.testRacing();
+        }
         if (t < 0) {
             this.stopCountdown();
             return;
@@ -321,6 +343,7 @@ export default class Game extends Component {
             d4:this.grades[3] > this.grades[6]?'T':'D',
             d5:this.grades[4] > this.grades[5]?'T':'D'
         });
+        // this.intervalId = requestAnimationFrame(() => this.updateOrder());
     }
 
     animate() {
@@ -340,18 +363,18 @@ export default class Game extends Component {
                 break;
             case Command.TABLE_START:
                 if(data.tbId != model.tableId)return;
-                this.startCountdown(data.drawNo, data.countDown);
+                // this.startCountdown(data.drawNo, data.countDown);
                 break;
             case Command.START_BET_LOBBY:
                 if(data.tbId != model.tableId)return;
-                this.startCountdown(data.drawNo, data.countDown);
+                // this.startCountdown(data.drawNo, data.countDown);
                 break;
             case Command.STOP_BET_LOBBY:
-                this.stopCountdown(data.drawNo, data.countDown);
+                // this.stopCountdown(data.drawNo, data.countDown);
                 break;
             case Command.BET_RESULT:
                 if(data.tableId != model.tableId)return;
-                this.startGame(data.numbers, data.drawNo);
+                // this.startGame(data.numbers, data.drawNo);
                 break;
         }
     }

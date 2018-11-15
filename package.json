@@ -7,7 +7,7 @@
     "dev": "node_modules/.bin/webpack-dev-server",
     "build": "node_modules/.bin/webpack --config webpack.config.production.js --progress --profile --color"
   },
-  "author": "LOCNV",
+  "author": "Carter",
   "license": "",
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -37,6 +37,7 @@
     "bootstrap": "^3.3.7",
     "i18n-react": "^0.4.0",
     "jquery": "^3.2.1",
+    "json-loader": "^0.5.7",
     "moment": "^2.22.2",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",

@@ -10,10 +10,10 @@ export default class Result extends PIXI.Container{
         super();
         this.isReady = false;
         this.speed = .3;
-        this.bg = PIXI.Sprite.fromImage('../img/bgRes.png');
-        this.prize1 = PIXI.Sprite.fromImage('../img/mcPrize1.png');
-        this.prize2 = PIXI.Sprite.fromImage('../img/mcPrize2.png');
-        this.prize3 = PIXI.Sprite.fromImage('../img/mcPrize3.png');
+        this.bg = PIXI.Sprite.fromImage('./img/bgRes.png');
+        this.prize1 = PIXI.Sprite.fromImage('./img/mcPrize1.png');
+        this.prize2 = PIXI.Sprite.fromImage('./img/mcPrize2.png');
+        this.prize3 = PIXI.Sprite.fromImage('./img/mcPrize3.png');
         this.prize1.x = 400;
         this.prize1.y = 40;
         this.prize2.x = 150;
@@ -46,18 +46,23 @@ export default class Result extends PIXI.Container{
         this.isReady = true;
     }
 
+    reset(){
+        this.removeChild(this.firstCar);
+        this.removeChild(this.secondCar);
+        this.removeChild(this.thirdCar);
+    }
+
     setVisible(){
         if(!this.isReady)return;
-        this.firstCar.alpha = 0;
-        this.secondCar.alpha = 0;
-        this.thirdCar.alpha = 0;
+        this.firstCar = null;
+        this.secondCar = null;
+        this.thirdCar = null;
         this.prize1.alpha = 0;
         this.prize2.alpha = 0;
         this.prize3.alpha = 0;
     }
 
     showResult(){
-        // this.setVisible(true);
         this.prize1.scale.set(0.9);
         this.prize2.scale.set(0.9);
         this.prize3.scale.set(0.9);

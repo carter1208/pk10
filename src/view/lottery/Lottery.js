@@ -14,6 +14,7 @@ import PopupContainer from '../../component/PopupContainer'
 import TableHistory from "../common/TableHistory";
 import ReportPanel from "../common/ReportPanel";
 import GameMenu from "../common/GameMenu";
+import * as PIXI from 'pixi.js';
 
 export default class Lottery extends Component {
     constructor(props) {
@@ -27,7 +28,9 @@ export default class Lottery extends Component {
         }
     }
     componentDidMount() {
+        model.clientReady = false;
         model.subscribe(Command.TABLE_HISTORY, this);
+
         this.onConnectGame();
     }
     componentWillUnmount() {
@@ -36,12 +39,12 @@ export default class Lottery extends Component {
     }
 
     onConnectGame(){
-        gameServer.startWaiting(this.onConnectSuccessHandler.bind(this));
+        gameServer.startWaiting(() => this.onConnectSuccessHandler());
         gameServer.connect(model.loginName, model.loginPass);
     }
 
     onConnectSuccessHandler(){
-        gameServer.startWaiting(this.onLoadInfoCompleteHandler.bind(this))
+        gameServer.startWaiting(() => this.onLoadInfoCompleteHandler())
         gameServer.getTableInfo(this.state.tbID, true);
         model.initBetCode();
         gameServer.getOddDefault(this.state.tbID, true);
@@ -49,6 +52,8 @@ export default class Lottery extends Component {
     }
 
     onLoadInfoCompleteHandler(){
+        model.clientReady = true;
+        this.setState({isShow:true});
         gameServer.getStart(this.state.tbID, false);
         gameServer.getTableHistory(this.state.tbID, false);
         gameServer.getServerDate(false);
@@ -62,7 +67,7 @@ export default class Lottery extends Component {
             1000000, 2000000, 5000000,
             10000000, 20000000, 50000000
         );
-        this.setState({isShow:true});
+        this.refs.bettingPanel.init();
     }
 
     removeState(){
@@ -75,7 +80,6 @@ export default class Lottery extends Component {
             case Command.TABLE_HISTORY:
                 if (!this.isFirst)
                     return;
-                this.refs.bettingPanel.init();
                 this.refs.tbHistory.updateHistory();
                 this.setState({
                     arrRes:model.table.history.getHistory

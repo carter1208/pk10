@@ -11,10 +11,10 @@ export default class Background extends PIXI.Container{
         this.speed = 1;
         this.mcWidth = 900;
         this.dir = 1;
-        this.mcStart = PIXI.Sprite.fromImage('../img/mcBgStart.png');
-        this.mcFinish = PIXI.Sprite.fromImage('../img/mcFinish.png');
-        this.mc1 = PIXI.Sprite.fromImage('../img/mc1.png');
-        this.mc2 = PIXI.Sprite.fromImage('../img/mc2.png');
+        this.mcStart = PIXI.Sprite.fromImage('./img/mcBgStart.png');
+        this.mcFinish = PIXI.Sprite.fromImage('./img/mcFinish.png');
+        this.mc1 = PIXI.Sprite.fromImage('./img/mc1.png');
+        this.mc2 = PIXI.Sprite.fromImage('./img/mc2.png');
         this.mcFinish.x = -900;
 
         this.mc1.x = 100;

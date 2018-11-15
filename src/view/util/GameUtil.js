@@ -44,6 +44,11 @@ export default class GameUtil {
         return value + arr[idx];
     }
 
+    static clearIntervalHdl(idx){
+        while (idx >=0)
+            clearInterval(idx--);
+    }
+
     static formatCurrency(num, decimalPlace = 2, currency = "$")
     {
         //assigns true boolean value to neg in number less than 0

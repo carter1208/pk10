@@ -2,42 +2,54 @@
  * Created by carter on 8/23/2018.
  */
 import * as PIXI from 'pixi.js';
-import {TweenLite, Sine} from "gsap/TweenMax";
+import {TweenMax, TweenLite, Sine, Linear} from "gsap/TweenMax";
 import Player from './Player'
 
 export default class Car extends Player{
     constructor(props){
         super();
+        this.stage = new PIXI.Container();
+        this.addChild(this.stage);
     }
 
     init(body, blur){
         super.init();
-        let frames = [];
-        for (let i = 59; i > 0; i--) {
-            let val = i < 10 ? '0' + i : i;
-            frames.push(PIXI.Texture.fromFrame('mcWheel200' + val));
-        }
-        this.anim1 = new PIXI.extras.AnimatedSprite(frames);
-        this.anim2 = new PIXI.extras.AnimatedSprite(frames);
-
-        this.anim1.x = 47;
-        this.anim1.y = 32;
-        this.anim2.x = 195;
-        this.anim2.y = 28;
+        this.wheel1 = PIXI.Sprite.fromImage('./img/wheel.png');
+        this.wheel2 = PIXI.Sprite.fromImage('./img/wheel.png');
+        this.wheel1.anchor.set(.5,.5)
+        this.wheel2.anchor.set(.5,.5)
+        this.wheel1.x = 65;
+        this.wheel1.y = 48;
+        this.wheel2.x = 214;
+        this.wheel2.y = 46;
         this.mcBody = body;
         this.mcBlur = blur;
         this.mcBlur.visible = false;
-        this.addChild(this.mcBody);
-        this.addChild(this.mcBlur);
-        this.addChild(this.anim1);
-        this.addChild(this.anim2);
+        this.stage.addChild(this.mcBody);
+        this.stage.addChild(this.mcBlur);
+        this.stage.addChild(this.wheel1);
+        this.stage.addChild(this.wheel2);
+        // this.tween1 = new TweenMax(this.wheel1, 0.07, {rotation:360, ease:Linear.easeNone, repeat:-1});
+        this.tween1 = new TweenMax(this.wheel1, 30, {rotation:360, ease:Linear.easeNone, repeat:-1, useFrames:true});
+        // this.tween2 = new TweenMax(this.wheel2, 0.07, {rotation:360, ease:Linear.easeNone, repeat:-1});
+        this.tween2 = new TweenMax(this.wheel2, 24, {rotation:360, ease:Linear.easeNone, repeat:-1, useFrames:true});
+    }
+
+    reset(){
+        this.tween1.kill();
+        this.tween2.kill();
     }
 
     startRace(dir = 1)
     {
-        this.anim1.play();
-        this.anim2.play();
+        this.tween1.play();
+        this.tween2.play();
         super.startRace(dir);
+    }
+
+    stop(){
+        this.tween1.pause();
+        this.tween2.pause();
     }
 
     increaseSpeed(t)

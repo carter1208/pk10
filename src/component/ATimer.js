@@ -14,28 +14,30 @@ export default class ATimer extends Component{
         this.targetTime = Math.floor(d.getTime()/1000) + time;
         this.counter = 0;
         this.handler = handler;
-
-        this.intervalFrame = setInterval(this.onEnterFrameHandler.bind(this));
+        requestAnimationFrame(this.onEnterFrameHandler.bind(this));
     }
 
     stopTimer()
     {
-        clearInterval(this.intervalFrame)
+        while (this.intervalID > -1)
+            cancelAnimationFrame(this.intervalID--);
     }
 
     onEnterFrameHandler()
     {
         var d = new Date();
         this.counter = this.targetTime - Math.floor(d.getTime()/1000);
+        this.intervalID = requestAnimationFrame(this.onEnterFrameHandler.bind(this));
         if (this.counter >= 0) {
             if (this.handler != null) {
                 this.handler.apply(null, [this.counter]);
             }
         } else {
-            clearInterval(this.intervalFrame);
+            cancelAnimationFrame(this.intervalID);
             if (this.handler != null) {
                 this.handler.apply(null, [this.counter]);
             }
+            return;
         }
     }
 }
