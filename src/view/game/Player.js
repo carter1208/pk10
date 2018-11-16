@@ -82,7 +82,8 @@ export default class Player extends PIXI.Container{
         }
         if (dif * this.dir > 0) {
             this.increaseSpeed(t);
-        }
+        }else
+            this.resetSpeed();
         this.running(t, px);
     }
 
@@ -95,6 +96,10 @@ export default class Player extends PIXI.Container{
             px = 1000 + this.maxx;
         }
         TweenLite.to(this, t, {x: px, onComplete:this.onTweenComplete.bind(this), ease:this.isFinish ? Sine.easeIn : Sine.easeInOut});
+    }
+
+    resetSpeed(){
+
     }
 
     increaseSpeed(t) {

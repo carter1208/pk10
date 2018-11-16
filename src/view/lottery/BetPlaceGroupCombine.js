@@ -6,8 +6,8 @@ import BetPlaceCombine2Item from "../lottery/BetPlaceCombine2Item"
 import BetPlaceCombine3Item from "../lottery/BetPlaceCombine3Item"
 import ListNumber from "./ListNumber"
 
-const CB2 = 'cb2';
-const CB3 = 'cb3';
+const CB2 = 'combine2-';
+const CB3 = 'combine3-';
 export default class BetPlaceGroupCombine extends Component {
     constructor(props) {
         super();
@@ -56,6 +56,12 @@ export default class BetPlaceGroupCombine extends Component {
 
     updateOdd(){
 
+    }
+
+    getValue(){
+        for (let i = 0; i < 6; i++){
+            this.refs[this.state.sence + i].getValue();
+        }
     }
 
     render() {

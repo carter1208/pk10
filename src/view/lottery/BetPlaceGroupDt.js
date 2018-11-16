@@ -14,10 +14,6 @@ export default class BetPlaceGroupDt extends Component{
         this.updateOdd();
     }
 
-    onClickBet(event,index) {
-        event.preventDefault();
-    }
-
     getNamebyKey(key){
         let str = '';
         switch (key){
@@ -103,7 +99,7 @@ export default class BetPlaceGroupDt extends Component{
                 );
             }else {
                 jsxCol.push(
-                    <BetPlaceDtItem ref={'dt'+this.arrName[idx]} idx={idx} key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i + 1))}
+                    <BetPlaceDtItem ref={'dt'+this.arrName[idx]} idx={idx} key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this)}
                                     id={this.getNamebyKey(i+1)} name={this.arrName[idx]} oddBetCode={114.15}
                                     value={0}/>
                 );

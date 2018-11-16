@@ -10,13 +10,15 @@ export default class BetPlaceCombine3Item extends Component{
     constructor(props){
         super(props);
         this.currItem = null;
+        if(!GlobalState['combine3'])
+            GlobalState['combine3'] = {};
         this.state={
-            color1:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].color1:'#999',
-            value1:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value1: 0,
-            color2:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].color2:'#999',
-            color3:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].color3:'#999',
-            value2:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value2 : 0,
-            value3:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value3 : 0,
+            color1:GlobalState['combine3'][this.props.idItem] ? GlobalState['combine3'][this.props.idItem].color1:'#999',
+            value1:GlobalState['combine3'][this.props.idItem] ? GlobalState['combine3'][this.props.idItem].value1: 0,
+            color2:GlobalState['combine3'][this.props.idItem] ? GlobalState['combine3'][this.props.idItem].color2:'#999',
+            color3:GlobalState['combine3'][this.props.idItem] ? GlobalState['combine3'][this.props.idItem].color3:'#999',
+            value2:GlobalState['combine3'][this.props.idItem] ? GlobalState['combine3'][this.props.idItem].value2 : 0,
+            value3:GlobalState['combine3'][this.props.idItem] ? GlobalState['combine3'][this.props.idItem].value3 : 0,
             name:this.props.name,
             id:this.props.id,
             oddBetCode:this.props.oddBetCode
@@ -24,14 +26,14 @@ export default class BetPlaceCombine3Item extends Component{
     }
 
     componentDidMount(){
-        if(!GlobalState[this.props.idItem]){
-            GlobalState[this.props.idItem] = this.state;
-            GlobalState[this.props.idItem].value1 = 0;
-            GlobalState[this.props.idItem].color1 = '#999';
-            GlobalState[this.props.idItem].value2 = 0;
-            GlobalState[this.props.idItem].color2 = '#999';
-            GlobalState[this.props.idItem].value3 = 0;
-            GlobalState[this.props.idItem].color3 = '#999';
+        if(!GlobalState['combine3'][this.props.idItem]){
+            GlobalState['combine3'][this.props.idItem] = this.state;
+            GlobalState['combine3'][this.props.idItem].value1 = 0;
+            GlobalState['combine3'][this.props.idItem].color1 = '#999';
+            GlobalState['combine3'][this.props.idItem].value2 = 0;
+            GlobalState['combine3'][this.props.idItem].color2 = '#999';
+            GlobalState['combine3'][this.props.idItem].value3 = 0;
+            GlobalState['combine3'][this.props.idItem].color3 = '#999';
         }
         this.getOdd();
         this.getValue();
@@ -82,8 +84,8 @@ export default class BetPlaceCombine3Item extends Component{
             this.state.value3 = id;
             this.state.color3 = color;
         }
-        for(let key in GlobalState){
-            if(GlobalState[key].value1 == this.state.value1 && GlobalState[key].value2 == this.state.value2 && GlobalState[key].value3 == this.state.value3){
+        for(let key in GlobalState['combine3']){
+            if(GlobalState['combine3'][key].value1 == this.state.value1 && GlobalState['combine3'][key].value2 == this.state.value2 && GlobalState['combine3'][key].value3 == this.state.value3){
                 alert(T.translate('betcode_exist'));
                 if(this.betInfo){
                     let input = document.getElementById('value'+this.props.idItem);
@@ -100,12 +102,12 @@ export default class BetPlaceCombine3Item extends Component{
             }
         }
         this.setState({});
-        GlobalState[this.props.idItem].value1 = this.state.value1;
-        GlobalState[this.props.idItem].value2 = this.state.value2;
-        GlobalState[this.props.idItem].value3 = this.state.value3;
-        GlobalState[this.props.idItem].color1 = this.state.color1;
-        GlobalState[this.props.idItem].color2 = this.state.color2;
-        GlobalState[this.props.idItem].color3 = this.state.color3;
+        GlobalState['combine3'][this.props.idItem].value1 = this.state.value1;
+        GlobalState['combine3'][this.props.idItem].value2 = this.state.value2;
+        GlobalState['combine3'][this.props.idItem].value3 = this.state.value3;
+        GlobalState['combine3'][this.props.idItem].color1 = this.state.color1;
+        GlobalState['combine3'][this.props.idItem].color2 = this.state.color2;
+        GlobalState['combine3'][this.props.idItem].color3 = this.state.color3;
     }
 
     onChange(event){

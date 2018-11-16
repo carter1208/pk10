@@ -16,10 +16,6 @@ export default class BetPlaceGroupSum2 extends Component{
 
     }
 
-    onClickBet(event, index) {
-        event.preventDefault();
-    }
-
     onClickBet(e){
         e.preventDefault();
         if(this.props.onClickBet)
@@ -29,6 +25,12 @@ export default class BetPlaceGroupSum2 extends Component{
     onBlurBet(){
         if(this.props.onBlurBet)
             this.props.onBlurBet();
+    }
+
+    getValue(){
+        for (let i = 0; i < this.arrName.length; i++){
+            this.refs['sum2' + this.arrName[i]].getValue();
+        }
     }
 
     updateOdd(){
@@ -50,7 +52,7 @@ export default class BetPlaceGroupSum2 extends Component{
                 jsxCol.push(<div key={'spacex'+ (i+ 1)} className="space-x"/>);
             }
             jsxCol.push(
-                <BetPlacePosItem ref={'sum2' + this.arrName[i]} key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i + 1))} id={this.arrName[i]}
+                <BetPlacePosItem ref={'sum2' + this.arrName[i]} key={i + 1} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this)} id={this.arrName[i]}
                                  name={'2S' + this.arrName[i]} oddBetCode={114.15} value={0} idx={idx}/>
             );
             if (jsxCol.length > 7 || i == this.arrName.length - 1) {

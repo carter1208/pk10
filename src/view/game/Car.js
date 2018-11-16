@@ -29,10 +29,8 @@ export default class Car extends Player{
         this.stage.addChild(this.mcBlur);
         this.stage.addChild(this.wheel1);
         this.stage.addChild(this.wheel2);
-        // this.tween1 = new TweenMax(this.wheel1, 0.07, {rotation:360, ease:Linear.easeNone, repeat:-1});
-        this.tween1 = new TweenMax(this.wheel1, 30, {rotation:360, ease:Linear.easeNone, repeat:-1, useFrames:true});
-        // this.tween2 = new TweenMax(this.wheel2, 0.07, {rotation:360, ease:Linear.easeNone, repeat:-1});
-        this.tween2 = new TweenMax(this.wheel2, 24, {rotation:360, ease:Linear.easeNone, repeat:-1, useFrames:true});
+        this.tween1 = new TweenMax(this.wheel1, 40, {rotation:-18, ease:Linear.easeNone, repeat:-1, useFrames:true});
+        this.tween2 = new TweenMax(this.wheel2, 40, {rotation:-18, ease:Linear.easeNone, repeat:-1, useFrames:true});
     }
 
     reset(){
@@ -44,6 +42,7 @@ export default class Car extends Player{
     {
         this.tween1.play();
         this.tween2.play();
+        this.resetSpeed();
         super.startRace(dir);
     }
 
@@ -52,9 +51,16 @@ export default class Car extends Player{
         this.tween2.pause();
     }
 
+    resetSpeed(){
+        this.tween1.duration(40);
+        this.tween2.duration(40);
+    }
+
     increaseSpeed(t)
     {
         this.mcBlur.visible = true;
+        this.tween1.duration(24);
+        this.tween2.duration(24);
         TweenLite.to(this.mcBlur, 0.5, {alpha:.3});
         TweenLite.to(this.mcBlur, 0.5, {alpha:0, delay:t});
     }

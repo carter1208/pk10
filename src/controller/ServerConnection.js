@@ -27,11 +27,11 @@ class ServerConnection {
                 break;
         }
         if (this.server) {
-            this.server.onConnection = this.onConnection.bind(this);
-            this.server.onConnectionLost = this.onConnectionLost.bind(this);
-            this.server.onLogin = this.onLogin.bind(this);
-            this.server.onLoginError = this.onLoginError.bind(this);
-            this.server.onExtensionResponse = this.onExtensionResponse.bind(this);
+            this.server.onConnection = () => this.onConnection();
+            this.server.onConnectionLost = () => this.onConnectionLost();
+            this.server.onLogin = () => this.onLogin();
+            this.server.onLoginError = (content) => this.onLoginError(content);
+            this.server.onExtensionResponse = (cmd, res) => this.onExtensionResponse(cmd, res);
         }
     }
 

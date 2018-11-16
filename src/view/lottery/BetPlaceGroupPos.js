@@ -15,10 +15,6 @@ export default class BetPlaceGroupPos extends Component{
 
     }
 
-    onClickBet(e, index) {
-        e.preventDefault();
-    }
-
     updateOdd(){
         for (let i = 0; i < 10; i++){
             this.refs['pos' + (i+ 1)].getOdd();
@@ -60,7 +56,7 @@ export default class BetPlaceGroupPos extends Component{
             }
 
             jsxCol.push(
-                <BetPlacePosItem ref={'pos' + (i+ 1)} key={i+ 1} idx={idx} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)}  onClick={this.onClickBet.bind(this, (i+ 1))} id={(i+ 1)} name={(i+ 1)} oddBetCode={114.15} value={0}/>
+                <BetPlacePosItem ref={'pos' + (i+ 1)} key={i+ 1} idx={idx} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)}  onClick={this.onClickBet.bind(this)} id={(i+ 1)} name={(i+ 1)} oddBetCode={114.15} value={0}/>
             );
             if (jsxCol.length > 7 || i == 9) {
                 if (jsxRow.length > 0) {

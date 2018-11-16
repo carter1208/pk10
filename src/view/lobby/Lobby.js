@@ -26,11 +26,11 @@ export default class Lobby extends Component {
         model.loginName = 'testpk10100';
         ServerConfig.agentId = '23947';
         model.loginPass = '123456';
-        lobbyServer.startWaiting(this.onConnectSuccessHandler.bind(this));
+        lobbyServer.startWaiting(() => this.onConnectSuccessHandler());
         lobbyServer.connect(model.loginName, model.loginPass);
     }
     onConnectSuccessHandler(){
-        lobbyServer.startWaiting(this.onLoadInfoCompleteHandler.bind(this))
+        lobbyServer.startWaiting(() => this.onLoadInfoCompleteHandler())
         lobbyServer.getTableListByUser(true);
         lobbyServer.getPersonInfo(true);
         lobbyServer.getGameLimit(true);

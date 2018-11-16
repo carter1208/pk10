@@ -36,41 +36,31 @@ export default class ChipSettingPanel extends Component{
     setRangeChip(minValue, maxValue) {
         let arrDefault = [];
         var arrValue = model.arrChipValue;
-        //get min value
-        var idxMin;
-        for (var i = 0; i < arrValue.length; i++ ) {
-            if (arrValue[i] >= minValue) {
-                break;
-            }
-        }
-        idxMin = Math.min(i, arrValue.length - 1);
-        arrDefault.push(arrValue[idxMin]);
-
-        //get max value
-        var idxMax;
-        for (i = arrValue.length - 1; i > -1; i-- ) {
-            if (arrValue[i] <= maxValue) {
-                break;
-            }
-        }
-        idxMax = Math.max(i, 0);
-        if (idxMax > idxMin) {
-            arrDefault.push(arrValue[idxMax]);
-            //get some value between min-max
-            var arrTemp = [];
-            for (i = idxMin + 1; i < idxMax; i++ ) {
-                arrTemp.push(arrValue[i]);
-            }
-
-            while (arrTemp.length > 0 && arrDefault.length < 6) {
-                i = Math.floor(Math.random() * arrTemp.length);
-                arrDefault.push(arrTemp.splice(i, 1)[0]);
-            }
-        }
+        let idxMin = arrValue.findIndex((item) => {return item >= minValue})
+        let idxMax = arrValue.findIndex((item) => {return item > maxValue}) - 1;
+        let arrTemp = arrValue.slice(idxMin,idxMax + 1);
+        arrDefault = this.random_elems(arrTemp, 6);
         return arrDefault;
     }
 
-    show(e){
+    random_elems(arr, count) {
+        let len = arr.length;
+        let lookup = {};
+        let tmp = [];
+        if (count > len)
+            count = len;
+        for (let i = 0; i < count; i++) {
+            let index;
+            do {
+                index = ~~(Math.random() * len);
+            } while (index in lookup);
+            lookup[index] = null;
+            tmp.push(arr[index]);
+        }
+        return tmp;
+    }
+
+    show(){
         GameUtil.sortArrayNumber(this.state.arrDefault);
         let arr = this.state.arrDefault;
         this.setState({
@@ -82,7 +72,7 @@ export default class ChipSettingPanel extends Component{
     }
 
     clearBet(e){
-        this.show(new Event('click'));
+        this.show();
     }
 
     confirm(e){

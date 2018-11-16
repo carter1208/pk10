@@ -22,6 +22,7 @@ export default class BettingPanel extends Component{
     constructor(props){
         super();
         this.currItem = null;
+        this.arrMenu = ['position','dt','sum2','sum3','combine'];
         this.state ={
             subMenu:'position'
         }
@@ -84,14 +85,18 @@ export default class BettingPanel extends Component{
         return val;
     }
 
+    updateBetStatus(name){
+        let total = this.getValueByGroup(name);
+        if(total > 0) {
+            document.getElementById(name + '_tick').style.visibility = 'visible';
+        }else {
+            document.getElementById(name + '_tick').style.visibility = 'hidden';
+        }
+    }
+
     onBlur(e){
         this.refs.betvalue.updateList(false, 0, 0);
-        let total = this.getValueByGroup(this.state.subMenu);
-        if(total > 0) {
-            document.getElementById(this.state.subMenu + '_tick').style.visibility = 'visible';
-        }else {
-            document.getElementById(this.state.subMenu + '_tick').style.visibility = 'hidden';
-        }
+        this.updateBetStatus(this.state.subMenu);
     }
 
     confirmBet(e){
@@ -100,7 +105,19 @@ export default class BettingPanel extends Component{
         gameServer.onExtensionResponse(Command.UPDATE_BETTING,obj);
     }
 
-    clearBet(){}
+    clearBet(){
+        this.resetBetPlace();
+        this.arrMenu.map((name) => {
+            this.updateBetStatus(name);
+        });
+    }
+
+    resetBetPlace(){
+        model.listBetPlaceInfo.map((betInfo) =>{
+            betInfo.tempValue = 0;
+        });
+        this.refs[this.state.subMenu].getValue();
+    }
 
     quickChange(e){
         this.refs.chipSetting.show();

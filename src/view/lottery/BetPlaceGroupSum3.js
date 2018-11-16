@@ -16,10 +16,6 @@ export default class BetPlaceGroupSum3 extends Component{
 
     }
 
-    onClickBet(event, index) {
-        event.preventDefault();
-    }
-
     onClickBet(e){
         e.preventDefault();
         if(this.props.onClickBet)
@@ -29,6 +25,12 @@ export default class BetPlaceGroupSum3 extends Component{
     onBlurBet(){
         if(this.props.onBlurBet)
             this.props.onBlurBet();
+    }
+
+    getValue(){
+        for (let i = 0; i < this.arrName.length; i++){
+            this.refs['sum3' + this.arrName[i]].getValue();
+        }
     }
 
     updateOdd(){
@@ -74,7 +76,7 @@ export default class BetPlaceGroupSum3 extends Component{
         for (let i = 0; i < this.arrName1.length; i++){
             idx++;
             jsxCol.push(
-                <BetPlacePosItem idx={idx} ref={'sum3' + this.arrName1[i]} key={this.arrName1[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this, (i+ 1))} id={GameUtil.getNamebyKey(this.arrName1[i])} name={'3S'+this.arrName1[i]} oddBetCode={114.15} value={0}/>
+                <BetPlacePosItem idx={idx} ref={'sum3' + this.arrName1[i]} key={this.arrName1[i]} onClickBet={this.onClickBet.bind(this)} onBlurBet={this.onBlurBet.bind(this)} onClick={this.onClickBet.bind(this)} id={GameUtil.getNamebyKey(this.arrName1[i])} name={'3S'+this.arrName1[i]} oddBetCode={114.15} value={0}/>
             );
         }
         jsxCol.push(

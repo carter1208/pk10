@@ -10,11 +10,13 @@ export default class BetPlaceCombine2Item extends Component{
     constructor(props){
         super(props);
         this.currItem = null;
+        if(!GlobalState['combine2'])
+            GlobalState['combine2']={};
         this.state={
-            color1:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].color1:'#999',
-            value1:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value1: 0,
-            color2:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].color2:'#999',
-            value2:GlobalState[this.props.idItem] ? GlobalState[this.props.idItem].value2 : 0,
+            color1:GlobalState['combine2'][this.props.idItem] ? GlobalState['combine2'][this.props.idItem].color1:'#999',
+            value1:GlobalState['combine2'][this.props.idItem] ? GlobalState['combine2'][this.props.idItem].value1: 0,
+            color2:GlobalState['combine2'][this.props.idItem] ? GlobalState['combine2'][this.props.idItem].color2:'#999',
+            value2:GlobalState['combine2'][this.props.idItem] ? GlobalState['combine2'][this.props.idItem].value2 : 0,
             name:this.props.name,
             id:this.props.id,
             oddBetCode:this.props.oddBetCode
@@ -63,8 +65,8 @@ export default class BetPlaceCombine2Item extends Component{
             this.state.color2=color;
         }
 
-        for(let key in GlobalState){
-            if(GlobalState[key].value1 == this.state.value1 && GlobalState[key].value2 == this.state.value2){
+        for(let key in GlobalState['combine2']){
+            if(GlobalState['combine2'][key].value1 == this.state.value1 && GlobalState['combine2'][key].value2 == this.state.value2){
                 alert(T.translate('betcode_exist'));
                 if(this.betInfo){
                     let input = document.getElementById('value'+this.props.idItem);
@@ -80,19 +82,19 @@ export default class BetPlaceCombine2Item extends Component{
             }
         }
         this.setState({});
-        GlobalState[this.props.idItem].value1 = this.state.value1;
-        GlobalState[this.props.idItem].value2 = this.state.value2;
-        GlobalState[this.props.idItem].color1 = this.state.color1;
-        GlobalState[this.props.idItem].color2 = this.state.color2;
+        GlobalState['combine2'][this.props.idItem].value1 = this.state.value1;
+        GlobalState['combine2'][this.props.idItem].value2 = this.state.value2;
+        GlobalState['combine2'][this.props.idItem].color1 = this.state.color1;
+        GlobalState['combine2'][this.props.idItem].color2 = this.state.color2;
 }
 
     componentDidMount(){
-        if(!GlobalState[this.props.idItem]){
-            GlobalState[this.props.idItem] = this.state;
-            GlobalState[this.props.idItem].value1 = 0;
-            GlobalState[this.props.idItem].color1 = '#999';
-            GlobalState[this.props.idItem].value2 = 0;
-            GlobalState[this.props.idItem].color2 = '#999';
+        if(!GlobalState['combine2'][this.props.idItem]){
+            GlobalState['combine2'][this.props.idItem] = this.state;
+            GlobalState['combine2'][this.props.idItem].value1 = 0;
+            GlobalState['combine2'][this.props.idItem].color1 = '#999';
+            GlobalState['combine2'][this.props.idItem].value2 = 0;
+            GlobalState['combine2'][this.props.idItem].color2 = '#999';
         }
         this.getOdd();
         this.getValue();
