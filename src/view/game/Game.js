@@ -171,8 +171,6 @@ export default class Game extends Component {
         this.animate.bind(this);
 
         model.clientReady = true;
-        // this.callTimeout = setTimeout(this.startGame.bind(this), 4000, this.getResult(), "123456")
-        // this.call = setInterval(this.testRacing.bind(this), 15000);
     }
 
     testRacing(){
@@ -343,7 +341,6 @@ export default class Game extends Component {
             d4:this.grades[3] > this.grades[6]?'T':'D',
             d5:this.grades[4] > this.grades[5]?'T':'D'
         });
-        // this.intervalId = requestAnimationFrame(() => this.updateOrder());
     }
 
     animate() {

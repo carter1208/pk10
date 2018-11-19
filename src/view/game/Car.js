@@ -52,15 +52,15 @@ export default class Car extends Player{
     }
 
     resetSpeed(){
-        this.tween1.duration(40);
-        this.tween2.duration(40);
+        this.tween1.duration(36);
+        this.tween2.duration(36);
     }
 
     increaseSpeed(t)
     {
         this.mcBlur.visible = true;
-        this.tween1.duration(24);
-        this.tween2.duration(24);
+        this.tween1.duration(20);
+        this.tween2.duration(20);
         TweenLite.to(this.mcBlur, 0.5, {alpha:.3});
         TweenLite.to(this.mcBlur, 0.5, {alpha:0, delay:t});
     }
